@@ -1,22 +1,16 @@
-# About me
+# Sunny Bharne
 
-## Senior Azure Developer
+### Senior Azure Developer
 
-##### Helsinki,Finland
+*Helsinki,Finland*
 
-##### | [Download Resume](/resume/TestAutomation_Specialist_SunnyBharne_Helsinki.pdf) | [LinkedIn](https://www.linkedin.com/in/sunnybharne) | [Github](https://github.com/sunnyRavindra) | [Email](mailto:sunny.bharne.automation@gmail.com?subject=Test_Automation_Expert) | [Certifications](https://www.linkedin.com/in/sunnybharne/details/certifications/) |
+| [Download Resume](/resume/TestAutomation_Specialist_SunnyBharne_Helsinki.pdf) | [LinkedIn](https://www.linkedin.com/in/sunnybharne) | [Github](https://github.com/sunnyRavindra) | [Email](mailto:sunny.bharne.automation@gmail.com?subject=Test_Automation_Expert) | [Certifications](https://www.linkedin.com/in/sunnybharne/details/certifications/) |
 
------
-
-
-I'm Sunny, Senior Azure Developer, currently living in **Helsinki** , Finland.
-
-Experienced (9years) Azure developer and Test Automation Engineer with expertise in Test
+Experienced (9years) Azure developer and Test Automation Engineer with expertise in Azure landing zones, Azure devops pipelines, Test
 Architecture, Framework Development, Test Automation and (AWS) Cloud DevOps
 transformations.
 
-
-## Next Js
+### Next Js
 
 <!----->
 <details>
@@ -40,9 +34,6 @@ App Router -> Determines your routes depending on the file structure of your pag
 ```
 > **Installation guide:** <https://nextjs.org/docs/getting-started/installation>
 </details>
-
-
-
 
 <!----->
 <details>
@@ -108,9 +99,11 @@ Intercepting routes:
 > **Project structure:** <https://nextjs.org/docs/getting-started/installation>.
 </details>
 
-</details>
-
+<!----->
+<details>
+  <summary>FAQ's</summary>
 
 > **FAQ's:** <https://nextjs.org/docs/app>.
 
 > **Continue reading:** <https://nextjs.org/docs/app>.
+</details>
