@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next Js
 
-## Getting Started
+<!----->
+<details>
+  <summary>Basics</summary>
 
-First, run the development server:
+Create next app:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app@latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App Router -> Determines your routes depending on the file structure of your pages directory.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  "scripts": {
+    "dev": "next dev", # yarn run dev, starts the development server on http://localhost:3000
+    "build": "next build", # yarn run build, builds the application for production usage
+    "start": "next start", # yarn run start, starts a Next.js production server
+    "lint": "next lint" # yarn run lint,  sets up Next.js' built-in ESLint configuration
+  }
+```
+> **Installation guide:** <https://nextjs.org/docs/getting-started/installation>
+</details>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!----->
+<details>
+  <summary>Repository structure</summary>
+ 
+```bash
+Root
+├── app # app files, default behaviour --> server-side rendered components (Root segment)
+│   ├── components # components files (non routable)
+│   │   ├── buttun.tsx # component files
+│   ├── lib 
+│   │   ├── constants.ts # constants files
+│   ├── dashboard
+│   │   ├── page.tsx # dashboard files (routable)
+│   │   ├── nav.tsx # navbar (non routable)
+│   ├── api
+│   │   ├── route.tsx # api route (routable)
+│   │   ├── db.tsx # database config (non routable)
+│   ├── layout.tsx # layout file
+│   ├── page.tsx # app starting point
+│   ├── loading.tsx # loading files
+│   ├── error.tsx # error files
+│   ├── global-error.tsx # global error files
+│   ├── routes.tsx # routes files
+│   ├── template.tsx # templates files
+│   ├── default.tsx # default files
+│   ├── nestedRoute # (segment)
+│   │   ├── nesteRoute # (leaf segment)
+│   │   │   ├── page.tsx # nested folder files
+│   ├── [dynamicRouete]
+│   │   │   ├── page.tsx # nested folder files
+│   ├── [...dynamicRoute]
+│   │   │   ├── page.tsx # nested folder files
+│   ├── [[...optionalRoute]
+│   │   │   ├── page.tsx # nested folder files
+│   ├── (privateRoute)
+│   │   │   ├── page.tsx # nested folder files
+│   ├── (_publicRoute)
+│   │   │   ├── page.tsx # nested folder files
+├── public # static files
+│   ├── favicon.ico # Icon on the browser tab
+│   ├── logo.svg # Logo
+├── next.config.js # next.js configuration
+├── package.json # dependencies and scripts
+├── instrumentation.ts # OpenTelemetry instrumentation file
+├── middleware.tsx # middleware files
+├── .env # environment variables
+├── .env.local # environment variables local
+├── .env.development # environment variables development
+├── .env.production # environment variables production
+├── eslintrc.json # eslint configuration
+├── gitignore # gitignore file
+├── next-env.d.ts # next.js typescript files
+├── tsconfig.json # typescript configuration
+├── jsconfig.json # javascript configuration
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`Hierarchy: layout.tsx > template.tsx > error.tsx > loading.tsx > notFound.tsx > page.tsx`
 
-## Deploy on Vercel
+parallel routes:
+Intercepting routes:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> **Project structure:** <https://nextjs.org/docs/getting-started/installation>.
+</details>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+</details>
+
+
+> **FAQ's:** <https://nextjs.org/docs/app>.
+
+> **Continue reading:** <https://nextjs.org/docs/app>.
