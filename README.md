@@ -10,7 +10,10 @@ Experienced (9years) Azure developer and Test Automation Engineer with expertise
 Architecture, Framework Development, Test Automation and (AWS) Cloud DevOps
 transformations.
 
-### Next Js
+<!----->
+<details>
+  <summary>Next Js</summary>
+
 
 <!----->
 <details>
@@ -106,4 +109,6 @@ Intercepting routes:
 > **FAQ's:** <https://nextjs.org/docs/app>.
 
 > **Continue reading:** <https://nextjs.org/docs/app>.
+</details>
+
 </details>
