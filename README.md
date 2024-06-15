@@ -108,7 +108,7 @@ Intercepting routes:
 
 > **FAQ's:** <https://nextjs.org/docs/app>.
 
-> **Continue reading:** <https://nextjs.org/docs/app>.
+> **Continue reading:** <https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts>.
 </details>
 
 </details>
