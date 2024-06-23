@@ -13,26 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "powershell.md",
+                "file": "Bicep-Module-Registry.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "c9ba1b7147a16d36",
+            "id": "1dd90f2fb2b7f8cf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Bicep Module Registry.md",
+                "file": "Bicep-Module-Registry.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ab0d1d5fb81324d5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Azure-Pipeline.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Bicep Module Registry.md",
+                "file": "Azure-Pipeline.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Bicep Module Registry.md",
+                "file": "Azure-Pipeline.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Bicep Module Registry.md"
+                "file": "Azure-Pipeline.md"
               }
             }
           },
@@ -166,13 +178,19 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "c9ba1b7147a16d36",
+  "active": "ab0d1d5fb81324d5",
   "lastOpenFiles": [
-    "powershell.md",
-    "Bicep Module Registry.md",
+    "tasks.md",
+    "Powershell.md",
+    "Azure-Pipeline.md",
+    "Bicep-Module-Registry.md",
+    "nextjs.mdx",
+    "Untitled Kanban.md",
+    "Azure-Container-Registry.md",
     "2024-06-17.md",
     "Untitled.canvas",
     "Excalidraw/Drawing 2024-06-17 18.13.32.excalidraw.md",

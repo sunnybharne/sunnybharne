@@ -1,0 +1,2 @@
+- ACR is based on docker
+- 
