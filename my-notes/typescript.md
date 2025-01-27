@@ -1,6 +1,5 @@
----
-title: TypeScript
----
+# TypeScript
+
 [Tutorial web site](https://www.typescripttutorial.net/typescript-tutorial/what-is-typescript/)
 
 ![TypeScript](https://www.typescripttutorial.net/wp-content/uploads/2020/05/what-is-typescript-compiler.png)

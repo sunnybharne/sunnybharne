@@ -9,10 +9,7 @@
         - Standalone plugins(Static page)
         - Service backed plugins(UI with backend database)
         - Third party backed plugins (UI with backend outside the org ex circleCI)
-- Architectrue
-    - 
 
 ## Software catalog
 - Template to software components
 - Tech docs
-
