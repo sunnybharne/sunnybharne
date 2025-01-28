@@ -1,7 +1,6 @@
 # Github Actions
 
 ## Git Basics
-
 ```Bash
 # Config
 git config user.name # Get the username
@@ -51,8 +50,40 @@ git rebase --abort # Abort the rebase
 ```
 
 ## Github Actions
-### Workflow (.github/workflows folder)
-- Container one or more jobs (Can run in parallel)
-- Each job runs on a separate VM
+
+### Basics
+- Workflow conatins one or more jobs (Can run in parallel)
+- job runs on a separate VM
     - Each job runs a scipt or an action
     - Actions is a reusable unit of code
+    - steps run in sequence
+- Events trigger the workflow
+    - Push, Pull request, Issue, etc
+- Runner is the VM that runs the job
+    - Types
+        - Repository runner
+        - Org runner
+        - Enterprise runner
+    - Self-hosted runner
+    - Github-hosted runner
+
+### Interesting facts
+- Workflow runtime -> 35 days
+- Job execution time -> 5 days
+- Job queue time -> 24 hours
+- Api requests limt - 1000 requests per hour per repo
+- Job matrix -> 256 jobs per workflow
+- Workflow runs queue -> 500 workflows runs can be queued in a 10 sec interval pre repo
+- Registering self-hosted runners - You can have a maximum of 10,000 self-hosted runners in one runner group.
+- If GitHub Actions services are temporarily unavailable, then a workflow run is discarded if it has not been queued within 30 minutes of being triggered. For example, if a workflow is triggered and the GitHub Actions services are unavailable for 31 minutes or longer, then the workflow run will not be processed.
+
+<!-- TODO -->
+### Choose when the workflow runs
+### Choose where the workflow runs
+### Choose what workflow do
+### Workflow syntax
+
+```YAML workflow = pipeline
+# .github/workflows/main.yml
+```
+
