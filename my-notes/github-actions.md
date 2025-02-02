@@ -77,13 +77,11 @@ git rebase --abort # Abort the rebase
 - Registering self-hosted runners - You can have a maximum of 10,000 self-hosted runners in one runner group.
 - If GitHub Actions services are temporarily unavailable, then a workflow run is discarded if it has not been queued within 30 minutes of being triggered. For example, if a workflow is triggered and the GitHub Actions services are unavailable for 31 minutes or longer, then the workflow run will not be processed.
 
-<!-- TODO -->
-### Choose when the workflow runs
-### Choose where the workflow runs
-### Choose what workflow do
-### Workflow syntax
+#### Choose when the workflow runs
+#### Choose where the workflow runs
+#### Choose what workflow do
+#### Workflow syntax
 
 ```YAML workflow = pipeline
 # .github/workflows/main.yml
 ```
-
