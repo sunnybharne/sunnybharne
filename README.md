@@ -1,42 +1,29 @@
-# Senior Azure Developer
+# About Me
+## Welcome to My Digital Space (Sunny Bharne)
 
-*Helsinki, Finland*
+## Hey there! 👋
+I'm **Sunny Bharne**, a cloud wizard 🧙‍♂️ and **Senior Azure Developer** based in the beautiful city of **Helsinki, Finland**. I thrive on building **scalable, secure, and efficient** cloud solutions that power businesses forward. ☁️⚡
 
-<!-- | [Download Resume](/resume/TestAutomation_Specialist_SunnyBharne_Helsinki.pdf) | [LinkedIn](https://www.linkedin.com/in/sunnybharne) | [Github](https://github.com/sunnyRavindra) | [Email](mailto:sunny.bharne.automation@gmail.com?subject=Test_Automation_Expert) | [Certifications](https://www.linkedin.com/in/sunnybharne/details/certifications/) | -->
+## My Tech Adventure 🏆
+From automating workflows to crafting bulletproof cloud infrastructures, my journey in tech has been an exciting rollercoaster! 🎢 With a strong foundation in **Azure**, **Azure DevOps**, and **Infrastructure as Code** (hello **Bicep** and **Terraform**! 👋), I help businesses bring their cloud dreams to life. 💭💡
 
-Experienced (10 years) Azure Developer and Test Automation Engineer with expertise in Azure landing zones, Azure DevOps pipelines, Test Architecture, Framework Development, Test Automation, and AWS Cloud DevOps transformations.
+Before diving deep into the world of cloud, I tinkered with **Java, Test Automation, Selenium, and Docker**, which fueled my love for problem-solving and efficiency. 🛠️
 
-## Skills
+## My Superpowers 🦸‍♂️
+- ☁️ **Cloud Wizardry**: Azure (Landing Zones, Security, Governance)
+- 🏗️ **Infrastructure as Code**: Bicep, Terraform
+- 🚀 **DevOps & Automation**: Azure DevOps, CI/CD, Infra Pipelines
+- 💻 **Code & Creativity**: Python, TypeScript, Java
+- 🔄 **Past Lives**: Java, Test Automation, Selenium, Docker
 
-- **Cloud Platforms:** Azure, AWS
-- **DevOps:** Azure DevOps, Jenkins, GitHub Actions
-- **Programming Languages:** Python, C#, JavaScript
-- **Automation Tools:** Selenium, Cypress, JUnit, NUnit
-- **Infrastructure as Code:** Terraform, ARM Templates
-- **Containerization:** Docker, Kubernetes
-- **Monitoring & Logging:** Prometheus, Grafana, ELK Stack
+## What Makes Me Tick? 🤔
+When I’m not deep in cloud configurations, you’ll find me geeking out over **new tech trends**, exploring the magic of **DevOps, AI, and automation**, or simply enjoying a good **cup of coffee ☕ + code 💻** combo.
 
-## Projects
+## Let's Connect! 🤝
+I love meeting like-minded tech enthusiasts, so let’s chat! Whether it's about cloud, DevOps, or your next big idea, I'm all ears. 👂✨
 
-### 1. Azure Landing Zones Implementation
-- **Description:** Designed and implemented Azure landing zones for a large enterprise to ensure secure and scalable cloud adoption.
-- **Technologies:** Azure, Terraform, Azure DevOps
-- **Outcome:** Improved cloud infrastructure management and compliance.
+📧 **Email**: [sunny.bharne@outlook.com](mailto:sunny.bharne@outlook.com)  
+🌐 **Website**: [sunnybharne.github.io/tech-docs](https://sunnybharne.github.io/tech-docs/)  
+💼 **LinkedIn**: [linkedin.com/in/sunnybharne](https://www.linkedin.com/in/sunnybharne/)  
+🐦 **GitHub**: [github.com/sunnybharne](https://github.com/sunnybharne)
 
-### 2. Automated Testing Framework
-- **Description:** Developed a robust test automation framework to streamline the testing process for web applications.
-- **Technologies:** Selenium, Python, Jenkins
-- **Outcome:** Reduced manual testing efforts by 70% and increased test coverage.
-
-### 3. CI/CD Pipeline for Microservices
-- **Description:** Built a CI/CD pipeline for deploying microservices on Kubernetes.
-- **Technologies:** Azure DevOps, Docker, Kubernetes
-- **Outcome:** Accelerated deployment cycles and improved application reliability.
-
-## Contact
-
-- **Email:** [sunny.bharne@outlook.com](mailto:sunny.bharne@outlook.com?subject=Senior_Azure_Developer)
-- **LinkedIn:** [linkedin.com/in/sunnybharne](https://www.linkedin.com/in/sunnybharne)
-- **GitHub:** [github.com/sunnyRavindra](https://github.com/sunnyRavindra)
-
-Feel free to reach out to me for collaboration or any exciting opportunities!
