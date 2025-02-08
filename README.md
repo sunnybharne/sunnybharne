@@ -1,4 +1,3 @@
-# About Me
 ## Welcome to My Digital Space (Sunny Bharne)
 
 ## Hey there! 👋
@@ -26,5 +25,3 @@ I love meeting like-minded tech enthusiasts, so let’s chat! Whether it's about
 🌐 **Website**: [sunnybharne.github.io/tech-docs](https://sunnybharne.github.io/tech-docs/)  
 💼 **LinkedIn**: [linkedin.com/in/sunnybharne](https://www.linkedin.com/in/sunnybharne/)  
 🐦 **GitHub**: [github.com/sunnybharne](https://github.com/sunnybharne)
-
-
