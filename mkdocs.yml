@@ -1,0 +1,38 @@
+site_name: ''
+theme:
+  name: material
+  palette:
+    primary: white
+    accent: orange
+  font:
+    text: Roboto
+    code: Roboto Mono
+  logo: assets/sunny-logo.png
+  favicon: assets/favicon.png
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.instant.progress
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.footer
+plugins:
+  - search
+  - blog
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github-alt 
+      link: https://github.com/sunnybharne
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/sunnybharne
+    - icon: fontawesome/solid/envelope
+      link: mailto:sunny.bharne@outlook.com
+    - icon: fontawesome/solid/globe
+      link: https://sunnybharne.github.io/tech-docs/
+
+repo_url: https://github.com/sunnybharne
+
+copyright: Copyright © 2025 Sunny Bharne
