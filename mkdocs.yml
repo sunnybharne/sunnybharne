@@ -1,4 +1,5 @@
-site_name: 'www.sunnybharne.com'
+site_name: ''
+site_url: https://sunnybharne.com
 theme:
   name: material
   palette:

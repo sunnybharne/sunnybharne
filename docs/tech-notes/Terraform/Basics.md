@@ -49,5 +49,9 @@ terraform state replace-provider # Replace the provider in the state
 - Your vcs is then associated with a workspace in terraform cloud.
 - This then creates the speculative plans when the pull requests are created.
 
+## Private registry
+
 ## CDKTF
 cdktf init
+
+
