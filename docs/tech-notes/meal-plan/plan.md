@@ -44,12 +44,3 @@ This meal plan provides **high protein** while keeping calories controlled for w
 |            | 50g Greek Yogurt with 1/2 Scoop Whey Protein                  | 175 kcal |
 | **Dinner** | Egg Bhurji (2 Whites, 2 Yolks, Spices, Vegetables)            | 144 kcal |
 |            | 200g Greek Yogurt with 1 Scoop Whey Protein                   | 380 kcal |
-
-## **Suggestions for Adjustments:**
-
-- Reduce **wraps** further if needed for lower calories.
-- Add **vegetables** for more fiber without many extra calories.
-- Adjust **protein powder intake** depending on daily activity levels.
-
-Let me know if you'd like further refinements! 🚀
-
