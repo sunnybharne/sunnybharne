@@ -53,5 +53,3 @@ terraform state replace-provider # Replace the provider in the state
 
 ## CDKTF
 cdktf init
-
-
