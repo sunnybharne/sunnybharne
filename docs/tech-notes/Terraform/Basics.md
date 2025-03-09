@@ -26,6 +26,30 @@ terraform state push # Push the state
 terraform state replace-provider # Replace the provider in the state
 ```
 
+## Language basics
+- Terraform block # Declares the version of Terraform to use.
+- Provider block # Configures the provider.
+- Resource block # Declares a resource.
+- Data block # Declares a data source.
+- Variables block # Declares input variables.
+- Outputs block # Declares output variables.
+- Modules block # Declares a module.
+- Locals block # Declares local values.
+- Functions # Perform operations on values.
+
+```hcl
+terraform { # Terraform block
+  required_version = ">= 0.12" # Version of Terraform
+  required_providers { # Providers block
+    azurerm = { # Provider block
+      source  = "hashicorp/azurerm" # Source of the provider
+      version = "~> 3.0" # Version of the provider
+    }
+  }
+}
+
+```
+
 ## HCP Terraform
 - Run your Terraform code in the HCP cloud rather than running it locally.
 
