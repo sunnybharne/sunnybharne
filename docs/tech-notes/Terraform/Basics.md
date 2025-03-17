@@ -12,11 +12,11 @@
 
 ```hcl
 terraform init # Initialize the directory
+terraform validate # Validate the code
+terraform fmt # Format the code
 terraform plan # Plan the changes
 terraform apply # Apply the changes
 terraform destroy # Destroy the infrastructure
-terraform fmt # Format the code
-terraform validate # Validate the code
 terraform show # Show the state
 terraform state list # List the resources
 terraform state rm # Remove the resource from the state
@@ -30,7 +30,7 @@ terraform state replace-provider # Replace the provider in the state
 - Terraform block # Declares the version of Terraform to use.
 - Provider block # Configures the provider.
 - Resource block # Declares a resource.
-- Data block # Declares a data source.
+- Data block # exisiting resources.
 - Variables block # Declares input variables.
 - Outputs block # Declares output variables.
 - Modules block # Declares a module.
@@ -38,7 +38,9 @@ terraform state replace-provider # Replace the provider in the state
 - Functions # Perform operations on values.
 
 ```hcl
-terraform { # Terraform block
+
+# Terraform block
+terraform {
   required_version = ">= 0.12" # Version of Terraform
   required_providers { # Providers block
     azurerm = { # Provider block
@@ -48,7 +50,41 @@ terraform { # Terraform block
   }
 }
 
+# Resource block
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "Sweden Central"
+}
+
+# Data block
+data "azurerm_resource_group" "example" {
+  name = "example-resources"
+}
+
+# Variables block
+variable "location" {
+  type    = string
+  description = "The location of the resources."
+  default = "Sweden Central"
+} 
+
+# Outputs block
+output "resource_group_id" {
+  value = azurerm_resource_group.example.id
+}
+
+# Locals block
+locals {
+  resource_group_name = "This is local variable"
+}
+
+# Modules block
+module "example" {
+  source = "./example"
+}
+
 ```
+
 
 ## HCP Terraform
 - Run your Terraform code in the HCP cloud rather than running it locally.
@@ -77,3 +113,5 @@ terraform { # Terraform block
 
 ## CDKTF
 cdktf init
+
+
