@@ -28,3 +28,4 @@ jobs:
       - run: |
           echo "www.sunnybharne.com" > CNAME
           mkdocs gh-deploy --force
+
