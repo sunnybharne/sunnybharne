@@ -12,11 +12,15 @@
 
 ```hcl
 terraform init # Initialize the directory
+terraform init -upgrade # You need to run this when you change the provider version
 terraform validate # Validate the code
 terraform fmt # Format the code
 terraform plan # Plan the changes
 terraform apply # Apply the changes
 terraform destroy # Destroy the infrastructure
+terraform plan --destroy # Shows what will be destroyed
+terraform apply --destroy # This will distroy the infra after the confirmation from the user
+terraform apply --destroy -auto-approve # This will distroy the infra without the conformation
 terraform show # Show the state
 terraform state list # List the resources
 terraform state rm # Remove the resource from the state
@@ -115,3 +119,7 @@ module "example" {
 cdktf init
 
 
+
+## lock file
+This is used to kepp the version information of your project
+After the verions is updated you can then remove the version from the terraform hcl code so that you keep on using the same version without inconsistences
