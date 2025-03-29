@@ -1,32 +1,45 @@
 import React from "react";
-// Import icons from react-icons
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Image from "next/image"; // Add Image import back
+// Remove react-icons import
+// import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Socials: React.FC = () => {
   return (
     <div className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-      {/* GitHub Link */}
+      {/* GitHub Link - Reverted to Image and matched Skills styling */}
       <a
-        // Removed hover background/text change, adjusted padding/gap slightly
-        className="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded hover:border-anime-blue transition-colors group"
+        // Use styling consistent with Skills component
+        className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
         href="https://github.com/sunnybharne"
         target="_blank"
         rel="noopener noreferrer"
       >
-        {/* Use FaGithub icon, add base color, hover color, and transition */}
-        <FaGithub className="w-6 h-6 text-gray-700 group-hover:text-anime-blue transition-colors" />
+        {/* Use Image component with original SVG */}
+        <Image
+          aria-hidden
+          src="/github.svg"
+          alt="Github icon"
+          width={22} // Increased size slightly
+          height={22} // Increased size slightly
+        />
         Github
       </a>
-      {/* LinkedIn Link */}
+      {/* LinkedIn Link - Reverted to Image and matched Skills styling */}
       <a
-        // Removed hover background/text change, adjusted padding/gap slightly
-        className="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded hover:border-anime-blue transition-colors group"
+        // Use styling consistent with Skills component
+        className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
         href="https://www.linkedin.com/in/sunnybharne"
         target="_blank"
         rel="noopener noreferrer"
       >
-        {/* Use FaLinkedin icon, add base color, hover color, and transition */}
-        <FaLinkedin className="w-6 h-6 text-gray-700 group-hover:text-anime-blue transition-colors" />
+        {/* Use Image component with original SVG */}
+        <Image
+          aria-hidden
+          src="/linkedin.svg"
+          alt="LinkedIn icon"
+          width={20} // Keep LinkedIn size
+          height={20} // Keep LinkedIn size
+        />
         LinkedIn
       </a>
     </div>
