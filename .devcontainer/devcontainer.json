@@ -1,0 +1,9 @@
+{
+  "name": "Dev Container",
+  "build": {
+    "dockerfile": "./Dockerfile"
+  },
+  "settings": {},
+  "extensions": [],
+  "postCreateCommand": ""
+}
