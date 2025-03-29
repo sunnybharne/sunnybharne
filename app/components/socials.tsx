@@ -1,38 +1,33 @@
 import React from "react";
-import Image from "next/image";
+// Import icons from react-icons
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Socials: React.FC = () => {
   return (
     <div className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      {/* GitHub Link */}
       <a
-        className="flex items-center gap-2 border border-current px-4 py-2 hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors"
+        // Removed hover background/text change, adjusted padding/gap slightly
+        className="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded hover:border-anime-blue transition-colors group"
         href="https://github.com/sunnybharne"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image
-          aria-hidden
-          src="/github.svg"
-          alt="github icon"
-          width={24}
-          height={24}
-        />
+        {/* Use FaGithub icon, add base color, hover color, and transition */}
+        <FaGithub className="w-6 h-6 text-gray-700 group-hover:text-anime-blue transition-colors" />
         Github
       </a>
+      {/* LinkedIn Link */}
       <a
-        className="flex items-center gap-2 border border-current px-4 py-2 hover:bg-[color:var(--foreground)] hover:text-[color:var(--background)] transition-colors"
+        // Removed hover background/text change, adjusted padding/gap slightly
+        className="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded hover:border-anime-blue transition-colors group"
         href="https://www.linkedin.com/in/sunnybharne"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image
-          aria-hidden
-          src="/linkedin.svg"
-          alt="linkedIn icon"
-          width={24}
-          height={24}
-        />
-       LinkedIn
+        {/* Use FaLinkedin icon, add base color, hover color, and transition */}
+        <FaLinkedin className="w-6 h-6 text-gray-700 group-hover:text-anime-blue transition-colors" />
+        LinkedIn
       </a>
     </div>
   );

@@ -1,5 +1,8 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/image"; // Bring back Image import
+
+// Remove react-icons import
+// import { SiAzure, SiBicep, SiAzuredevops, SiAzurepipelines } from "react-icons/si";
 
 const Skills: React.FC = () => {
   return (
@@ -7,70 +10,57 @@ const Skills: React.FC = () => {
       <p className="text-1xl font-bold border-b border-current pb-1 mb-4">Skills</p>
       <p className="text-1xl mb-4">2024-2025</p>
       <div className="row-start-3 flex gap-[16px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        {/* Microsoft Azure - Reverted to Image */}
+        <div className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded bg-white shadow-sm">
           <Image
             aria-hidden
             src="/azure.svg"
-            alt="azure icon"
-            width={21}
-            height={21}
+            alt="Azure icon"
+            width={20} // Consistent size
+            height={20}
+            className="object-contain" // Ensure aspect ratio is maintained
           />
-         Microsoft Azure 
-        </a>
+          <span className="font-mono text-sm">Microsoft Azure</span>
+        </div>
 
-        <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        {/* Bicep IAC - Reverted to Image */}
+        <div className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded bg-white shadow-sm">
           <Image
             aria-hidden
             src="/bicep.svg"
-            alt="bicep icon"
+            alt="Bicep icon"
             width={20}
             height={20}
+            className="object-contain"
           />
-        Bicep IAC
-        </a>
+          <span className="font-mono text-sm">Bicep IAC</span>
+        </div>
 
-        <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        {/* Azure DevOps - Reverted to Image */}
+        <div className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded bg-white shadow-sm">
           <Image
             aria-hidden
             src="/devops.svg"
-            alt="azure devops icon"
-            width={26}
-            height={26}
+            alt="Azure DevOps icon"
+            width={20}
+            height={20}
+            className="object-contain"
           />
-         Azure Devops
-        </a>
+          <span className="font-mono text-sm">Azure DevOps</span>
+        </div>
 
-        <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        {/* Azure Pipelines - Reverted to Image */}
+        <div className="flex items-center gap-2 border border-gray-300 px-3 py-1 rounded bg-white shadow-sm">
           <Image
             aria-hidden
             src="/pipelines.svg"
-            alt="azure devops icon"
+            alt="Azure Pipelines icon"
             width={20}
             height={20}
+            className="object-contain"
           />
-        Azure Pipelines
-        </a>
-
+          <span className="font-mono text-sm">Azure Pipelines</span>
+        </div>
       </div>
       {/*<p className="text-1xl">2015-2024</p>
       <p className="text-1xl">2015-2024</p>
