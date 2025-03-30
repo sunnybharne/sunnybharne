@@ -1,9 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-// Remove react-icons import
-// import { SiAzure, SiBicep, SiAzuredevops, SiAzurepipelines } from "react-icons/si";
-
 const Skills: React.FC = () => {
   return (
     <>
@@ -27,7 +24,6 @@ const Skills: React.FC = () => {
          Microsoft Azure
         </a>
 
-        {/* Bicep IAC - Reverted to original link structure */}
         <a
           className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
           href="#"
@@ -44,7 +40,6 @@ const Skills: React.FC = () => {
         Bicep IAC
         </a>
 
-        {/* Azure DevOps - Reverted to original link structure */}
         <a
           className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
           href="#"
@@ -61,7 +56,6 @@ const Skills: React.FC = () => {
          Azure Devops
         </a>
 
-        {/* Azure Pipelines - Reverted to original link structure */}
         <a
           className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
           href="#"
@@ -79,10 +73,6 @@ const Skills: React.FC = () => {
         </a>
 
       </div>
-      {/*<p className="text-1xl">2015-2024</p>
-      <p className="text-1xl">2015-2024</p>
-      <p className="text-1xl">2015-2024</p>
-      <p className="text-1xl">2015-2024</p>*/}
     </>
   );
 };
