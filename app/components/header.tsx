@@ -1,11 +1,20 @@
 import React from "react";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   return (
-    <>
-        <h1 className="text-3xl sm:text-4xl font-bold text-center sm:text-left text-anime-blue">SUNNY BHARNE</h1>
-        <h2 className="text-1xl sm:text-1xl font-bold text-center">Senior Azure Developer</h2>
-    </>
+    <div className="flex flex-row p-8">
+        <Image
+          src="/sunny.png"
+          alt="Sunny Bharne profile picture"
+          width={150}
+          height={150}
+        />
+      <div className="flex flex-col justify-center p-8">
+        <p>SUNNY BHARNE</p>
+        <p>Senior Azure Developer</p>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { GeistSans, GeistMono } from "geist/font";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,8 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Directly use the variable property from the imported font objects
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en">
       <body className="bg-anime-bg antialiased">
         {children}
       </body>
