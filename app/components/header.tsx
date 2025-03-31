@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Socials from "./socials";
 
 const Header: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Header: React.FC = () => {
           <h1 className="justify-self-end text-2xl tracking-wide text-blue-600 dark:text-sky-400 underline decoration-pink-500">SUNNY BHARNE</h1>
           <p className="text-sm">Senior Azure Developer</p>
           <p className="text-sm">OP Financial group</p>
+          <Socials />
         </div>
     </div>
   );

@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <div className="grid gap-2 md:gap-12 justify-center py-2 md:py-50">
       <Header />
-      <Socials />
       <Skills />
     </div>
   );

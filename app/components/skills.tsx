@@ -8,7 +8,7 @@ const Skills: React.FC = () => {
       <p className="text-1xl mb-4">2024-2025</p>
       <div className="row-start-3 flex gap-[16px] flex-wrap items-center justify-center">
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          className="flex items-center gap-2"
           href="#"
           target="_blank"
           rel="noopener noreferrer"

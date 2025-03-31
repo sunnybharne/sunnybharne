@@ -1,90 +1,22 @@
+
 import React from "react";
-import Image from "next/image";
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 
 const Socials: React.FC = () => {
   return (
-    <div className="grid grid-cols-5 gap-2 grid-wrap">
-
-      <a
-        className="flex items-center gap-1 border border-current px-3 py-1"
-        href="https://github.com/sunnybharne"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          aria-hidden
-          src="/github.svg"
-          alt="Github icon"
-          width={22}
-          height={22}
-        />
-        Github
+    <div className="flex gap-3 text-xl">
+      <a href="https://github.com/sunnybharne" target="_blank" rel="noopener noreferrer">
+        <FaGithub aria-hidden />
       </a>
-
-      <a
-        className="flex items-center gap-1 border border-current px-3 py-1"
-        href="https://www.linkedin.com/in/sunnybharne"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          aria-hidden
-          src="/linkedin.svg"
-          alt="LinkedIn icon"
-          width={20}
-          height={20}
-        />
-        LinkedIn
+      <a href="https://www.linkedin.com/in/sunnybharne" target="_blank" rel="noopener noreferrer">
+        <FaLinkedin aria-hidden />
       </a>
-
-      <a
-        className="flex items-center gap-1 border border-current px-3 py-1"
-        href="https://www.linkedin.com/in/sunnybharne"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          aria-hidden
-          src="/linkedin.svg"
-          alt="x icon"
-          width={20}
-          height={20}
-        />
-       Twitter
+      <a href="https://twitter.com/sunnybharne" target="_blank" rel="noopener noreferrer">
+        <FaXTwitter aria-hidden />
       </a>
-
-      <a
-        className="flex items-center gap-1 border border-current px-3 py-1"
-        href="https://www.linkedin.com/in/sunnybharne"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          aria-hidden
-          src="/linkedin.svg"
-          alt="Email icon"
-          width={20}
-          height={20}
-        />
-        Email
+      <a href="mailto:sunnybharne@example.com">
+        <FaEnvelope aria-hidden />
       </a>
-
-      <a
-        className="flex items-center gap-1 border border-current px-3 py-1"
-        href="https://www.linkedin.com/in/sunnybharne"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          aria-hidden
-          src="/linkedin.svg"
-          alt="Email icon"
-          width={20}
-          height={20}
-        />
-        Resume
-      </a>
-
     </div>
   );
 };
