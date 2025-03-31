@@ -7,10 +7,9 @@ const Skills: React.FC = () => {
       <p className="text-1xl font-bold border-b border-current pb-1 mb-4">Skills</p>
       <p className="text-1xl mb-4">2024-2025</p>
       <div className="row-start-3 flex gap-[16px] flex-wrap items-center justify-center">
-        {/* Microsoft Azure - Reverted to original link structure */}
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono" // Original classes
-          href="#" // Original href
+          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -18,8 +17,8 @@ const Skills: React.FC = () => {
             aria-hidden
             src="/azure.svg"
             alt="azure icon"
-            width={20} // Consistent size
-            height={20} // Consistent size
+            width={20}
+            height={20}
           />
          Microsoft Azure
         </a>
@@ -34,8 +33,8 @@ const Skills: React.FC = () => {
             aria-hidden
             src="/bicep.svg"
             alt="bicep icon"
-            width={20} // Consistent size (already 20)
-            height={20} // Consistent size (already 20)
+            width={20}
+            height={20}
           />
         Bicep IAC
         </a>
@@ -50,8 +49,8 @@ const Skills: React.FC = () => {
             aria-hidden
             src="/devops.svg"
             alt="azure devops icon"
-            width={20} // Consistent size
-            height={20} // Consistent size
+            width={20}
+            height={20}
           />
          Azure Devops
         </a>
@@ -65,9 +64,9 @@ const Skills: React.FC = () => {
           <Image
             aria-hidden
             src="/pipelines.svg"
-            alt="azure pipelines icon" // Adjusted alt text slightly
-            width={20} // Consistent size (already 20)
-            height={20} // Consistent size (already 20)
+            alt="azure pipelines icon"
+            width={20}
+            height={20}
           />
         Azure Pipelines
         </a>
