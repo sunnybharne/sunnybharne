@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Socials: React.FC = () => {
   return (
-    <div className="flex gap-2">
+    <div className="grid grid-cols-5 gap-2 grid-wrap">
 
       <a
         className="flex items-center gap-1 border border-current px-3 py-1"
@@ -50,7 +50,7 @@ const Socials: React.FC = () => {
           width={20}
           height={20}
         />
-       X 
+       Twitter
       </a>
 
       <a
