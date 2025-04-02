@@ -25,3 +25,5 @@ I welcome connections with fellow technology professionals. Feel free to reach o
 🌐 **Website**: [sunnybharne.github.io/tech-docs](https://sunnybharne.com/nvim/tech-docs/)  
 💼 **LinkedIn**: [linkedin.com/in/sunnybharne](https://www.linkedin.com/in/sunnybharne/)  
 🐙 **GitHub**: [github.com/sunnybharne](https://github.com/sunnybharne)
+
+![Sunny's GitHub stats](https://github-readme-stats.vercel.app/api?username=sunnybharne&show_icons=true&count_private=true&theme=radical)

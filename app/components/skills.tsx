@@ -3,11 +3,9 @@ import Image from "next/image";
 
 const Skills: React.FC = () => {
   return (
-    <>
-    <div className="flex p-8">
-      <div className="row-start-3 flex gap-[16px] flex-wrap items-center">
+    <div className="flex p-8 gap-4">
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          className="flex p-8 gap-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -22,7 +20,7 @@ const Skills: React.FC = () => {
         </a>
 
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          className="flex p-8 gap-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -37,7 +35,7 @@ const Skills: React.FC = () => {
         </a>
 
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          className="flex p-8 gap-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -52,7 +50,7 @@ const Skills: React.FC = () => {
         </a>
 
         <a
-          className="flex items-center gap-2 border border-current px-3 py-1 font-mono"
+          className="flex p-8 gap-4"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -65,12 +63,7 @@ const Skills: React.FC = () => {
           />
         Azure Pipelines
         </a>
-
-      </div>
-
     </div>
-    </>
-
   );
 };
 
