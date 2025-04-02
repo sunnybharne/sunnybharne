@@ -1,4 +1,3 @@
-
 import React from "react";
 import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 
@@ -14,7 +13,7 @@ const Socials: React.FC = () => {
       <a href="https://twitter.com/sunnybharne" target="_blank" rel="noopener noreferrer">
         <FaXTwitter aria-hidden />
       </a>
-      <a href="mailto:sunnybharne@example.com">
+      <a href="mailto:sunny.bharne@outlook.com">
         <FaEnvelope aria-hidden />
       </a>
     </div>

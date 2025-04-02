@@ -4,10 +4,10 @@ import Socials from "./socials";
 
 const Header: React.FC = () => {
   return (
-    <div className="grid grid-cols-2 gap-2" >
+    <div className="flex gap-2" >
         <Image
           className="rounded-xl justify-self-end"
-          src="/sunny.png"
+          src="/Sunny.png"
           alt="Sunny Bharne profile picture"
           width={120}
           height={120}
