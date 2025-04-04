@@ -22,6 +22,6 @@ Outside of work, I follow **new tech trends** and explore developments in **DevO
 I welcome connections with fellow technology professionals. Feel free to reach out to discuss cloud, DevOps, or potential collaborations.
 
 📧 **Email**: [sunny.bharne@outlook.com](mailto:sunny.bharne@outlook.com)  
-🌐 **Website**: [sunnybharne.github.io/tech-docs](https://sunnybharne.com/nvim/tech-docs/)  
+🌐 **Website**: [sunnybharne.com](https://sunnybharne.com)  
 💼 **LinkedIn**: [linkedin.com/in/sunnybharne](https://www.linkedin.com/in/sunnybharne/)  
 🐙 **GitHub**: [github.com/sunnybharne](https://github.com/sunnybharne)
