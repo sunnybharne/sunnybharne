@@ -18,7 +18,6 @@ const Skills: React.FC = () => {
           />
          Microsoft Azure
         </a>
-
         <a
           className="flex p-8 gap-4"
           target="_blank"
@@ -33,7 +32,6 @@ const Skills: React.FC = () => {
           />
         Bicep IAC
         </a>
-
         <a
           className="flex p-8 gap-4"
           target="_blank"
@@ -48,7 +46,6 @@ const Skills: React.FC = () => {
           />
          Azure Devops
         </a>
-
         <a
           className="flex p-8 gap-4"
           target="_blank"
