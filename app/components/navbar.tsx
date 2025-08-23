@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   const handleTechDocsClick = () => {
-    window.open('https://github.com/sunnybharne/nvim/tree/main/scratchpad', '_blank');
+    window.open('https://sunnybharne.github.io/tech-notes/', '_blank');
   };
 
   return (
