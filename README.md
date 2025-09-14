@@ -1,5 +1,3 @@
-# Skilled in below topics
-
 ## Current Skills 
 - Azure Landing Zones
 - Cloud Adoption Framework
