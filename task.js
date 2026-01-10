@@ -5,7 +5,6 @@
 // Change the phone plans to do stuff.
 //
 // FIXME: non work
-// Fix the github stuff.
 // Fix the azure devops connections. and check if eveything works fine.
 //
 // FIXME: youtube stuff
@@ -18,5 +17,3 @@
 //
 // FIXME: Job Stuff (Plan the job stuff)
 // FIXME: Create social media plan
-// FIXME:
-// Check the pr status.

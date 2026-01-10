@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/banner.svg" alt="Banner" width="100%">
+
 # Sunny Bharne, I do all things Azure.
 
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
