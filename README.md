@@ -49,3 +49,6 @@
 ###### I use [VIM](https://github.com/sunnybharne/nvim), Judge me!
 
 </div>
+
+---
+
