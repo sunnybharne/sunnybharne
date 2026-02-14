@@ -24,7 +24,7 @@
 - Azure subscription provisioning IAC. ([Platform Landing Zones](https://github.com/sunnybharne/azure-enterprise-platform), Standard Landing Zones, Shared Landing Zones).
 - Azure Management Group structure provisioning IAC. (According to CAF and some of my own architectural thoughts)
 - [Azure Policy](https://github.com/sunnybharne/azure-enterprise-platform) provisioning IAC. (According to CAF and some of my own architectural thoughts)
-- Azure Policy release with SAFe deployment model. (This is a bit complicated in a large enterprise)
+- Azure Policy release design with multiple release cycles. 
 - Azure Platform Change Management using ServiceNow.
 - Azure Platform Test Automation using Pester and Terraform testing tools.
 
