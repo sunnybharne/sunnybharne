@@ -7,13 +7,33 @@ data "azurerm_storage_account" "site" {
   resource_group_name = data.azurerm_resource_group.site.name
 }
 
-# Azure's static-website feature serves content from a special container
-# called `$web`. The container itself is created automatically by Azure when
-# static-website hosting is enabled on the storage account — we only need
-# to read it.
-data "azurerm_storage_container" "web" {
-  name               = "$web"
+# Enable static-website hosting on the existing storage account. This is
+# the data-plane property that turns on the `$web` container + the
+# *.z*.web.core.windows.net endpoint. We use the standalone resource
+# (rather than the `static_website {}` block on azurerm_storage_account)
+# because the storage account itself is NOT managed here — it's read via
+# a data source so we don't fight with whoever manages it elsewhere.
+#
+# Side effect: Azure auto-creates the `$web` container when this resource
+# is created. We don't need a separate azurerm_storage_container resource
+# for it (and creating one would conflict with the auto-created one).
+resource "azurerm_storage_account_static_website" "web" {
   storage_account_id = data.azurerm_storage_account.site.id
+  index_document     = "index.html"
+  error_404_document = "404.html"
+}
+
+# Static-website was first enabled on stjsdownloads imperatively (one-time
+# `az` command) before this module existed. The `import` block lets the
+# very first `terraform apply` adopt that existing configuration into state
+# without re-creating anything. After the first successful apply, this
+# block becomes a no-op and can be deleted — Terraform supports keeping it
+# either way.
+import {
+  to = azurerm_storage_account_static_website.web
+  # Terraform requires the import ID to be known at plan time, so we build
+  # it from the input vars rather than referencing the data source.
+  id = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
 }
 
 locals {
@@ -55,7 +75,7 @@ resource "azurerm_storage_blob" "site" {
 
   name                   = each.value
   storage_account_name   = data.azurerm_storage_account.site.name
-  storage_container_name = data.azurerm_storage_container.web.name
+  storage_container_name = "$web"
   type                   = "Block"
 
   source = "${var.site_source_path}/${each.value}"
@@ -70,4 +90,8 @@ resource "azurerm_storage_blob" "site" {
     lower(regex("\\.[^.]*$", each.value)),
     "application/octet-stream",
   )
+
+  # Ordering: don't try to upload blobs until static-website is enabled,
+  # because enabling it is what auto-provisions the $web container.
+  depends_on = [azurerm_storage_account_static_website.web]
 }

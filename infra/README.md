@@ -1,43 +1,43 @@
 # infra — deploy the portfolio to an Azure Storage Account
 
-Terraform that uploads the Next.js static export (`../out/`) into the `$web`
-container of an **existing** storage account.
+Terraform that:
 
-The storage account itself is **not** managed here — only the blob contents.
-Static-website hosting must be enabled on the account before the first
-`terraform apply` (see one-time setup below).
+1. Enables static-website hosting on an existing storage account (creates
+   the `$web` container as a side effect — that's the container Azure
+   serves the site from).
+2. Uploads the Next.js static export (`../out/`) into that container.
+
+A single `terraform apply` does both, in that order — the blob uploads
+`depends_on` the static-website resource, so Terraform won't try to push
+files before the container exists.
+
+On the **very first apply** an `import` block adopts the existing
+static-website configuration on the account into state (the feature was
+toggled on out-of-band before this module existed). Subsequent applies
+are no-ops for the import block. You can delete the block once you've
+seen one clean apply, or leave it — it's idempotent.
+
+The storage account itself is **not** managed here — only the static-website
+configuration on it and the blob contents inside it. That keeps this module
+safe to run alongside other Terraform that owns the account.
 
 ## Prerequisites
 
 - An existing storage account in your subscription (any region, Standard tier, StorageV2 kind).
-- Static-website hosting enabled on that account (one-time `az` command below).
 - `az login` against the subscription that owns it.
-- Terraform >= 1.5.
+- Terraform >= 1.6 (the `import` block in `main.tf` uses variable
+  interpolation, which requires 1.6+).
 - HCP Terraform (Terraform Cloud) workspace `sunny-portfolio` in the
   `papliba-org` org (already created). Run `terraform login` once locally
-  so the CLI has a TFC token.
-
-## One-time setup
-
-```bash
-# Replace <account> with your actual storage account name.
-az storage blob service-properties update \
-  --account-name <account> \
-  --auth-mode login \
-  --static-website \
-  --index-document index.html \
-  --404-document 404.html
-```
-
-This is run once per storage account and persists. It also auto-creates the
-`$web` container Azure will serve from.
+  so the CLI has a TFC token. The workspace's Terraform version must also
+  be set to 1.6+ in the TFC UI.
 
 ## Fill in `terraform.tfvars`
 
 ```hcl
 subscription_id      = "e0f7f90b-..."
 resource_group_name  = "rg"
-storage_account_name = "<your-account-name>"
+storage_account_name = "stjsdownloads"
 ```
 
 ## Deploy
@@ -46,7 +46,8 @@ storage_account_name = "<your-account-name>"
 # From the repo root: produce the static export Terraform will upload.
 npm run build
 
-# Then from this directory: apply the upload.
+# Then from this directory: one apply does both — infra config (static-website)
+# and the app deploy (blob uploads), in the correct order.
 cd infra
 terraform init
 terraform apply

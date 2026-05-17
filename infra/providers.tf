@@ -1,5 +1,6 @@
 terraform {
-  required_version = ">= 1.5.0"
+  # 1.6+ required so the `import` block in main.tf can reference variables.
+  required_version = ">= 1.6.0"
 
   required_providers {
     azurerm = {
