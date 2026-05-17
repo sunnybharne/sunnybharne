@@ -62,6 +62,46 @@ sees per-file content changes between applies and only replaces blobs whose
 contents actually changed. New files are added; removed files are deleted by
 terraform on the next apply (because `fileset` no longer lists them).
 
+## CI deploy (GitHub Actions)
+
+`.github/workflows/deploy.yml` runs on every push to `main` that touches
+`app/`, `data/`, `infra/`, or related build files, and on manual dispatch.
+
+It does the same thing the local "Deploy" flow above does: `npm run build`
+then `terraform init && terraform apply` from `infra/`. Concurrency-guarded
+so two deploys can't race each other.
+
+Required repo secrets:
+
+| Secret                  | What it is                                                                |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`       | Client ID of the user-assigned managed identity federated to this repo.   |
+| `AZURE_TENANT_ID`       | Azure AD tenant ID (`c0f414ff-9e2d-4011-929c-fe21ed71b218`).              |
+| `AZURE_SUBSCRIPTION_ID` | `e0f7f90b-e7e5-48d7-b3c7-7b313b0c595b`.                                   |
+| `TF_API_TOKEN`          | HCP Terraform team/user API token (read/write on the `sunny-portfolio` workspace). Surfaces as `TF_TOKEN_app_terraform_io` to the terraform CLI. |
+
+One-time setup, if reusing the existing stjs managed identity:
+
+```bash
+# Add a second federated credential to the same MI for THIS repo.
+az identity federated-credential create \
+  --identity-name managed-identity \
+  --resource-group rg \
+  --name sunnybharne-portfolio-main \
+  --issuer https://token.actions.githubusercontent.com \
+  --subject repo:sunnybharne/sunnybharne:ref:refs/heads/main \
+  --audiences api://AzureADTokenExchange
+```
+
+The MI already has `Storage Blob Data Contributor` on `stjsdownloads`
+(granted by `stjs/infra`), so it has the permissions needed to write to
+`$web` — no extra role assignment required.
+
+The TFC workspace's **Execution Mode** must be set to **Local** in the TFC
+UI so the GitHub Actions runner runs the apply itself with its OIDC-bound
+Azure identity. (Remote mode would need Azure Dynamic Provider Credentials
+configured on the workspace instead — works too, just a different shape.)
+
 ## Custom domain (optional)
 
 1. Add a CNAME at your DNS provider pointing your hostname (e.g.
