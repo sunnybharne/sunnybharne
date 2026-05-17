@@ -26,7 +26,6 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  id-token: write   # required for Azure OIDC federation
   contents: read
 
 jobs:
@@ -34,22 +33,16 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # Azure provider auth via OIDC. The user-assigned managed identity
-      # must have a federated credential configured for
-      # repo:sunnybharne/sunnybharne:ref:refs/heads/main. The same MI can
-      # be reused from the stjs setup — just add another federated
-      # credential entry to it.
-      ARM_USE_OIDC: 'true'
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
       # HCP Terraform (Terraform Cloud) backend auth. Create a team or user
       # API token in TFC and store it as a repo secret.
+      #
+      # Azure auth itself happens INSIDE TFC (Remote execution): TFC issues
+      # OIDC tokens on behalf of the run, and the managed identity
+      # `managed-identity` in rg has federated-credentials trusting TFC's
+      # issuer for run_phase=plan and run_phase=apply on this workspace.
+      # The runner here just needs to talk to TFC; the actual Azure
+      # principal-of-record is the MI, not anything on this runner.
       TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
-
-      # subscription_id is also a Terraform input variable.
-      TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     steps:
       - uses: actions/checkout@v4
@@ -76,16 +69,19 @@ jobs:
           # exit code rather than the wrapper's structured output.
           terraform_wrapper: false
 
+      # IMPORTANT: terraform runs from the repo root with `-chdir=infra`,
+      # not `working-directory: infra`. The TFC workspace has its
+      # working-directory attribute set to `infra`, so this combination
+      # uploads the entire repo (including ./out from the build step) to
+      # TFC, then executes inside ./infra remotely. If we ran from
+      # ./infra here, TFC would receive only the infra dir and the blob
+      # uploads would all be no-ops because ../out wouldn't exist on the
+      # remote.
       - name: terraform init
-        working-directory: infra
-        run: terraform init -input=false
+        run: terraform -chdir=infra init -input=false
 
-      # Plan separately so the apply step can surface what's about to change.
-      # On a stable site this is mostly content-only diffs in the $web blobs.
       - name: terraform plan
-        working-directory: infra
-        run: terraform plan -input=false -out=tfplan
+        run: terraform -chdir=infra plan -input=false -out=tfplan
 
       - name: terraform apply
-        working-directory: infra
-        run: terraform apply -input=false -auto-approve tfplan
+        run: terraform -chdir=infra apply -input=false -auto-approve tfplan

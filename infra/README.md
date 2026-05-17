@@ -43,17 +43,21 @@ storage_account_name = "stjsdownloads"
 ## Deploy
 
 ```bash
-# From the repo root: produce the static export Terraform will upload.
-npm run build
+# All commands from the repo root.
+npm run build                                # produces ./out
 
-# Then from this directory: one apply does both — infra config (static-website)
-# and the app deploy (blob uploads), in the correct order.
-cd infra
-terraform init
-terraform apply
+terraform -chdir=infra init
+terraform -chdir=infra apply
 ```
 
-The site URL is in `terraform output primary_web_endpoint`.
+The site URL is in `terraform -chdir=infra output primary_web_endpoint`.
+
+**Run from the repo root, not from `infra/`.** TFC's working-directory is
+set to `infra`, so a `terraform` invocation from the repo root uploads the
+whole repo (including `out/`) to TFC, then executes inside `infra/`. If
+you `cd infra` and run terraform there, TFC will only receive the `infra/`
+directory and the blob uploads will plan as zero files because `../out`
+won't be in the upload.
 
 ## How updates work
 
@@ -67,40 +71,61 @@ terraform on the next apply (because `fileset` no longer lists them).
 `.github/workflows/deploy.yml` runs on every push to `main` that touches
 `app/`, `data/`, `infra/`, or related build files, and on manual dispatch.
 
-It does the same thing the local "Deploy" flow above does: `npm run build`
-then `terraform init && terraform apply` from `infra/`. Concurrency-guarded
-so two deploys can't race each other.
+It does `npm ci && npm run build` to produce `out/`, then runs
+`terraform init/plan/apply` from the **repo root** with `-chdir=infra` so
+that TFC's remote run receives the whole repo (including `out/`) rather
+than just the `infra/` directory.
 
-Required repo secrets:
+Required repo secret:
 
-| Secret                  | What it is                                                                |
-| ----------------------- | ------------------------------------------------------------------------- |
-| `AZURE_CLIENT_ID`       | Client ID of the user-assigned managed identity federated to this repo.   |
-| `AZURE_TENANT_ID`       | Azure AD tenant ID (`c0f414ff-9e2d-4011-929c-fe21ed71b218`).              |
-| `AZURE_SUBSCRIPTION_ID` | `e0f7f90b-e7e5-48d7-b3c7-7b313b0c595b`.                                   |
-| `TF_API_TOKEN`          | HCP Terraform team/user API token (read/write on the `sunny-portfolio` workspace). Surfaces as `TF_TOKEN_app_terraform_io` to the terraform CLI. |
+| Secret         | What it is                                                                                            |
+| -------------- | ----------------------------------------------------------------------------------------------------- |
+| `TF_API_TOKEN` | HCP Terraform team/user API token with access to the `papliba-org/sunny-portfolio` workspace. Surfaces as `TF_TOKEN_app_terraform_io` to the terraform CLI. |
 
-One-time setup, if reusing the existing stjs managed identity:
+That's the only one — Azure auth happens *inside* TFC via Dynamic
+Provider Credentials, not on the GitHub runner. See the next section.
 
-```bash
-# Add a second federated credential to the same MI for THIS repo.
-az identity federated-credential create \
-  --identity-name managed-identity \
-  --resource-group rg \
-  --name sunnybharne-portfolio-main \
-  --issuer https://token.actions.githubusercontent.com \
-  --subject repo:sunnybharne/sunnybharne:ref:refs/heads/main \
-  --audiences api://AzureADTokenExchange
-```
+## How Azure auth works (TFC ↔ Azure OIDC federation)
 
-The MI already has `Storage Blob Data Contributor` on `stjsdownloads`
-(granted by `stjs/infra`), so it has the permissions needed to write to
-`$web` — no extra role assignment required.
+The `sunny-portfolio` TFC workspace runs in **Remote** execution mode.
+TFC's run environment authenticates to Azure by exchanging a workspace-
+bound OIDC token for an Azure access token via the **user-assigned
+managed identity** `managed-identity` in rg. Setup is one-time:
 
-The TFC workspace's **Execution Mode** must be set to **Local** in the TFC
-UI so the GitHub Actions runner runs the apply itself with its OIDC-bound
-Azure identity. (Remote mode would need Azure Dynamic Provider Credentials
-configured on the workspace instead — works too, just a different shape.)
+1. **Federated credentials on the MI** — two entries, one per run phase:
+
+   ```bash
+   az identity federated-credential create \
+     --identity-name managed-identity --resource-group rg \
+     --name tfc-sunny-portfolio-plan \
+     --issuer https://app.terraform.io \
+     --subject "organization:papliba-org:project:Default Project:workspace:sunny-portfolio:run_phase:plan" \
+     --audiences api://AzureADTokenExchange
+
+   az identity federated-credential create \
+     --identity-name managed-identity --resource-group rg \
+     --name tfc-sunny-portfolio-apply \
+     --issuer https://app.terraform.io \
+     --subject "organization:papliba-org:project:Default Project:workspace:sunny-portfolio:run_phase:apply" \
+     --audiences api://AzureADTokenExchange
+   ```
+
+2. **TFC workspace env vars** — set on `papliba-org/sunny-portfolio`:
+
+   | Key                       | Value                                  |
+   | ------------------------- | -------------------------------------- |
+   | `TFC_AZURE_PROVIDER_AUTH` | `true`                                 |
+   | `TFC_AZURE_RUN_CLIENT_ID` | `09bc3a6a-8adc-45fc-8558-c428f9faefe4` (MI client ID) |
+   | `ARM_TENANT_ID`           | `c0f414ff-9e2d-4011-929c-fe21ed71b218` |
+   | `ARM_SUBSCRIPTION_ID`     | `e0f7f90b-e7e5-48d7-b3c7-7b313b0c595b` |
+
+3. **TFC workspace working directory** = `infra` (so terraform commands
+   executed in remote runs use the `infra/` subtree, while the upload
+   tarball is the whole repo).
+
+The MI already has `Contributor` on rg and `Storage Blob Data Contributor`
+on `stjsdownloads` (granted by `stjs/infra`), which covers everything
+this module touches — no extra role assignments required.
 
 ## Custom domain (optional)
 
