@@ -72,60 +72,39 @@ terraform on the next apply (because `fileset` no longer lists them).
 `app/`, `data/`, `infra/`, or related build files, and on manual dispatch.
 
 It does `npm ci && npm run build` to produce `out/`, then runs
-`terraform init/plan/apply` from the **repo root** with `-chdir=infra` so
-that TFC's remote run receives the whole repo (including `out/`) rather
-than just the `infra/` directory.
+`terraform init/plan/apply` from the **repo root** with `-chdir=infra`.
+The job binds to the `prod` GitHub Actions environment — that's what
+makes the Azure OIDC handshake succeed (see auth section below).
 
-Required repo secret:
+### What the `prod` environment holds
 
-| Secret         | What it is                                                                                            |
-| -------------- | ----------------------------------------------------------------------------------------------------- |
-| `TF_API_TOKEN` | HCP Terraform team/user API token with access to the `papliba-org/sunny-portfolio` workspace. Surfaces as `TF_TOKEN_app_terraform_io` to the terraform CLI. |
+| Item                                      | Type    | Value                                                                                                                           |
+| ----------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`                         | var     | Client ID of the user-assigned MI `managed-identity`.                                                                           |
+| `AZURE_TENANT_ID`                         | var     | Azure AD tenant.                                                                                                                |
+| `AZURE_SUBSCRIPTION_ID`                   | var     | Subscription that owns `stjsdownloads`.                                                                                         |
+| `TF_API_TOKEN`                            | secret  | HCP Terraform user/team token with access to the `papliba-org/sunny-portfolio` workspace. Surfaces as `TF_TOKEN_app_terraform_io`. |
 
-That's the only one — Azure auth happens *inside* TFC via Dynamic
-Provider Credentials, not on the GitHub runner. See the next section.
+## How auth works
 
-## How Azure auth works (TFC ↔ Azure OIDC federation)
+Two independent handshakes:
 
-The `sunny-portfolio` TFC workspace runs in **Remote** execution mode.
-TFC's run environment authenticates to Azure by exchanging a workspace-
-bound OIDC token for an Azure access token via the **user-assigned
-managed identity** `managed-identity` in rg. Setup is one-time:
+1. **GitHub Actions runner → Azure (OIDC, no secret).**
+   The `id-token: write` permission lets the runner mint a GitHub OIDC
+   token. The azurerm provider exchanges it for an Azure AAD token via
+   the federated credential on the user-assigned MI `managed-identity`
+   in rg. The federated-credential subject is
+   `repo:sunnybharne/sunnybharne:environment:prod`, which is why the job
+   must declare `environment: prod`. The MI already has the roles it
+   needs: `Contributor` on rg and `Storage Blob Data Contributor` on
+   `stjsdownloads` (granted by `stjs/infra`).
 
-1. **Federated credentials on the MI** — two entries, one per run phase:
-
-   ```bash
-   az identity federated-credential create \
-     --identity-name managed-identity --resource-group rg \
-     --name tfc-sunny-portfolio-plan \
-     --issuer https://app.terraform.io \
-     --subject "organization:papliba-org:project:Default Project:workspace:sunny-portfolio:run_phase:plan" \
-     --audiences api://AzureADTokenExchange
-
-   az identity federated-credential create \
-     --identity-name managed-identity --resource-group rg \
-     --name tfc-sunny-portfolio-apply \
-     --issuer https://app.terraform.io \
-     --subject "organization:papliba-org:project:Default Project:workspace:sunny-portfolio:run_phase:apply" \
-     --audiences api://AzureADTokenExchange
-   ```
-
-2. **TFC workspace env vars** — set on `papliba-org/sunny-portfolio`:
-
-   | Key                       | Value                                  |
-   | ------------------------- | -------------------------------------- |
-   | `TFC_AZURE_PROVIDER_AUTH` | `true`                                 |
-   | `TFC_AZURE_RUN_CLIENT_ID` | `09bc3a6a-8adc-45fc-8558-c428f9faefe4` (MI client ID) |
-   | `ARM_TENANT_ID`           | `c0f414ff-9e2d-4011-929c-fe21ed71b218` |
-   | `ARM_SUBSCRIPTION_ID`     | `e0f7f90b-e7e5-48d7-b3c7-7b313b0c595b` |
-
-3. **TFC workspace working directory** = `infra` (so terraform commands
-   executed in remote runs use the `infra/` subtree, while the upload
-   tarball is the whole repo).
-
-The MI already has `Contributor` on rg and `Storage Blob Data Contributor`
-on `stjsdownloads` (granted by `stjs/infra`), which covers everything
-this module touches — no extra role assignments required.
+2. **Runner → HCP Terraform (API token).**
+   The `TF_API_TOKEN` secret authenticates the terraform CLI to the TFC
+   backend so it can read and write workspace state. TFC is in **Local**
+   execution mode — it stores state, but the apply runs on the GH
+   Actions runner (or your laptop), which is what holds the Azure
+   credentials. TFC never talks to Azure here.
 
 ## Custom domain (optional)
 

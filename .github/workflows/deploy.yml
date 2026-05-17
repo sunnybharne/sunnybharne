@@ -27,22 +27,39 @@ concurrency:
 
 permissions:
   contents: read
+  id-token: write   # required so the runner can mint a GH OIDC token to exchange for an Azure AAD token via the MI's federated credential
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Pulls in vars + secrets from the `prod` environment:
+    #   - vars.AZURE_CLIENT_ID, vars.AZURE_TENANT_ID, vars.AZURE_SUBSCRIPTION_ID
+    #     identify the user-assigned MI `managed-identity` in rg and the
+    #     Azure subscription the deploy targets.
+    #   - secrets.TF_API_TOKEN is the HCP Terraform user/team token used to
+    #     read/write state on the sunny-portfolio workspace (TFC is now in
+    #     Local execution mode — TFC stores state, this runner does the apply).
+    # The MI's federated-credential subject is
+    #   repo:sunnybharne/sunnybharne:environment:prod
+    # so this `environment:` field is what lets the OIDC handshake succeed.
+    environment: prod
+
     env:
-      # HCP Terraform (Terraform Cloud) backend auth. Create a team or user
-      # API token in TFC and store it as a repo secret.
-      #
-      # Azure auth itself happens INSIDE TFC (Remote execution): TFC issues
-      # OIDC tokens on behalf of the run, and the managed identity
-      # `managed-identity` in rg has federated-credentials trusting TFC's
-      # issuer for run_phase=plan and run_phase=apply on this workspace.
-      # The runner here just needs to talk to TFC; the actual Azure
-      # principal-of-record is the MI, not anything on this runner.
+      # Azure auth on the runner: OIDC. With `id-token: write` granted, the
+      # runner has ACTIONS_ID_TOKEN_REQUEST_URL/_TOKEN, and the azurerm
+      # provider exchanges that GH OIDC token for an Azure AAD token via
+      # the MI's federated credential.
+      ARM_USE_OIDC: 'true'
+      ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      # HCP Terraform backend auth (state read/write).
       TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+
+      # subscription_id is also a Terraform input variable.
+      TF_VAR_subscription_id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
     steps:
       - uses: actions/checkout@v4
@@ -69,14 +86,10 @@ jobs:
           # exit code rather than the wrapper's structured output.
           terraform_wrapper: false
 
-      # IMPORTANT: terraform runs from the repo root with `-chdir=infra`,
-      # not `working-directory: infra`. The TFC workspace has its
-      # working-directory attribute set to `infra`, so this combination
-      # uploads the entire repo (including ./out from the build step) to
-      # TFC, then executes inside ./infra remotely. If we ran from
-      # ./infra here, TFC would receive only the infra dir and the blob
-      # uploads would all be no-ops because ../out wouldn't exist on the
-      # remote.
+      # All terraform commands run from the repo root with `-chdir=infra`.
+      # The TFC workspace's working-directory attribute is set to `infra`,
+      # so the upload tarball includes the whole repo (and therefore ./out
+      # from the build step), while terraform itself executes inside infra/.
       - name: terraform init
         run: terraform -chdir=infra init -input=false
 
