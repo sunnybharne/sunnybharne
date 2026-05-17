@@ -26,20 +26,34 @@ export default function HomePage() {
 function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-6 pt-20 pb-16 sm:pt-32">
-      <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
-        Helsinki, Finland · Azure Platform Engineer · A decade in
-      </p>
-      <h1 className="text-5xl font-bold tracking-tight sm:text-7xl">
-        I do all things
-        <br />
-        <span className="opacity-60">Azure.</span>
-      </h1>
-      <p className="mt-6 max-w-xl text-lg opacity-80">
-        Platform engineer with ten years of experience. I build Azure landing
-        zones, write the IaC (Bicep + Terraform) that provisions them, design
-        the Azure Policy that governs them, and wire up the pipelines that
-        ship them.
-      </p>
+      <div className="flex flex-col-reverse items-start gap-10 md:flex-row md:items-center md:gap-12">
+        <div className="flex-1">
+          <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
+            Helsinki, Finland · Azure Platform Engineer · A decade in
+          </p>
+          <h1 className="text-5xl font-bold tracking-tight sm:text-7xl">
+            I do all things
+            <br />
+            <span className="opacity-60">Azure.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg opacity-80">
+            Platform engineer with ten years of experience. I build Azure
+            landing zones, write the IaC (Bicep + Terraform) that provisions
+            them, design the Azure Policy that governs them, and wire up the
+            pipelines that ship them.
+          </p>
+        </div>
+        <div className="shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/profile.jpg"
+            alt="Sunny Bharne"
+            width={224}
+            height={224}
+            className="h-40 w-40 rounded-full object-cover ring-1 ring-black/10 dark:ring-white/15 shadow-sm sm:h-56 sm:w-56"
+          />
+        </div>
+      </div>
       <div className="mt-10 flex flex-wrap items-center gap-3">
         <a
           href="https://github.com/sunnybharne"
