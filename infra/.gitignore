@@ -1,0 +1,21 @@
+# Local terraform state — switch to a remote backend before sharing across machines.
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Provider plugins and module cache (but DO commit .terraform.lock.hcl)
+.terraform/
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Plan output files (may contain secrets)
+*.tfplan
+*.tfplan.*
+
+# Override files (intentional local-only overrides)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
