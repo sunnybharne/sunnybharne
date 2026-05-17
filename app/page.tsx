@@ -1,9 +1,21 @@
+import videosData from '../data/videos.json';
+
+type Video = {
+  id: string;
+  title: string;
+  url: string;
+  thumbnail: string;
+  views: string | null;
+  published: string | null;
+};
+
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Expertise />
       <FeaturedProduct />
+      <LatestVideos />
       <Projects />
       <PastLife />
       <CTA />
@@ -163,6 +175,56 @@ function FeaturedProduct() {
             Source on GitHub →
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function LatestVideos() {
+  const videos = (videosData.videos as Video[]).slice(0, 6);
+  if (videos.length === 0) return null;
+  return (
+    <section className="border-t border-black/5 dark:border-white/10">
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <div className="flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest opacity-60">
+              YouTube · @SunnySideCode
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Latest videos
+            </h2>
+          </div>
+          <a
+            href="https://www.youtube.com/@SunnySideCode"
+            className="text-sm opacity-70 hover:opacity-100"
+          >
+            Visit the channel →
+          </a>
+        </div>
+        <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {videos.map((v) => (
+            <li key={v.id} className="group">
+              <a href={v.url} className="block">
+                <div className="overflow-hidden rounded-md border border-black/5 dark:border-white/10 bg-foreground/5 aspect-video">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={v.thumbnail}
+                    alt={v.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition group-hover:scale-[1.02]"
+                  />
+                </div>
+                <h3 className="mt-3 text-sm font-semibold leading-snug group-hover:underline">
+                  {v.title}
+                </h3>
+                <p className="mt-1 text-xs opacity-60">
+                  {[v.views, v.published].filter(Boolean).join(' · ')}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

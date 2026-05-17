@@ -1,0 +1,37 @@
+{
+  "fetchedAt": "2026-05-17T06:11:46.286Z",
+  "videos": [
+    {
+      "id": "d3y5ABV5_34",
+      "title": "Claude vs Qwen 7b Software Engineer Vlog1.4.0",
+      "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
+      "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
+      "views": "618 views",
+      "published": "5 days ago"
+    },
+    {
+      "id": "RgUAUc-uL74",
+      "title": "Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0",
+      "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
+      "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
+      "views": "2.4K views",
+      "published": "3 weeks ago"
+    },
+    {
+      "id": "8mTpQM1TAug",
+      "title": "Day in a life of a software engineer | Finland  Vlog1.2.0",
+      "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
+      "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
+      "views": "1.9K views",
+      "published": "1 month ago"
+    },
+    {
+      "id": "UElJWj9QDuM",
+      "title": "Productivity Desk Setup 2026 - Software Engineer Vlog1.0.0",
+      "url": "https://www.youtube.com/watch?v=UElJWj9QDuM",
+      "thumbnail": "https://i.ytimg.com/vi/UElJWj9QDuM/hqdefault.jpg",
+      "views": "5.3K views",
+      "published": "1 month ago"
+    }
+  ]
+}
