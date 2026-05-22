@@ -57,8 +57,8 @@
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><img src="https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg" width="280" alt="Claude vs Qwen 7b Software Engineer Vlog1.4.0"></a><br><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><b>Claude vs Qwen 7b Software Engineer Vlog1.4.0</b></a><br><sub>892 views · 9 days ago</sub></td>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=RgUAUc-uL74"><img src="https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg" width="280" alt="Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0"></a><br><a href="https://www.youtube.com/watch?v=RgUAUc-uL74"><b>Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0</b></a><br><sub>2.4K views · 3 weeks ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><img src="https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg" width="280" alt="Claude vs Qwen 7b Software Engineer Vlog1.4.0"></a><br><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><b>Claude vs Qwen 7b Software Engineer Vlog1.4.0</b></a><br><sub>899 views · 10 days ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=RgUAUc-uL74"><img src="https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg" width="280" alt="Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0"></a><br><a href="https://www.youtube.com/watch?v=RgUAUc-uL74"><b>Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0</b></a><br><sub>2.4K views · 4 weeks ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=8mTpQM1TAug"><img src="https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg" width="280" alt="Day in a life of a software engineer | Finland  Vlog1.2.0"></a><br><a href="https://www.youtube.com/watch?v=8mTpQM1TAug"><b>Day in a life of a software engineer | Finland  Vlog1.2.0</b></a><br><sub>1.9K views · 1 month ago</sub></td>
   </tr>
   <tr>
