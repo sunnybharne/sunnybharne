@@ -1,12 +1,20 @@
 {
-  "fetchedAt": "2026-05-28T07:11:42.449Z",
+  "fetchedAt": "2026-05-29T07:12:01.573Z",
   "videos": [
+    {
+      "id": "aHygd83XVdU",
+      "title": "2026 Desk Setup Upgrade | Cockpit Mode",
+      "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
+      "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
+      "views": "29 views",
+      "published": "17 hours ago"
+    },
     {
       "id": "d3y5ABV5_34",
       "title": "Claude vs Qwen 7b Software Engineer Vlog1.4.0",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.5K views",
+      "views": "1.6K views",
       "published": "2 weeks ago"
     },
     {
