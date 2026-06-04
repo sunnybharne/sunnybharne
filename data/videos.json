@@ -1,13 +1,13 @@
 {
-  "fetchedAt": "2026-06-03T07:33:34.886Z",
+  "fetchedAt": "2026-06-04T07:30:29.533Z",
   "videos": [
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "115 views",
-      "published": "5 days ago"
+      "views": "116 views",
+      "published": "6 days ago"
     },
     {
       "id": "d3y5ABV5_34",
@@ -39,7 +39,7 @@
       "url": "https://www.youtube.com/watch?v=UElJWj9QDuM",
       "thumbnail": "https://i.ytimg.com/vi/UElJWj9QDuM/hqdefault.jpg",
       "views": "5.3K views",
-      "published": "1 month ago"
+      "published": "2 months ago"
     }
   ]
 }
