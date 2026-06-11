@@ -1,45 +1,45 @@
 {
-  "fetchedAt": "2026-06-10T07:20:52.737Z",
+  "fetchedAt": "2026-06-11T07:31:48.482Z",
   "videos": [
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "136",
-      "published": "12d ago"
+      "views": "137 views",
+      "published": "13 days ago"
     },
     {
       "id": "d3y5ABV5_34",
       "title": "Claude vs Qwen 7b Software Engineer Vlog1.4.0",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.7K",
-      "published": "4w ago"
+      "views": "1.7K views",
+      "published": "4 weeks ago"
     },
     {
       "id": "RgUAUc-uL74",
       "title": "Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "2.4K",
-      "published": "1mo ago"
+      "views": "2.4K views",
+      "published": "1 month ago"
     },
     {
       "id": "8mTpQM1TAug",
       "title": "Day in a life of a software engineer | Finland  Vlog1.2.0",
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
-      "views": "2K",
-      "published": "1mo ago"
+      "views": "2K views",
+      "published": "1 month ago"
     },
     {
       "id": "UElJWj9QDuM",
       "title": "Productivity Desk Setup 2026 - Software Engineer Vlog1.0.0",
       "url": "https://www.youtube.com/watch?v=UElJWj9QDuM",
       "thumbnail": "https://i.ytimg.com/vi/UElJWj9QDuM/hqdefault.jpg",
-      "views": "5.3K",
-      "published": "2mo ago"
+      "views": "5.3K views",
+      "published": "2 months ago"
     }
   ]
 }
