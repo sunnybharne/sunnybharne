@@ -1,11 +1,9 @@
-## Hello world workflow
-
-name: Hello World
+name: Hello World!
 on: push
 
 jobs:
     test:
-        runs-on: ubuntu
+        runs-on: ubuntu-latest
         steps:
             - name: Hello World Display
               run: echo "Hello World!"
