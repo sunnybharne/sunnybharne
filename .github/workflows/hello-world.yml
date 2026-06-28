@@ -1,0 +1,12 @@
+## Hello world workflow
+
+name: Hello World
+on: push
+
+jobs:
+    test:
+        runs-on: ubuntu
+        steps:
+            - name: Hello World Display
+              run: echo "Hello World!"
+            
