@@ -1,28 +1,36 @@
 {
-  "fetchedAt": "2026-06-28T07:15:03.330Z",
+  "fetchedAt": "2026-07-18T06:40:21.047Z",
   "videos": [
+    {
+      "id": "awCupq9jkQ4",
+      "title": "Normal Coding Day | Creating a New Email Client | Software Engineering",
+      "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
+      "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
+      "views": "287 views",
+      "published": "13 days ago"
+    },
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "167 views",
-      "published": "4 weeks ago"
+      "views": "188 views",
+      "published": "1 month ago"
     },
     {
       "id": "d3y5ABV5_34",
       "title": "Claude vs Qwen 7b Software Engineer Vlog1.4.0",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.7K views",
-      "published": "1 month ago"
+      "views": "1.8K views",
+      "published": "2 months ago"
     },
     {
       "id": "RgUAUc-uL74",
       "title": "Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "2.6K views",
+      "views": "2.7K views",
       "published": "2 months ago"
     },
     {
@@ -30,16 +38,16 @@
       "title": "Day in a life of a software engineer | Finland  Vlog1.2.0",
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
-      "views": "2K views",
-      "published": "2 months ago"
+      "views": "2.1K views",
+      "published": "3 months ago"
     },
     {
       "id": "UElJWj9QDuM",
       "title": "Productivity Desk Setup 2026 - Software Engineer Vlog1.0.0",
       "url": "https://www.youtube.com/watch?v=UElJWj9QDuM",
       "thumbnail": "https://i.ytimg.com/vi/UElJWj9QDuM/hqdefault.jpg",
-      "views": "5.5K views",
-      "published": "2 months ago"
+      "views": "5.6K views",
+      "published": "3 months ago"
     }
   ]
 }
