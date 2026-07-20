@@ -57,8 +57,8 @@
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Creating a New Email Client | Software Engineering"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Creating a New Email Client | Software Engineering</b></a><br><sub>296 views · 2 weeks ago</sub></td>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><img src="https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg" width="280" alt="2026 Desk Setup Upgrade | Cockpit Mode"></a><br><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><b>2026 Desk Setup Upgrade | Cockpit Mode</b></a><br><sub>188 views · 1 month ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Creating a New Email Client | Software Engineering"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Creating a New Email Client | Software Engineering</b></a><br><sub>310 views · 2 weeks ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><img src="https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg" width="280" alt="2026 Desk Setup Upgrade | Cockpit Mode"></a><br><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><b>2026 Desk Setup Upgrade | Cockpit Mode</b></a><br><sub>191 views · 1 month ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><img src="https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg" width="280" alt="Claude vs Qwen 7b Software Engineer Vlog1.4.0"></a><br><a href="https://www.youtube.com/watch?v=d3y5ABV5_34"><b>Claude vs Qwen 7b Software Engineer Vlog1.4.0</b></a><br><sub>1.8K views · 2 months ago</sub></td>
   </tr>
   <tr>
