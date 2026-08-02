@@ -1,20 +1,28 @@
 {
-  "fetchedAt": "2026-08-01T06:51:29.585Z",
+  "fetchedAt": "2026-08-02T06:54:17.846Z",
   "videos": [
+    {
+      "id": "rPmby-3YCCc",
+      "title": "Why AI Made Me Give Up Vim and Return to VS Code",
+      "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
+      "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
+      "views": "32 views",
+      "published": "10 hours ago"
+    },
     {
       "id": "awCupq9jkQ4",
       "title": "Normal Coding Day | Creating a New Email Client | Software Engineering",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "505 views",
-      "published": "3 weeks ago"
+      "views": "526 views",
+      "published": "4 weeks ago"
     },
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "195 views",
+      "views": "196 views",
       "published": "2 months ago"
     },
     {
@@ -39,14 +47,6 @@
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
       "views": "2.1K views",
-      "published": "3 months ago"
-    },
-    {
-      "id": "UElJWj9QDuM",
-      "title": "Productivity Desk Setup 2026 - Software Engineer Vlog1.0.0",
-      "url": "https://www.youtube.com/watch?v=UElJWj9QDuM",
-      "thumbnail": "https://i.ytimg.com/vi/UElJWj9QDuM/hqdefault.jpg",
-      "views": "5.6K views",
       "published": "3 months ago"
     }
   ]
