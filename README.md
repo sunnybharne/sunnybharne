@@ -57,8 +57,8 @@
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><img src="https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg" width="280" alt="Why AI Made Me Give Up Vim and Return to VS Code"></a><br><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><b>Why AI Made Me Give Up Vim and Return to VS Code</b></a><br><sub>32 views · 10 hours ago</sub></td>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Creating a New Email Client | Software Engineering"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Creating a New Email Client | Software Engineering</b></a><br><sub>526 views · 4 weeks ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><img src="https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg" width="280" alt="Why AI Made Me Give Up Vim and Return to VS Code"></a><br><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><b>Why AI Made Me Give Up Vim and Return to VS Code</b></a><br><sub>221 views · 1 day ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Creating a New Email Client | Software Engineering"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Creating a New Email Client | Software Engineering</b></a><br><sub>546 views · 4 weeks ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><img src="https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg" width="280" alt="2026 Desk Setup Upgrade | Cockpit Mode"></a><br><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><b>2026 Desk Setup Upgrade | Cockpit Mode</b></a><br><sub>196 views · 2 months ago</sub></td>
   </tr>
   <tr>
