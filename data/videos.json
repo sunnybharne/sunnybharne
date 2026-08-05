@@ -1,21 +1,21 @@
 {
-  "fetchedAt": "2026-08-04T06:53:38.898Z",
+  "fetchedAt": "2026-08-05T06:55:15.751Z",
   "videos": [
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "595 views",
-      "published": "2 days ago"
+      "views": "744 views",
+      "published": "3 days ago"
     },
     {
       "id": "awCupq9jkQ4",
-      "title": "Normal Coding Day | Creating a New Email Client | Software Engineering",
+      "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "574 views",
-      "published": "4 weeks ago"
+      "views": "615 views",
+      "published": "1 month ago"
     },
     {
       "id": "aHygd83XVdU",
@@ -27,7 +27,7 @@
     },
     {
       "id": "d3y5ABV5_34",
-      "title": "Claude vs Qwen 7b Software Engineer Vlog1.4.0",
+      "title": "Claude vs Qwen 7B: Can a Local LLM Replace Claude?",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
       "views": "1.8K views",
@@ -35,7 +35,7 @@
     },
     {
       "id": "RgUAUc-uL74",
-      "title": "Real Coding Day | Software Engineer | My Macbook App Vlog1.3.0",
+      "title": "A Real Coding Day: Building My First Mac App",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
       "views": "2.7K views",
@@ -43,7 +43,7 @@
     },
     {
       "id": "8mTpQM1TAug",
-      "title": "Day in a life of a software engineer | Finland  Vlog1.2.0",
+      "title": "Day in the Life of a Software Engineer in Finland",
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
       "views": "2.1K views",
