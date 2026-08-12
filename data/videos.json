@@ -1,53 +1,53 @@
 {
-  "fetchedAt": "2026-08-11T06:20:02.334Z",
+  "fetchedAt": "2026-08-12T06:30:15.653Z",
   "videos": [
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "854",
-      "published": "9d ago"
+      "views": "878 views",
+      "published": "10 days ago"
     },
     {
       "id": "awCupq9jkQ4",
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "909",
-      "published": "1mo ago"
+      "views": "1K views",
+      "published": "1 month ago"
     },
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "207",
-      "published": "2mo ago"
+      "views": "209 views",
+      "published": "2 months ago"
     },
     {
       "id": "d3y5ABV5_34",
       "title": "Claude vs Qwen 7B: Can a Local LLM Replace Claude?",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.8K",
-      "published": "2mo ago"
+      "views": "1.8K views",
+      "published": "3 months ago"
     },
     {
       "id": "RgUAUc-uL74",
       "title": "A Real Coding Day: Building My First Mac App",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "2.8K",
-      "published": "3mo ago"
+      "views": "2.8K views",
+      "published": "3 months ago"
     },
     {
       "id": "8mTpQM1TAug",
       "title": "Day in the Life of a Software Engineer in Finland",
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
-      "views": "2.1K",
-      "published": "3mo ago"
+      "views": "2.1K views",
+      "published": "3 months ago"
     }
   ]
 }
