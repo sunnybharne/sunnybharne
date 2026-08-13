@@ -1,13 +1,13 @@
 {
-  "fetchedAt": "2026-08-12T06:30:15.653Z",
+  "fetchedAt": "2026-08-13T06:31:22.654Z",
   "videos": [
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "878 views",
-      "published": "10 days ago"
+      "views": "890 views",
+      "published": "11 days ago"
     },
     {
       "id": "awCupq9jkQ4",
@@ -22,7 +22,7 @@
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "209 views",
+      "views": "210 views",
       "published": "2 months ago"
     },
     {
@@ -47,7 +47,7 @@
       "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
       "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
       "views": "2.1K views",
-      "published": "3 months ago"
+      "published": "4 months ago"
     }
   ]
 }
