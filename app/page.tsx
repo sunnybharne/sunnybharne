@@ -132,37 +132,36 @@ function Expertise() {
 function FeaturedProduct() {
   const features = [
     {
-      title: 'Azure foundation',
-      body: 'Management groups, subscriptions, Key Vault, policy assignments, and least-privilege access set up with clear ownership.',
+      title: 'Visible agent work',
+      body: 'A planned visual timeline for prompts, tool calls, file changes, errors, and agent decisions.',
     },
     {
-      title: 'Microsoft 365',
-      body: 'Domain-backed mailboxes, Teams, admin separation, billing alerts, and service-health notifications for day-to-day operations.',
+      title: 'Human checkpoints',
+      body: 'Review and approval moments placed where consequential actions happen, not hidden in terminal noise.',
     },
     {
-      title: 'Domain and web',
-      body: 'GoDaddy DNS, papliba.com, and Azure-hosted web resources tied back to the company identity and platform setup.',
+      title: 'Local by default',
+      body: 'Workspace access, process control, credentials, and session data stay on the user machine unless configured otherwise.',
     },
     {
-      title: 'Operational hygiene',
-      body: 'Documented access patterns, ownership notes, and security reminders so the setup stays understandable later.',
+      title: 'Pi remains Pi',
+      body: 'Papliba is designed as another surface for Pi, using the Pi RPC boundary instead of rebuilding the agent runtime.',
     },
   ];
   return (
     <section className="border-t border-black/5 dark:border-white/10">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
-          Current focus · Papliba · Azure platform · Microsoft 365
+          Current focus · Papliba · Pi agent UX
         </p>
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Papliba — the platform{' '}
-          <span className="opacity-60">I&apos;m building now.</span>
+          Papliba — a window{' '}
+          <span className="opacity-60">into your Pi agent.</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base opacity-80">
-          Papliba is the current project I&apos;m working on: a practical
-          business platform around the public web presence, Microsoft 365
-          tenant, Azure governance, Key Vault, policy, and the operational
-          pieces needed to run it cleanly.
+          Papliba is an open-source, local-first control surface for the Pi
+          coding agent. The goal is to make agent activity visible, reviewable,
+          and easier to shape while Pi remains the underlying runtime.
         </p>
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -182,10 +181,10 @@ function FeaturedProduct() {
             Visit papliba.com
           </a>
           <a
-            href="mailto:info@papliba.com"
+            href="https://github.com/sunnybharne/papliba"
             className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
           >
-            Contact Papliba →
+            View the repo →
           </a>
         </div>
       </div>
@@ -247,18 +246,30 @@ function Projects() {
   const projects = [
     {
       num: '01',
+      title: 'papliba',
+      body: 'An open-source, local-first control surface for the Pi coding agent, starting with product docs and architecture.',
+      href: 'https://github.com/sunnybharne/papliba',
+    },
+    {
+      num: '02',
+      title: 'pi-agent.nvim',
+      body: 'A small Neovim plugin that opens a right-side Pi Agent chat panel and sends editor context with prompts.',
+      href: 'https://github.com/sunnybharne/pi-agent.nvim',
+    },
+    {
+      num: '03',
       title: 'azure-enterprise-platform',
       body: 'My reference Azure platform: landing zones, management group structure, policy release design — IaC end-to-end.',
       href: 'https://github.com/sunnybharne/azure-enterprise-platform',
     },
     {
-      num: '02',
+      num: '04',
       title: 'sunny-agent',
       body: 'An AI agent built to act on my behalf. Early stage — the long-running side project.',
       href: 'https://github.com/sunnybharne/sunny-agent',
     },
     {
-      num: '03',
+      num: '05',
       title: 'nvim — my Neovim config',
       body: 'My personal Neovim setup. I use VIM. Judge me.',
       href: 'https://github.com/sunnybharne/nvim',
@@ -268,7 +279,7 @@ function Projects() {
     <section className="border-t border-black/5 dark:border-white/10">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <h2 className="text-3xl font-semibold tracking-tight">Projects</h2>
-        <ol className="mt-10 grid gap-8 sm:grid-cols-3">
+        <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
             <li key={p.num}>
               <div className="font-mono text-sm opacity-50">{p.num}</div>

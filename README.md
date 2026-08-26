@@ -57,7 +57,7 @@
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><img src="https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg" width="280" alt="Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch"></a><br><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><b>Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch</b></a><br><sub>230 views · 6 days ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><img src="https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg" width="280" alt="Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch"></a><br><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><b>Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch</b></a><br><sub>227 views · 7 days ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><img src="https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg" width="280" alt="Why AI Made Me Give Up Vim and Return to VS Code"></a><br><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><b>Why AI Made Me Give Up Vim and Return to VS Code</b></a><br><sub>1.1K views · 3 weeks ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Building a New Email Client"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Building a New Email Client</b></a><br><sub>2K views · 1 month ago</sub></td>
   </tr>

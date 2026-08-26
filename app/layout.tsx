@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sunnybharne.dev'),
+  metadataBase: new URL('https://www.sunnybharne.com'),
   title: {
     default: 'Sunny Bharne — I do all things Azure.',
     template: '%s — Sunny Bharne',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: 'Sunny Bharne — I do all things Azure.',
     description:
       'Azure Platform Engineer in Helsinki. Azure DevOps, IaC (Bicep + Terraform), Landing Zones, Azure Policy.',
-    url: 'https://sunnybharne.dev',
+    url: 'https://www.sunnybharne.com',
     siteName: 'Sunny Bharne',
     type: 'website',
   },
