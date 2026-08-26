@@ -132,38 +132,37 @@ function Expertise() {
 function FeaturedProduct() {
   const features = [
     {
-      title: 'Push-to-talk',
-      body: 'Hold a global hotkey, speak, release. No clicks, no UI to manage. Out of your way until you need it.',
+      title: 'Azure foundation',
+      body: 'Management groups, subscriptions, Key Vault, policy assignments, and least-privilege access set up with clear ownership.',
     },
     {
-      title: 'Offline by default',
-      body: 'Transcription runs locally via Whisper. Audio never leaves your machine — no cloud, no account, no network wait.',
+      title: 'Microsoft 365',
+      body: 'Domain-backed mailboxes, Teams, admin separation, billing alerts, and service-health notifications for day-to-day operations.',
     },
     {
-      title: 'Appears in any app',
-      body: 'Your words land where the cursor is. Slack, Notion, terminal, IDE — it all just works.',
+      title: 'Domain and web',
+      body: 'GoDaddy DNS, papliba.com, and Azure-hosted web resources tied back to the company identity and platform setup.',
     },
     {
-      title: 'Mac + Windows',
-      body: 'Single C# / .NET codebase on Avalonia. Same behavior on both platforms, none of the Electron weight.',
+      title: 'Operational hygiene',
+      body: 'Documented access patterns, ownership notes, and security reminders so the setup stays understandable later.',
     },
   ];
   return (
     <section className="border-t border-black/5 dark:border-white/10">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
-          Featured product · Free · macOS · Windows · runs offline
+          Current focus · Papliba · Azure platform · Microsoft 365
         </p>
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          stjs — Stop typing.{' '}
-          <span className="opacity-60">Just speak.</span>
+          Papliba — the platform{' '}
+          <span className="opacity-60">I&apos;m building now.</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base opacity-80">
-          A cross-platform desktop utility I&apos;m building in public on
-          YouTube. Hold a hotkey, talk, release — the transcribed text appears
-          in whatever app you&apos;re in. Slack, Notion, your editor, anywhere.
-          Audio never leaves your machine, and the whole thing is free to
-          download and use.
+          Papliba is the current project I&apos;m working on: a practical
+          business platform around the public web presence, Microsoft 365
+          tenant, Azure governance, Key Vault, policy, and the operational
+          pieces needed to run it cleanly.
         </p>
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -177,16 +176,16 @@ function FeaturedProduct() {
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <a
-            href="https://stjs.app"
+            href="https://papliba.com"
             className="rounded-md bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90"
           >
-            Visit stjs.app
+            Visit papliba.com
           </a>
           <a
-            href="https://github.com/sunnybharne/stjs"
+            href="mailto:info@papliba.com"
             className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
           >
-            Source on GitHub →
+            Contact Papliba →
           </a>
         </div>
       </div>
