@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fetches latest videos from https://www.youtube.com/@SunnySideCode/videos by
+// Fetches latest videos from https://www.youtube.com/@sunnybharne/videos by
 // parsing the `ytInitialData` blob and the `lockupViewModel` tiles inside it.
 // Writes data/videos.json (consumed by the Next.js page) and rewrites the
 // "## Latest videos" block in README.md between the YOUTUBE:START/END markers.
@@ -10,7 +10,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const CHANNEL_URL = 'https://www.youtube.com/@SunnySideCode/videos';
+const CHANNEL_HANDLE = '@sunnybharne';
+const CHANNEL_URL = `https://www.youtube.com/${CHANNEL_HANDLE}/videos`;
 const MAX = 6;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -176,7 +177,7 @@ function renderReadmeBlock(videos) {
   lines.push('</table>');
   lines.push('');
   lines.push(
-    `<sub>↑ latest from <a href="https://www.youtube.com/@SunnySideCode">@SunnySideCode</a></sub>`,
+    `<sub>↑ latest from <a href="https://www.youtube.com/${CHANNEL_HANDLE}">${CHANNEL_HANDLE}</a></sub>`,
   );
   return lines.join('\n');
 }

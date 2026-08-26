@@ -1,20 +1,28 @@
 {
-  "fetchedAt": "2026-08-19T06:09:28.907Z",
+  "fetchedAt": "2026-08-26T06:40:01.884Z",
   "videos": [
+    {
+      "id": "_FB_mPdOwjM",
+      "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
+      "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
+      "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
+      "views": "230 views",
+      "published": "6 days ago"
+    },
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "1K views",
-      "published": "2 weeks ago"
+      "views": "1.1K views",
+      "published": "3 weeks ago"
     },
     {
       "id": "awCupq9jkQ4",
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "1.4K views",
+      "views": "2K views",
       "published": "1 month ago"
     },
     {
@@ -22,7 +30,7 @@
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "213 views",
+      "views": "222 views",
       "published": "2 months ago"
     },
     {
@@ -39,14 +47,6 @@
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
       "views": "2.8K views",
-      "published": "3 months ago"
-    },
-    {
-      "id": "8mTpQM1TAug",
-      "title": "Day in the Life of a Software Engineer in Finland",
-      "url": "https://www.youtube.com/watch?v=8mTpQM1TAug",
-      "thumbnail": "https://i.ytimg.com/vi/8mTpQM1TAug/hqdefault.jpg",
-      "views": "2.1K views",
       "published": "4 months ago"
     }
   ]

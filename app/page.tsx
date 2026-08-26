@@ -203,14 +203,14 @@ function LatestVideos() {
         <div className="flex items-end justify-between gap-4 flex-wrap">
           <div>
             <p className="mb-2 text-sm font-medium uppercase tracking-widest opacity-60">
-              YouTube · @SunnySideCode
+              YouTube · @sunnybharne
             </p>
             <h2 className="text-3xl font-semibold tracking-tight">
               Latest videos
             </h2>
           </div>
           <a
-            href="https://www.youtube.com/@SunnySideCode"
+            href="https://www.youtube.com/@sunnybharne"
             className="text-sm opacity-70 hover:opacity-100"
           >
             Visit the channel →
