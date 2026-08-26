@@ -14,26 +14,48 @@ const CHANNEL_URL = 'https://www.youtube.com/@SunnySideCode/videos';
 const MAX = 6;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
+const VIDEOS_PATH = path.join(ROOT, 'data', 'videos.json');
 
 async function main() {
-  const html = await fetchHtml(CHANNEL_URL);
-  const data = extractInitialData(html);
-  const videos = collectLockups(data).slice(0, MAX);
+  let videos;
+
+  try {
+    const html = await fetchHtml(CHANNEL_URL);
+    const data = extractInitialData(html);
+    videos = collectLockups(data).slice(0, MAX);
+  } catch (err) {
+    if (await hasCachedVideos()) {
+      console.warn(
+        `[fetch-videos] refresh failed (${formatError(err)}) — using existing data/videos.json`,
+      );
+      return;
+    }
+    throw err;
+  }
 
   if (videos.length === 0) {
     console.warn('[fetch-videos] no videos parsed — leaving existing data in place');
     return;
   }
 
-  const outDir = path.join(ROOT, 'data');
-  await fs.mkdir(outDir, { recursive: true });
+  await fs.mkdir(path.dirname(VIDEOS_PATH), { recursive: true });
   await fs.writeFile(
-    path.join(outDir, 'videos.json'),
+    VIDEOS_PATH,
     JSON.stringify({ fetchedAt: new Date().toISOString(), videos }, null, 2) + '\n',
   );
   console.log(`[fetch-videos] wrote ${videos.length} videos to data/videos.json`);
 
   await updateReadme(videos);
+}
+
+async function hasCachedVideos() {
+  try {
+    const raw = await fs.readFile(VIDEOS_PATH, 'utf8');
+    const cached = JSON.parse(raw);
+    return Array.isArray(cached.videos) && cached.videos.length > 0;
+  } catch {
+    return false;
+  }
 }
 
 async function fetchHtml(url) {
@@ -165,6 +187,10 @@ function escapeHtml(s) {
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
+}
+
+function formatError(err) {
+  return err?.message || String(err);
 }
 
 main().catch((err) => {
