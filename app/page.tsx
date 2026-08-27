@@ -1,4 +1,10 @@
+import Link from 'next/link';
 import videosData from '../data/videos.json';
+import {
+  formatPostDate,
+  getAllPosts,
+  type PostSummary,
+} from '@/lib/posts';
 
 type Video = {
   id: string;
@@ -9,17 +15,80 @@ type Video = {
   published: string | null;
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await getAllPosts();
+
   return (
     <>
       <Hero />
       <Expertise />
       <FeaturedProduct />
+      <RecentWriting posts={posts.slice(0, 3)} />
       <LatestVideos />
       <Projects />
       <PastLife />
       <CTA />
     </>
+  );
+}
+
+function RecentWriting({ posts }: { posts: PostSummary[] }) {
+  return (
+    <section className="border-t border-black/5 dark:border-white/10">
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase opacity-60">
+              Writing
+            </p>
+            <h2 className="text-3xl font-semibold">Notes from the work</h2>
+          </div>
+          <Link
+            href="/posts/"
+            className="text-sm opacity-70 hover:opacity-100 hover:underline"
+          >
+            Browse all writing
+          </Link>
+        </div>
+
+        {posts.length > 0 ? (
+          <ol className="mt-10 border-t border-black/10 dark:border-white/15">
+            {posts.map((post) => (
+              <li
+                key={post.slug}
+                className="border-b border-black/10 dark:border-white/15"
+              >
+                <Link
+                  href={`/posts/${post.slug}/`}
+                  className="group grid gap-3 py-7 sm:grid-cols-[10rem_1fr] sm:gap-8"
+                >
+                  <div className="text-xs opacity-55">
+                    <time dateTime={post.date}>
+                      {formatPostDate(post.date)}
+                    </time>
+                    <span className="mt-1 block">
+                      {post.readingTimeMinutes} min read
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold group-hover:underline">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-sm leading-6 opacity-70">
+                      {post.description}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="mt-10 border-y border-black/10 py-8 dark:border-white/15">
+            <p className="text-sm opacity-65">The first note is coming soon.</p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
