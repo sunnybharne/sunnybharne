@@ -76,6 +76,21 @@ function SiteHeader() {
             LinkedIn
           </a>
           <a
+            href="https://www.youtube.com/@sunnybharne"
+            rel="me"
+            className="opacity-70 hover:opacity-100"
+          >
+            YouTube
+          </a>
+          <a
+            href="https://x.com/thesunnybharne"
+            rel="me"
+            aria-label="X profile for @thesunnybharne"
+            className="opacity-70 hover:opacity-100"
+          >
+            X
+          </a>
+          <a
             href="mailto:sunny.bharne@outlook.com"
             className="opacity-70 hover:opacity-100"
           >
@@ -90,9 +105,39 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="border-t border-black/5 dark:border-white/10">
-      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-2 px-6 py-6 text-sm opacity-70 sm:flex-row sm:items-center">
-        <span>© {new Date().getFullYear()} Sunny Bharne. Helsinki, Finland.</span>
-        <span className="opacity-60">I use VIM. Judge me.</span>
+      <div className="mx-auto max-w-5xl px-6 py-6 text-sm opacity-70">
+        <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+          <span>© {new Date().getFullYear()} Sunny Bharne. Helsinki, Finland.</span>
+          <span className="opacity-60">I use VIM. Judge me.</span>
+        </div>
+        <nav
+          aria-label="Social profiles"
+          className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs"
+        >
+          <a href="https://github.com/sunnybharne" className="hover:underline">
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/sunnybharne/"
+            className="hover:underline"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://www.youtube.com/@sunnybharne"
+            rel="me"
+            className="hover:underline"
+          >
+            YouTube @sunnybharne
+          </a>
+          <a
+            href="https://x.com/thesunnybharne"
+            rel="me"
+            className="hover:underline"
+          >
+            X @thesunnybharne
+          </a>
+        </nav>
       </div>
     </footer>
   );

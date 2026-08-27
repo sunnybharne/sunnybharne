@@ -137,6 +137,20 @@ function Hero() {
           LinkedIn
         </a>
         <a
+          href="https://www.youtube.com/@sunnybharne"
+          rel="me"
+          className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
+        >
+          YouTube @sunnybharne
+        </a>
+        <a
+          href="https://x.com/thesunnybharne"
+          rel="me"
+          className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
+        >
+          X @thesunnybharne
+        </a>
+        <a
           href="mailto:sunny.bharne@outlook.com"
           className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
         >
