@@ -32,8 +32,8 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <Expertise />
       <FeaturedProduct />
+      <Expertise />
       <LearningPreview
         roadmap={learningRoadmap}
         entries={learningEntries.slice(0, 2)}
@@ -256,7 +256,7 @@ function Hero() {
           X @thesunnybharne
         </a>
         <a
-          href="mailto:sunny.bharne@outlook.com"
+          href="mailto:sunny@papliba.com"
           className="rounded-md border border-foreground/15 px-5 py-2.5 text-sm font-medium hover:bg-foreground/5"
         >
           Email me →
@@ -339,18 +339,38 @@ function FeaturedProduct() {
   return (
     <section className="border-t border-black/5 dark:border-white/10">
       <div className="mx-auto max-w-5xl px-6 py-20">
-        <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
-          Current focus · Papliba · Pi agent UX
-        </p>
-        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Papliba — a window{' '}
-          <span className="opacity-60">into your Pi agent.</span>
-        </h2>
-        <p className="mt-6 max-w-2xl text-base opacity-80">
-          Papliba is an open-source, local-first control surface for the Pi
-          coding agent. The goal is to make agent activity visible, reviewable,
-          and easier to shape while Pi remains the underlying runtime.
-        </p>
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_10rem] md:items-start md:gap-12">
+          <div>
+            <p className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">
+              Main product · Papliba · Pi agent UX
+            </p>
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              Papliba — a window{' '}
+              <span className="opacity-60">into your Pi agent.</span>
+            </h2>
+            <p className="mt-6 max-w-2xl text-base opacity-80">
+              Papliba is an open-source, local-first control surface for the Pi
+              coding agent. The goal is to make agent activity visible,
+              reviewable, and easier to shape while Pi remains the underlying
+              runtime.
+            </p>
+          </div>
+
+          <a
+            href="https://papliba.com"
+            aria-label="Visit Papliba"
+            className="order-first inline-flex h-28 w-28 justify-self-start rounded-[1.4rem] shadow-lg ring-1 ring-black/10 transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-4 md:order-last md:h-40 md:w-40 md:justify-self-end md:rounded-[2rem] dark:ring-white/15"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/papliba-logo.svg"
+              alt=""
+              width={160}
+              height={160}
+              className="h-full w-full rounded-[inherit]"
+            />
+          </a>
+        </div>
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {features.map((item) => (
@@ -516,7 +536,7 @@ function CTA() {
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="mailto:sunny.bharne@outlook.com"
+            href="mailto:sunny@papliba.com"
             className="rounded-md bg-foreground px-5 py-2.5 text-sm font-medium text-background hover:opacity-90"
           >
             Email me

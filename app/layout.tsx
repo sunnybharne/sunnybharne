@@ -94,7 +94,7 @@ function SiteHeader() {
             X
           </a>
           <a
-            href="mailto:sunny.bharne@outlook.com"
+            href="mailto:sunny@papliba.com"
             className="opacity-70 hover:opacity-100"
           >
             Contact
