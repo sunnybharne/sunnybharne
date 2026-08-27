@@ -5,6 +5,13 @@ import {
   getAllPosts,
   type PostSummary,
 } from '@/lib/posts';
+import {
+  formatLearningDate,
+  getAllLearningLogs,
+  getLearningRoadmap,
+  type LearningLogSummary,
+  type LearningRoadmap,
+} from '@/lib/learning';
 
 type Video = {
   id: string;
@@ -16,19 +23,117 @@ type Video = {
 };
 
 export default async function HomePage() {
-  const posts = await getAllPosts();
+  const [posts, learningRoadmap, learningEntries] = await Promise.all([
+    getAllPosts(),
+    getLearningRoadmap(),
+    getAllLearningLogs(),
+  ]);
 
   return (
     <>
       <Hero />
       <Expertise />
       <FeaturedProduct />
+      <LearningPreview
+        roadmap={learningRoadmap}
+        entries={learningEntries.slice(0, 2)}
+      />
       <RecentWriting posts={posts.slice(0, 3)} />
       <LatestVideos />
       <Projects />
       <PastLife />
       <CTA />
     </>
+  );
+}
+
+function LearningPreview({
+  roadmap,
+  entries,
+}: {
+  roadmap: LearningRoadmap;
+  entries: LearningLogSummary[];
+}) {
+  const activeItems = roadmap.tracks.flatMap((track) =>
+    track.items
+      .filter((item) => item.status === 'in-progress')
+      .map((item) => ({ ...item, trackTitle: track.title })),
+  );
+
+  return (
+    <section className="border-t border-black/5 dark:border-white/10">
+      <div className="mx-auto max-w-5xl px-6 py-20">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase opacity-60">
+              Learning journey
+            </p>
+            <h2 className="text-3xl font-semibold">What I am learning now</h2>
+          </div>
+          <Link
+            href="/learning/"
+            className="text-sm opacity-70 hover:opacity-100 hover:underline"
+          >
+            View the roadmap
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-10 border-y border-black/10 py-8 dark:border-white/15 md:grid-cols-[1fr_1.2fr] md:gap-14">
+          <div>
+            <p className="text-xs uppercase opacity-50">Current focus</p>
+            <h3 className="mt-3 text-2xl font-semibold leading-tight">
+              {roadmap.currentFocus.title}
+            </h3>
+            <p className="mt-3 text-sm leading-6 opacity-70">
+              {roadmap.currentFocus.description}
+            </p>
+          </div>
+
+          <ol className="border-l border-black/15 pl-6 dark:border-white/20">
+            {activeItems.map((item, index) => (
+              <li
+                key={item.id}
+                className={
+                  index > 0
+                    ? 'border-t border-black/10 pt-5 pb-1 dark:border-white/15'
+                    : 'pb-5'
+                }
+              >
+                <p className="text-xs uppercase opacity-50">
+                  {item.trackTitle}
+                </p>
+                <p className="mt-1 font-semibold">{item.title}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {entries.length > 0 ? (
+          <div className="mt-8 grid gap-4 sm:grid-cols-[12rem_1fr] sm:gap-8">
+            <div>
+              <p className="text-xs uppercase opacity-50">Latest log</p>
+              <time
+                dateTime={entries[0].date}
+                className="mt-2 block text-xs opacity-55"
+              >
+                {formatLearningDate(entries[0].date)}
+              </time>
+            </div>
+            <Link
+              href={`/learning/${entries[0].slug}/`}
+              className="group max-w-2xl"
+            >
+              <h3 className="font-semibold group-hover:underline">
+                {entries[0].title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 opacity-70">
+                {entries[0].description}
+              </p>
+            </Link>
+          </div>
+        ) : null}
+      </div>
+    </section>
   );
 }
 

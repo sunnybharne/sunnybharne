@@ -1,0 +1,65 @@
+updated: 2026-08-27
+
+currentFocus:
+  title: Azure governance and practical agent tooling
+  description: Deepening Azure platform governance while building useful, local-first interfaces for coding agents.
+  started: 2026-08-27
+
+tracks:
+  - id: azure-platform
+    title: Azure platform
+    description: Governance, landing zones, policy operations, and repeatable platform engineering.
+    items:
+      - id: azure-policy-at-scale
+        title: Azure Policy at scale
+        outcome: Document and automate policy assignments, exemptions, remediation, and operator-facing ownership metadata at management-group scope.
+        status: in-progress
+        resources:
+          - title: Azure Policy assignment structure
+            provider: Microsoft Learn
+            url: https://learn.microsoft.com/azure/governance/policy/concepts/assignment-structure
+      - id: landing-zone-operations
+        title: Landing zone operations
+        outcome: Turn platform architecture into an operable lifecycle with tested changes, clear ownership, and safe releases.
+        status: planned
+
+  - id: agent-systems
+    title: AI agent systems
+    description: Agent runtimes, human checkpoints, context handling, and understandable interfaces.
+    items:
+      - id: pi-agent-ux
+        title: Pi agent UX and runtime integration
+        outcome: Make agent activity visible and reviewable without rebuilding the Pi runtime.
+        status: in-progress
+        resources:
+          - title: Papliba repository
+            provider: GitHub
+            url: https://github.com/sunnybharne/papliba
+      - id: agent-evaluation
+        title: Practical agent evaluation
+        outcome: Define repeatable ways to compare reliability, context use, latency, and token consumption.
+        status: planned
+
+  - id: developer-tooling
+    title: Developer tooling
+    description: Neovim integrations and focused tools that improve everyday engineering workflows.
+    items:
+      - id: neovim-plugin-design
+        title: Neovim plugin design
+        outcome: Improve editor-context capture, persistent conversations, and the interaction model for Pi-powered workflows.
+        status: in-progress
+        resources:
+          - title: pi-agent.nvim repository
+            provider: GitHub
+            url: https://github.com/sunnybharne/pi-agent.nvim
+
+evidence:
+  - title: Project work
+    description: Public repositories where learning is applied through working software and infrastructure.
+    url: https://github.com/sunnybharne
+  - title: Technical writing
+    description: Longer notes that turn experiments and implementation decisions into reusable explanations.
+    url: /posts/
+  - title: Video notes
+    description: Practical demonstrations and reflections published while building and testing tools.
+    url: https://www.youtube.com/@sunnybharne

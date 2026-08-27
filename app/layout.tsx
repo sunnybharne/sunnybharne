@@ -60,6 +60,9 @@ function SiteHeader() {
           SUNNY BHARNE
         </Link>
         <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:gap-x-6">
+          <Link href="/learning/" className="opacity-70 hover:opacity-100">
+            Learning
+          </Link>
           <Link href="/posts/" className="opacity-70 hover:opacity-100">
             Writing
           </Link>
