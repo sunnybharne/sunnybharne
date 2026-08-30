@@ -1,13 +1,13 @@
 {
-  "fetchedAt": "2026-08-29T06:13:10.196Z",
+  "fetchedAt": "2026-08-30T06:13:42.055Z",
   "videos": [
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "240 views",
-      "published": "9 days ago"
+      "views": "247 views",
+      "published": "10 days ago"
     },
     {
       "id": "rPmby-3YCCc",
@@ -15,14 +15,14 @@
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
       "views": "1.1K views",
-      "published": "3 weeks ago"
+      "published": "4 weeks ago"
     },
     {
       "id": "awCupq9jkQ4",
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "2.6K views",
+      "views": "2.8K views",
       "published": "1 month ago"
     },
     {
@@ -30,7 +30,7 @@
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "230 views",
+      "views": "233 views",
       "published": "3 months ago"
     },
     {
@@ -46,7 +46,7 @@
       "title": "A Real Coding Day: Building My First Mac App",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "2.8K views",
+      "views": "2.9K views",
       "published": "4 months ago"
     }
   ]
