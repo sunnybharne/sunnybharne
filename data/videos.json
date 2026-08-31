@@ -1,20 +1,20 @@
 {
-  "fetchedAt": "2026-08-30T06:13:42.055Z",
+  "fetchedAt": "2026-08-31T06:19:19.662Z",
   "videos": [
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "247 views",
-      "published": "10 days ago"
+      "views": "253 views",
+      "published": "11 days ago"
     },
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "1.1K views",
+      "views": "1.2K views",
       "published": "4 weeks ago"
     },
     {
@@ -22,7 +22,7 @@
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "2.8K views",
+      "views": "3K views",
       "published": "1 month ago"
     },
     {
