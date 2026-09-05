@@ -140,3 +140,48 @@ body {
   border-top: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
   margin: 3rem 0;
 }
+
+.learning-policy-guide header,
+.learning-policy-guide .post-content > :not(.learning-table-scroll) {
+  max-width: 48rem;
+}
+
+.learning-policy-guide .post-content h2,
+.learning-policy-guide .post-content h3 {
+  scroll-margin-top: 2rem;
+}
+
+.learning-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.learning-table-scroll:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
+}
+
+.learning-table-scroll table {
+  display: table;
+  width: 100%;
+  min-width: 42rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.learning-table-scroll th,
+.learning-table-scroll td {
+  vertical-align: top;
+}
+
+.learning-table-scroll th {
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+
+.learning-table-scroll th:first-child {
+  width: 30%;
+}
+
+.learning-table-scroll th:last-child {
+  width: 18%;
+}

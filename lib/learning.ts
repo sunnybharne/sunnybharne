@@ -15,6 +15,27 @@ const markdown = new MarkdownIt({
   typographer: false,
 });
 
+const policyGuideMarkdown = new MarkdownIt({
+  html: false,
+  linkify: true,
+  typographer: false,
+});
+
+policyGuideMarkdown.renderer.rules.heading_open = (tokens, index, options, _env, self) => {
+  const heading = tokens[index + 1].content;
+  const id = heading
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+  tokens[index].attrSet('id', id);
+  return self.renderToken(tokens, index, options);
+};
+
+policyGuideMarkdown.renderer.rules.table_open = () =>
+  '<div class="learning-table-scroll" role="region" aria-label="Scrollable reference table" tabindex="0"><table>\n';
+policyGuideMarkdown.renderer.rules.table_close = () => '</table></div>\n';
+
 export const learningStatuses = [
   'planned',
   'in-progress',
@@ -122,7 +143,10 @@ export async function getLearningLogBySlug(
 
     return {
       ...summary,
-      contentHtml: markdown.render(content),
+      contentHtml: (slug === 'asc-default-policy-guide'
+        ? policyGuideMarkdown
+        : markdown
+      ).render(content),
     };
   } catch (error) {
     if (isMissingFile(error)) return null;

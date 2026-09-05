@@ -56,9 +56,12 @@ export default async function LearningEntryPage({
   if (!entry) notFound();
 
   const track = roadmap.tracks.find((item) => item.id === entry.track);
+  const articleWidth = slug === 'asc-default-policy-guide'
+    ? 'max-w-6xl learning-policy-guide'
+    : 'max-w-3xl';
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 py-14 sm:py-20">
+    <article className={`mx-auto w-full px-6 py-14 sm:py-20 ${articleWidth}`}>
       <Link
         href="/learning/"
         className="text-sm opacity-60 hover:opacity-100 hover:underline"
