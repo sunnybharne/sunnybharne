@@ -142,8 +142,59 @@ body {
 }
 
 .learning-policy-guide header,
-.learning-policy-guide .post-content > :not(.learning-table-scroll) {
+.learning-policy-guide .post-content > :not(.learning-table-scroll):not(.policy-group) {
   max-width: 48rem;
+}
+
+.learning-policy-guide header {
+  margin-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.learning-policy-guide .post-content {
+  margin-top: 1.5rem;
+  line-height: 1.65;
+}
+
+.policy-group {
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+  border-radius: 6px;
+}
+
+.policy-group + .policy-group {
+  margin-top: 0.75rem;
+}
+
+.policy-group summary {
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+}
+
+.policy-group summary:hover {
+  background: color-mix(in srgb, var(--foreground) 4%, transparent);
+}
+
+.policy-group summary:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.post-content .policy-group summary h3 {
+  display: inline;
+  margin: 0 0 0 0.5rem;
+  font-size: 1.0625rem;
+}
+
+.policy-group[open] summary {
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.policy-group .learning-table-scroll {
+  padding: 0.75rem;
+}
+
+.policy-group td:last-child {
+  font-size: 0.875rem;
 }
 
 .learning-policy-guide .post-content h2,
@@ -164,7 +215,7 @@ body {
 .learning-table-scroll table {
   display: table;
   width: 100%;
-  min-width: 42rem;
+  min-width: 28rem;
   font-size: 1rem;
   line-height: 1.65;
 }
@@ -179,9 +230,21 @@ body {
 }
 
 .learning-table-scroll th:first-child {
-  width: 30%;
+  width: 28%;
 }
 
-.learning-table-scroll th:last-child {
-  width: 18%;
+.learning-table-scroll th:nth-child(2) {
+  width: 12%;
+}
+
+.policy-group table {
+  min-width: 42rem;
+}
+
+.policy-group th:nth-child(2) {
+  width: 52%;
+}
+
+.policy-group th:last-child {
+  width: 20%;
 }

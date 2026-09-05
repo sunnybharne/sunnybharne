@@ -21,6 +21,43 @@ const policyGuideMarkdown = new MarkdownIt({
   typographer: false,
 });
 
+policyGuideMarkdown.core.ruler.push('policy-groups', (state) => {
+  const tokens: typeof state.tokens = [];
+  let inReference = false;
+  let groupOpen = false;
+
+  const closeGroup = () => {
+    tokens.push(new state.Token('policy_group_close', 'details', -1));
+    groupOpen = false;
+  };
+
+  for (let index = 0; index < state.tokens.length; index += 1) {
+    const token = state.tokens[index];
+
+    if (token.type === 'heading_open' && ['h2', 'h3'].includes(token.tag)) {
+      if (groupOpen) closeGroup();
+      if (token.tag === 'h2') {
+        inReference = state.tokens[index + 1].content === 'All 224 policies';
+      }
+      if (inReference && token.tag === 'h3') {
+        tokens.push(new state.Token('policy_group_open', 'details', 1));
+        token.meta = { policyGroup: true };
+        state.tokens[index + 2].meta = { policyGroup: true };
+        groupOpen = true;
+      }
+    }
+
+    tokens.push(token);
+  }
+
+  if (groupOpen) closeGroup();
+  state.tokens = tokens;
+});
+
+policyGuideMarkdown.renderer.rules.policy_group_open = () =>
+  '<details class="policy-group">\n';
+policyGuideMarkdown.renderer.rules.policy_group_close = () => '</details>\n';
+
 policyGuideMarkdown.renderer.rules.heading_open = (tokens, index, options, _env, self) => {
   const heading = tokens[index + 1].content;
   const id = heading
@@ -29,7 +66,15 @@ policyGuideMarkdown.renderer.rules.heading_open = (tokens, index, options, _env,
     .trim()
     .replace(/\s+/g, '-');
   tokens[index].attrSet('id', id);
+  if (tokens[index].meta?.policyGroup) {
+    return `<summary>${self.renderToken(tokens, index, options)}`;
+  }
   return self.renderToken(tokens, index, options);
+};
+
+policyGuideMarkdown.renderer.rules.heading_close = (tokens, index, options, _env, self) => {
+  const heading = self.renderToken(tokens, index, options);
+  return tokens[index].meta?.policyGroup ? `${heading}</summary>\n` : heading;
 };
 
 policyGuideMarkdown.renderer.rules.table_open = () =>
