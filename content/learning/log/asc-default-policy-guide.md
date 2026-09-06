@@ -20,14 +20,6 @@ It reports security risks, such as open ports or missing encryption. **It does n
 
 This describes version **57.59.0** defaults, checked **5 September 2026**.
 
-## What matters
-
-- **Policy:** one check. **Initiative:** a bundle. **Assignment:** where and how it runs.
-- **Enforcement `Default` does not mean Deny.** An audit effect still only reports.
-- **An assignment does not prove a paid Defender plan is enabled.** Check the plan separately.
-- **Noncompliant can mean missing evidence**, not only a bad setting. Inspect the failed condition.
-- **Compliant does not mean fully secure.** A private endpoint check, for example, may not check public access.
-
 ## Check your assignment
 
 In Azure Policy, open **Assignments → ASC Default**. Check scope, version, parameters, overrides and exemptions before interpreting results.
