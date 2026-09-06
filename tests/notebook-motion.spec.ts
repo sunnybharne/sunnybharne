@@ -124,6 +124,10 @@ for (const width of [320, 390, 768, 1280]) {
     const drawing = await page.locator('.notebook-motion').boundingBox();
     expect(text!.x + text!.width).toBeLessThan(drawing!.x);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+    const list = await page.locator('.article-list').boundingBox();
+    const padding = width <= 600 ? 20.8 : 32;
+    expect(list!.x).toBeCloseTo(padding, 0);
+    expect(list!.width).toBeCloseTo(width - 2 * padding, 0);
     await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   });
 }
