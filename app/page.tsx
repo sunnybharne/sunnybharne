@@ -12,7 +12,7 @@ export default async function HomePage() {
         <div className="section-heading">
           <h2 id="recent-title">Latest articles</h2>
         </div>
-        <ArticleList articles={articles.slice(0, 6)} />
+        <ArticleList articles={articles.slice(0, 6)} compact />
       </section>
     </div>
   );

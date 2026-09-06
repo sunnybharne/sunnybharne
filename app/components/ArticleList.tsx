@@ -10,11 +10,11 @@ export default function ArticleList({ articles, compact = false }: { articles: A
           <li className="article-list-item" key={article.href}>
             <div className="article-list-date">
               <time dateTime={article.date}>{shortDate(article.date)}</time>
-              <span>{article.readingTimeMinutes} min read</span>
+              {!compact ? <span>{article.readingTimeMinutes} min read</span> : null}
             </div>
             <div className="article-list-copy">
               <h2><Link href={article.href}>{article.title}</Link></h2>
-              <p>{article.description}</p>
+              {!compact ? <p>{article.description}</p> : null}
             </div>
           </li>
         );

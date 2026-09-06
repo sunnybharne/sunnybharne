@@ -59,8 +59,8 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .article-list-copy h2 a { text-decoration: none; }
 .article-list-copy h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .article-list-copy p { color: var(--muted); font-size: .94rem; line-height: 1.7; margin-top: .55rem; max-width: 38rem; }
-.article-list-compact .article-list-item { padding-block: 1.3rem; }
-.article-list-compact .article-list-copy h2 { font-size: 1.4rem; }
+.article-list-compact .article-list-item { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; padding-block: .8rem; }
+.article-list-compact .article-list-copy h2 { margin-top: 0; font-size: 1rem; font-weight: 550; line-height: 1.45; }
 .page-heading { margin-bottom: 2.5rem; max-width: var(--reading); }
 .page-heading h1 { font-size: clamp(2.3rem, 5vw, 3rem); line-height: 1.15; }
 .page-heading .back-link { display: inline-block; margin-bottom: 1.25rem; }
@@ -159,6 +159,8 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
   .article-list-date { display: flex; gap: .7rem; }
   .article-list-date span { margin: 0; }
   .article-list-copy h2 { font-size: 1.3rem; }
+  .article-list-compact .article-list-item { grid-template-columns: 5.5rem minmax(0, 1fr); gap: .75rem; padding-block: .8rem; }
+  .article-list-compact .article-list-date { display: block; }
   .page-heading { margin-bottom: 2rem; }
   .article-header { padding-block: 1.6rem; }
   .post-content { font-size: 1.0625rem; line-height: 1.8; }
