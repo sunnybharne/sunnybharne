@@ -1,6 +1,6 @@
 ---
 title: "Windows VM policies: audit to apply"
-description: "Four password rules. One subscription initiative. Verified inside Windows."
+description: "Four password rules, VM tag opt-in, and the difference between applying and monitoring."
 date: 2026-09-06
 track: azure-platform
 provider: Azure Machine Configuration lab
@@ -11,9 +11,9 @@ tags:
 draft: false
 ---
 
-> **Prod test VM: 4/4 rules compliant.** Settings verified on 6 September 2026. Applies once; later drift is reported.
+> **Prod test VM: 4/4 rules compliant.** Verified on 6 September 2026. Tag opt-in is configured; new-VM and offboarding tests are pending.
 
-[ASC Default](/learning/asc-default-policy-guide/) still audits Microsoft's security baseline. This lab adds a **custom initiative** to change four local Windows settings.
+[ASC Default](/learning/asc-default-policy-guide/) audits Microsoft's baseline. Our **custom initiative** changes four local Windows settings.
 
 ## The four rules
 
@@ -24,33 +24,42 @@ draft: false
 | [Password history](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/enforce-password-history) | 24 passwords | Prevents reuse of remembered passwords. |
 | [Minimum password age](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/minimum-password-age) | 1 day | Stops ordinary users quickly cycling through password history. |
 
-These are this lab's chosen values. Existing passwords are not replaced. Domain controllers are excluded; domain policy can override local settings.
+These are lab values. Existing passwords are not replaced. Domain controllers are excluded; domain policy can override local settings.
 
-## What runs where
-
-| Lab setup | Prod | Platform |
+| Test VM | Extension | Custom rules |
 |---|---|---|
-| ASC Default assignment | Present | Present |
-| Machine Configuration extension | Installed | Absent |
-| New custom initiative | Assigned | Not assigned |
-| Four custom rule results | Compliant | Not evaluated |
+| Prod | Installed | Tagged; 4/4 compliant |
+| Platform | Absent | Not assigned |
 
-Checking **inside** an Azure VM needs the extension and identity. An assignment alone cannot run those checks.
+## Application teams choose by tag
+
+The initiative stays assigned to **Prod subscription**. To opt in, put `ApplyWindowsPasswordBaseline` on the **VM itself**.
+
+| VM tag | Custom password policies |
+|---|---|
+| Present, with any value | Eligible to apply all four rules |
+| Missing | Outside these policies |
+
+Use `ApplyWindowsPasswordBaseline = true` for clarity. **Even `false` counts as present**: only existence matters. [Policy conditions](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule)
+
+Resource group/subscription tags do not count; resources [do not inherit tags automatically](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags). The Prod test VM is opted in. Platform remains outside this initiative.
+
+**Removing the tag is not a rollback.** Windows values stay as configured. For full opt-out, verify and remove this initiative's existing guest assignments; do not rely on tag removal to clean them up. [Assignment lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments)
 
 ## How settings reach Windows
 
-**Subscription → prepare VM → deliver package → apply → report**
+**Prod + VM tag → prepare → download → apply → report**
 
-1. **Scope:** Prod subscription. **Four rule policies + one package-access policy** in a custom initiative.
-2. **Prepare:** Microsoft's [Deploy prerequisites to enable Guest Configuration policies on virtual machines](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options) installs the extension and enables the VM's system identity.
-3. **Download:** our helper attaches a specified shared user-assigned identity with [read access to the private package container](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/5-access-package).
+1. **Prepare:** Microsoft's [Deploy prerequisites to enable Guest Configuration policies on virtual machines](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options) installs the extension and enables the VM's system identity. This remains subscription-wide.
+2. **Select:** the VM tag gates **four rule policies + one package-access policy**. ASC Default's audits remain unchanged.
+3. **Download:** our helper attaches a shared user-assigned identity with [read access to the private package container](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/5-access-package).
 4. **Apply:** four `DeployIfNotExists` policies deliver guest assignments. The extension downloads packages, changes settings, and reports compliance.
 
-A **package** is a ZIP: desired setting + code to read, check, and change it. We built one per rule, separate from Microsoft's `AzureWindowsBaseline` audit package. [Package documentation](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package)
+A **package** is a ZIP: desired setting + code to check/change it. Each rule has its own custom package. Microsoft's `AzureWindowsBaseline` remains an audit package in this lab. [Package documentation](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package)
 
 ## Apply once or keep correcting?
 
-`DeployIfNotExists` delivers the configuration. The **Machine Configuration mode** controls what happens inside Windows. [Microsoft's modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options)
+`DeployIfNotExists` delivers configuration. **Machine Configuration mode** controls Windows behavior. [Microsoft's modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options)
 
 | Mode | Behavior | This lab |
 |---|---|---|
@@ -66,12 +75,13 @@ Continuous correction is separate. In ApplyAndMonitor, remediation or an Azure V
 
 - First test: maximum age **42 → 60**. Expanded initiative: length **0 → 14**, history **0 → 24**, minimum age **0 → 1**.
 - **4/4 compliant reports**, confirmed with `net accounts`. Lockout settings unchanged.
-- Missing package identity caused download failures. Preparation remediation fixed access; rule remediation applied settings.
-- Azure Policy's summary lagged behind the VM reports.
+- Preparation remediation fixed package access; rule remediation applied settings. Azure Policy's summary lagged behind VM reports.
 
 ## Next tests
 
-1. Create another Windows VM in Prod; verify automatic preparation and all four rules.
-2. Change a setting; compare drift reporting with automatic correction on the lab VM.
+1. Compare new tagged and untagged Windows VMs in Prod.
+2. Add the tag to an existing VM; check delivery and remediation timing.
+3. Remove the tag; verify offboarding and retained Windows values.
+4. Change a setting; compare monitoring with automatic correction.
 
-Scope includes future supported individual Windows VMs in Prod; **one existing VM is verified**. Linux, Arc, uniform scale sets, tagged AKS nodes and excluded legacy images are outside this custom policy's scope.
+**One existing VM is verified.** Target: supported individual Windows VMs with the opt-in tag in Prod. Linux, Arc, uniform scale sets, tagged AKS nodes and excluded legacy images are outside scope.
