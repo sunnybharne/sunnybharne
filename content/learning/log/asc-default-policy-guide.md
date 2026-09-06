@@ -20,14 +20,6 @@ It reports security risks, such as open ports or missing encryption. **It does n
 
 This describes version **57.59.0** defaults, checked **5 September 2026**.
 
-## Check your assignment
-
-In Azure Policy, open **Assignments → ASC Default**. Check scope, version, parameters, overrides and exemptions before interpreting results.
-
-An assignment using `57.*.*` receives newer minor and patch versions, so its checks can change.
-
-Want to change Windows settings? Use a separate applying policy: [Windows VM password rules](/articles/windows-vm-policy-enforcement/).
-
 ## References
 
 - [Microsoft’s policy reference](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)
