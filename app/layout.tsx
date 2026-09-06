@@ -8,11 +8,11 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.sunnybharne.com'),
-  title: { default: 'Sunny Bharne — Notes from the work', template: '%s — Sunny Bharne' },
-  description: 'A personal notebook on Azure, automation and learning through real work. Written by Sunny Bharne in Helsinki.',
+  title: { default: 'Sunny Bharne — Practical engineering notes', template: '%s — Sunny Bharne' },
+  description: 'Practical notes on Azure, automation and lessons from real engineering work. Written by Sunny Bharne in Helsinki.',
   openGraph: {
-    title: 'Sunny Bharne — Notes from the work',
-    description: 'Notes on Azure, automation and the things I learn along the way.',
+    title: 'Sunny Bharne — Practical engineering notes',
+    description: 'A simple reference for Azure, automation and lessons from real work.',
     url: 'https://www.sunnybharne.com', siteName: 'Sunny Bharne', type: 'website',
   },
 };
@@ -28,6 +28,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <nav aria-label="Main navigation">
               <Link href="/articles/">Articles</Link>
               <Link href="/topics/">Topics</Link>
+              <Link href="/projects/">Projects</Link>
+              <Link href="/learning/">Learning</Link>
               <Link href="/about/">About</Link>
             </nav>
           </div>

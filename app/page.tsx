@@ -7,9 +7,9 @@ export default async function HomePage() {
   return (
     <div className="page-shell home-page">
       <section className="home-intro" aria-labelledby="intro-title">
-        <p className="eyebrow">A personal engineering notebook</p>
-        <h1 id="intro-title">Notes from the work.</h1>
-        <p>I’m Sunny, an Azure platform engineer in Helsinki. I write about the things I build, test and figure out.</p>
+        <p className="eyebrow">Personal reference</p>
+        <h1 id="intro-title">Notes I want to find again.</h1>
+        <p>I’m Sunny, an Azure platform engineer in Helsinki. This is where I keep practical notes from the things I build, test and learn.</p>
         <Link href="/about/" className="text-link">A little about me →</Link>
       </section>
       <section aria-labelledby="recent-title">
