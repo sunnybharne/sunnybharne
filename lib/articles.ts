@@ -2,6 +2,7 @@ import { getAllLearningLogs } from './learning';
 import { getAllPosts } from './posts';
 
 export type ArticleSummary = {
+  slug: string;
   href: string;
   title: string;
   description: string;
@@ -18,7 +19,8 @@ export async function getArticles(): Promise<ArticleSummary[]> {
   ]);
   return [
     ...notes.map((note): ArticleSummary => ({
-      href: `/learning/${note.slug}/`,
+      slug: note.slug,
+      href: `/articles/${note.slug}/`,
       title: note.title,
       description: note.description,
       date: note.date,
@@ -27,7 +29,8 @@ export async function getArticles(): Promise<ArticleSummary[]> {
       kind: 'note',
     })),
     ...posts.map((post): ArticleSummary => ({
-      href: `/posts/${post.slug}/`,
+      slug: post.slug,
+      href: `/articles/${post.slug}/`,
       title: post.title,
       description: post.description,
       date: post.date,
