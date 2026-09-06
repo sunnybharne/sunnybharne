@@ -9,8 +9,8 @@ export const diagramNodes = [
 ];
 
 export const diagramEdges = [
-  { id: 'baseline', points: [[360, 82], [360, 114], [185, 114], [185, 204]], label: 'configures baseline', x: 225, y: 114 },
-  { id: 'checks', points: [[310, 237], [442, 237]], label: 'checks', x: 376, y: 219 },
-  { id: 'findings', points: [[551, 204], [551, 50], [500, 50]], label: 'findings', x: 551, y: 114 },
-  { id: 'reference', points: [[185, 270], [185, 362]], label: 'references', x: 185, y: 336 },
+  { id: 'baseline', from: 'defender', to: 'assignment', points: [[360, 82], [360, 114], [185, 114], [185, 204]], label: 'configures baseline', x: 225, y: 114 },
+  { id: 'checks', from: 'assignment', to: 'resources', points: [[310, 237], [442, 237]], label: 'checks', x: 376, y: 219 },
+  { id: 'findings', from: 'resources', to: 'defender', points: [[551, 204], [551, 50], [500, 50]], label: 'findings', x: 551, y: 114 },
+  { id: 'reference', from: 'assignment', to: 'benchmark', points: [[185, 270], [185, 362]], label: 'references', x: 185, y: 336 },
 ];

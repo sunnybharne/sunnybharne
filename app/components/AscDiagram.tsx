@@ -3,34 +3,52 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { diagramEdges, diagramNodes, diagramSize, subscriptionBox } from '@/lib/asc-diagram-model';
+import type { createAscDiagram } from '@/lib/asc-diagram-scene';
 
 export default function AscDiagram() {
   const host = useRef<HTMLDivElement>(null);
+  const controller = useRef<ReturnType<typeof createAscDiagram> | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const element = host.current;
     if (!element) return;
     let disposed = false;
-    let cleanup: (() => void) | undefined;
+    let started = false;
+    let visible = false;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => controller.current?.setEnabled(visible && !document.hidden && !reducedMotion.matches);
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      observer.disconnect();
+      visible = entry.isIntersecting;
+      update();
+      if (!visible || started) return;
+      started = true;
       import('@/lib/asc-diagram-scene').then(({ createAscDiagram }) => {
         if (disposed) return;
-        const drawing = createAscDiagram(element, () => {
-          cleanup?.();
+        controller.current = createAscDiagram(element, () => {
+          controller.current?.dispose();
+          controller.current = null;
           setReady(false);
         });
-        cleanup = drawing.dispose;
         setReady(true);
+        update();
+        controller.current.play();
       }).catch(() => {
         // The SVG and all labels remain usable without WebGL.
         if (!disposed) setReady(false);
       });
     });
     observer.observe(element);
-    return () => { disposed = true; observer.disconnect(); cleanup?.(); };
+    reducedMotion.addEventListener('change', update);
+    document.addEventListener('visibilitychange', update);
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      reducedMotion.removeEventListener('change', update);
+      document.removeEventListener('visibilitychange', update);
+      controller.current?.dispose();
+      controller.current = null;
+    };
   }, []);
 
   const position = (x: number, y: number) => ({
@@ -51,12 +69,20 @@ export default function AscDiagram() {
             </svg>
           </div>
           <p className="asc-diagram-scope" style={position(40, 153)}>Your subscription</p>
-          {diagramNodes.map((node) => (
-            <div className="asc-diagram-node" key={node.id} style={{ ...position(node.x, node.y), width: `${node.width / 720 * 100}%`, height: `${node.height / 460 * 100}%` }}>
-              <strong>{node.href ? <Link href={node.href}>{node.title}</Link> : node.id === 'benchmark' ? <>Microsoft cloud<br />security benchmark</> : node.title}</strong>
-              <span>{node.detail}</span>
-            </div>
-          ))}
+          {diagramNodes.map((node) => {
+            const content = <><strong>{node.id === 'benchmark' ? <>Microsoft cloud<br />security benchmark</> : node.title}</strong><span>{node.detail}</span></>;
+            const props = {
+              className: 'asc-diagram-node',
+              style: { ...position(node.x, node.y), width: `${node.width / 720 * 100}%`, height: `${node.height / 460 * 100}%` },
+              onPointerEnter: () => controller.current?.play(node.id),
+              onFocus: () => controller.current?.play(node.id),
+            };
+            return node.href ? (
+              <Link key={node.id} {...props} href={node.href} aria-label={node.title}>{content}</Link>
+            ) : (
+              <button key={node.id} {...props} type="button" disabled={!ready} aria-label={`Show ${node.title} connections`} onClick={() => controller.current?.play(node.id)}>{content}</button>
+            );
+          })}
           {diagramEdges.map((edge) => <span className="asc-diagram-edge" key={edge.id} style={position(edge.x, edge.y)}>{edge.label}</span>)}
         </div>
       </div>

@@ -32,6 +32,37 @@ test('keeps the diagram readable on mobile without widening the page', async ({ 
   await expect.poll(() => region.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
 });
 
+test('signals move briefly and replay on keyboard interaction', async ({ page }) => {
+  await page.goto(article);
+  const canvas = page.locator('.asc-diagram canvas');
+  await canvas.waitFor();
+  const first = await canvas.screenshot();
+  await page.waitForTimeout(600);
+  expect(await canvas.screenshot()).not.toEqual(first);
+  await page.waitForTimeout(4200);
+  const settled = await canvas.screenshot();
+  await page.waitForTimeout(300);
+  expect(await canvas.screenshot()).toEqual(settled);
+  await page.getByRole('button', { name: 'Show ASC Default connections', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(700);
+  expect(await canvas.screenshot()).not.toEqual(settled);
+});
+
+test('reduced motion keeps signals still even on interaction', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(article);
+  const canvas = page.locator('.asc-diagram canvas');
+  await canvas.waitFor();
+  const first = await canvas.screenshot();
+  await page.getByRole('button', { name: 'Show ASC Default connections', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await page.mouse.move(0, 0);
+  await page.locator('.article-title').click();
+  await page.waitForTimeout(600);
+  expect(await canvas.screenshot()).toEqual(first);
+});
+
 test('retains the whole diagram without WebGL', async ({ page }) => {
   await page.addInitScript(() => { HTMLCanvasElement.prototype.getContext = () => null; });
   await page.goto(article);
