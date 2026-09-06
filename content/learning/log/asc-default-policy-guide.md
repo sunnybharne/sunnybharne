@@ -10,7 +10,7 @@ tags:
 draft: false
 ---
 
-**ASC means Azure Security Center**, now called **Microsoft Defender for Cloud**. It checks your Azure setup for security risks.
+**ASC means Azure Security Center**, now called **[Microsoft Defender for Cloud](/articles/defender-for-cloud/)**. It checks your Azure setup for security risks.
 
 **ASC Default** is its security checklist.
 
