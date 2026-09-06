@@ -37,7 +37,7 @@ any remaining blocker; do not claim the update is live until it is verified.
 - Keep the white, compact layout full-width and left-aligned, with small edge padding.
   Keep article text readable; lists and reference tables can use the available width.
 - Homepage Three.js motion is decorative, lazy-loaded,
-  and pausable. Keep the static fallback and reduced-motion support.
+  and settles after four seconds, with no button. Keep the static fallback and reduced-motion support.
 - For animation changes, build first, then run `npm run test:browser`.
   Tests use Python 3 and Chromium (`npx playwright install chromium`).
 - Documentation-only instruction changes need a diff review and

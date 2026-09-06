@@ -53,16 +53,19 @@ export function createNotebookWireframe(host: HTMLElement, onContextLost: () => 
     const delta = now - previous;
     // A small drawing does not need to render at the screen's full refresh rate.
     if (delta < 1000 / 30) return;
-    elapsed += Math.min(delta, 100) / 1000;
+    elapsed = Math.min(4, elapsed + delta / 1000);
     previous = now;
-    wireframe.rotation.x = 0.35 + Math.sin(elapsed * 0.3) * 0.06;
-    wireframe.rotation.y = -0.6 + elapsed * 0.09;
+    // Ease to rest within four seconds; no persistent motion or control needed.
+    const progress = 1 - (1 - elapsed / 4) ** 3;
+    wireframe.rotation.x = 0.35 + progress * 0.04;
+    wireframe.rotation.y = -0.6 + progress * 0.3;
     renderer.render(scene, camera);
+    if (elapsed >= 4) setPlaying(false);
   };
 
   const setPlaying = (playing: boolean) => {
     if (disposed) return;
-    if (playing && frame === null) {
+    if (playing && elapsed < 4 && frame === null) {
       previous = 0;
       frame = requestAnimationFrame(animate);
     } else if (!playing && frame !== null) {

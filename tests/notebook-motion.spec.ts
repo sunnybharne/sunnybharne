@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test('animates quietly and supports keyboard pause and resume', async ({ page }) => {
+test('animates briefly then settles without a button', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
@@ -25,15 +25,13 @@ test('animates quietly and supports keyboard pause and resume', async ({ page })
   await page.waitForTimeout(1200);
   expect(await canvas.screenshot()).not.toEqual(first);
 
-  await page.getByRole('button', { name: 'Pause animation' }).focus();
-  await page.keyboard.press('Enter');
-  await expect(page.getByRole('button', { name: 'Play animation' })).toBeFocused();
-  const paused = await canvas.screenshot();
+  await expect(page.locator('.notebook-motion button')).toHaveCount(0);
+  await page.waitForTimeout(4200);
+  const settled = await canvas.screenshot();
+  const frames = await page.evaluate(() => window.animationFrames);
   await page.waitForTimeout(400);
-  expect(await canvas.screenshot()).toEqual(paused);
-  await page.keyboard.press('Enter');
-  await page.waitForTimeout(800);
-  expect(await canvas.screenshot()).not.toEqual(paused);
+  expect(await page.evaluate(() => window.animationFrames)).toBe(frames);
+  expect(await canvas.screenshot()).toEqual(settled);
   expect(errors).toEqual([]);
 });
 
