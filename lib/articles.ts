@@ -11,13 +11,6 @@ export type ArticleSummary = {
   kind: 'note' | 'article';
 };
 
-const subjects = [
-  { slug: 'azure-policy', title: 'Azure Policy', description: 'Assignments, governance and rules that run in Azure.', tags: ['azure', 'azure-policy', 'policy', 'governance'] },
-  { slug: 'windows', title: 'Windows', description: 'Settings, baselines and tests inside virtual machines.', tags: ['windows'] },
-  { slug: 'machine-configuration', title: 'Machine Configuration', description: 'From checking a machine to applying its configuration.', tags: ['machine-configuration'] },
-  { slug: 'security', title: 'Security', description: 'Understanding security checks and what they change.', tags: ['security'] },
-];
-
 export async function getArticles(): Promise<ArticleSummary[]> {
   const [notes, posts] = await Promise.all([
     getAllLearningLogs({ includeDrafts: false }),
@@ -43,28 +36,6 @@ export async function getArticles(): Promise<ArticleSummary[]> {
       kind: 'article',
     })),
   ].sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
-}
-
-export function getArticleTopic(article: ArticleSummary) {
-  return subjects.find((subject) => subject.tags.some((tag) => article.tags.includes(tag)));
-}
-
-export async function getTopics() {
-  const articles = await getArticles();
-  const known = new Set(subjects.flatMap((subject) => subject.tags));
-  const additional = [...new Set(articles.flatMap((article) => article.tags))]
-    .filter((tag) => !known.has(tag) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tag))
-    .sort()
-    .map((tag) => ({
-      slug: tag,
-      title: tag.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join(' '),
-      description: '',
-      tags: [tag],
-    }));
-  return [...subjects, ...additional].map((subject) => ({
-    ...subject,
-    articles: articles.filter((article) => subject.tags.some((tag) => article.tags.includes(tag))),
-  })).filter((subject) => subject.articles.length > 0);
 }
 
 export function shortDate(date: string): string {
