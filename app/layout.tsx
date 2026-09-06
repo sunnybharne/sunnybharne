@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Link href="/" className="site-name">Sunny Bharne<span aria-hidden="true">.</span></Link>
             <nav aria-label="Main navigation">
               <Link href="/articles/">Articles</Link>
-              <a href="https://github.com/sunnybharne">Projects</a>
+              <a href="https://github.com/sunnybharne">GitHub</a>
               <Link href="/about/">About</Link>
             </nav>
           </div>
