@@ -10,7 +10,9 @@ tags:
 draft: false
 ---
 
-**ASC Default** is Defender for Cloud’s assignment of the Microsoft cloud security benchmark: a bundle of Azure security checks.
+**ASC means Azure Security Center**, now called **Microsoft Defender for Cloud**. It checks your Azure setup for security risks.
+
+**ASC Default** is its security checklist.
 
 ## What it does
 
