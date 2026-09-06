@@ -1,0 +1,122 @@
+{
+  "properties": {
+    "displayName": "Windows local password baseline - Prod",
+    "description": "Four Windows password rules for VMs with vmsecurityBenchmarks=true.",
+    "version": "1.3.0",
+    "metadata": {
+      "category": "Guest Configuration",
+      "version": "1.3.0"
+    },
+    "parameters": {
+      "BenchmarkTagName": {
+        "defaultValue": "vmsecurityBenchmarks",
+        "metadata": {
+          "displayName": "VM opt-in tag name"
+        },
+        "type": "String"
+      },
+      "EnableAutoRemediation": {
+        "allowedValues": [
+          "true",
+          "false"
+        ],
+        "defaultValue": "true",
+        "metadata": {
+          "displayName": "Apply automatically"
+        },
+        "type": "String"
+      }
+    },
+    "policyDefinitions": [
+      {
+        "definitionVersion": "1.*.*",
+        "groupNames": [
+          "PasswordRules"
+        ],
+        "parameters": {
+          "BenchmarkTagName": {
+            "value": "[parameters('BenchmarkTagName')]"
+          },
+          "EnableAutoRemediation": {
+            "value": "[parameters('EnableAutoRemediation')]"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/policyDefinitions/windows-local-password-age-60",
+        "policyDefinitionReferenceId": "windows-local-password-age-60"
+      },
+      {
+        "definitionVersion": "1.*.*",
+        "groupNames": [
+          "PasswordRules"
+        ],
+        "parameters": {
+          "BenchmarkTagName": {
+            "value": "[parameters('BenchmarkTagName')]"
+          },
+          "EnableAutoRemediation": {
+            "value": "[parameters('EnableAutoRemediation')]"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/policyDefinitions/windows-local-password-length-14",
+        "policyDefinitionReferenceId": "windows-local-password-length-14"
+      },
+      {
+        "definitionVersion": "1.*.*",
+        "groupNames": [
+          "PasswordRules"
+        ],
+        "parameters": {
+          "BenchmarkTagName": {
+            "value": "[parameters('BenchmarkTagName')]"
+          },
+          "EnableAutoRemediation": {
+            "value": "[parameters('EnableAutoRemediation')]"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/policyDefinitions/windows-local-password-history-24",
+        "policyDefinitionReferenceId": "windows-local-password-history-24"
+      },
+      {
+        "definitionVersion": "1.*.*",
+        "groupNames": [
+          "PasswordRules"
+        ],
+        "parameters": {
+          "BenchmarkTagName": {
+            "value": "[parameters('BenchmarkTagName')]"
+          },
+          "EnableAutoRemediation": {
+            "value": "[parameters('EnableAutoRemediation')]"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/policyDefinitions/windows-local-min-password-age-1",
+        "policyDefinitionReferenceId": "windows-local-min-password-age-1"
+      },
+      {
+        "definitionVersion": "1.*.*",
+        "groupNames": [
+          "Preparation"
+        ],
+        "parameters": {
+          "BenchmarkTagName": {
+            "value": "[parameters('BenchmarkTagName')]"
+          }
+        },
+        "policyDefinitionId": "/subscriptions/<subscription-id>/providers/Microsoft.Authorization/policyDefinitions/windows-policy-package-identity",
+        "policyDefinitionReferenceId": "package-identity"
+      }
+    ],
+    "policyDefinitionGroups": [
+      {
+        "description": "Maximum age, minimum length, password history and minimum age.",
+        "displayName": "Password rules",
+        "name": "PasswordRules"
+      },
+      {
+        "description": "Attach the identity that reads the private configuration packages.",
+        "displayName": "Package access",
+        "name": "Preparation"
+      }
+    ]
+  }
+}
