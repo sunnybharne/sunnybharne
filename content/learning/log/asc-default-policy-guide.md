@@ -16,17 +16,9 @@ draft: false
 
 ## What it does
 
-Version **57.59.0**, checked **5 September 2026**:
+It reports security risks, such as open ports or missing encryption. **It does not block deployments or fix settings.**
 
-| Default effect | Checks | Result |
-|---|---:|---|
-| Audit | 99 | Reports a setting that fails the rule. |
-| AuditIfNotExists | 109 | Reports a missing or noncompliant related resource or assessment. |
-| Disabled | 16 | Skips the check. |
-
-**208 auditing, 16 disabled. These defaults do not block deployments or fix settings.** These are policy counts, not your compliance results.
-
-Checks cover access, networks, encryption, logs, VM settings and other services. Not every check applies to every resource.
+This describes version **57.59.0** defaults, checked **5 September 2026**.
 
 ## What matters
 
