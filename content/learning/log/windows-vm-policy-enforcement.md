@@ -11,7 +11,7 @@ tags:
 draft: false
 ---
 
-> **Prod test VM: 4/4 rules compliant.** Verified on 6 September 2026. Tag opt-in is configured; new-VM and offboarding tests are pending.
+> **Prod test VM: 4/4 rules compliant.** Verified on 6 September 2026. Version 1.2.0 uses one shared tag parameter; new-VM and offboarding tests are pending.
 
 [ASC Default](/learning/asc-default-policy-guide/) audits Microsoft's baseline. Our **custom initiative** changes four local Windows settings.
 
@@ -33,25 +33,27 @@ These are lab values. Existing passwords are not replaced. Domain controllers ar
 
 ## Application teams choose by tag
 
-The initiative stays assigned to **Prod subscription**. To opt in, put `ApplyWindowsPasswordBaseline` on the **VM itself**.
+The initiative stays assigned to **Prod subscription**. The new opt-in tag is **`vmsecurityBenchmarks = true`**, on the **VM itself**.
 
 | VM tag | Custom password policies |
 |---|---|
-| Present, with any value | Eligible to apply all four rules |
-| Missing | Outside these policies |
+| `vmsecurityBenchmarks = true` | Eligible to apply all four rules |
+| `false` or missing | Outside these policies |
 
-Use `ApplyWindowsPasswordBaseline = true` for clarity. **Even `false` counts as present**: only existence matters. [Policy conditions](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule)
+**One shared parameter:** `BenchmarkTagName` defaults to `vmsecurityBenchmarks`. The initiative passes it to all four rule policies and the package-access helper. It chooses the tag name; **it does not add tags to VMs**. [Initiative parameters](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure#parameters)
 
-Resource group/subscription tags do not count; resources [do not inherit tags automatically](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags). The Prod test VM is opted in. Platform remains outside this initiative.
+Azure still evaluates a [condition inside each policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-policy-rule). Sharing the parameter keeps the chosen tag name consistent.
 
-**Removing the tag is not a rollback.** Windows values stay as configured. For full opt-out, verify and remove this initiative's existing guest assignments; do not rely on tag removal to clean them up. [Assignment lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments)
+Resource group/subscription tags do not count; resources [do not inherit tags automatically](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources#inherit-tags). The Prod test VM has `vmsecurityBenchmarks=true`. Platform remains unchanged.
+
+**Removing the tag or setting `false` is not a rollback.** Windows values remain. For full opt-out, verify and remove this initiative's existing guest assignments. [Assignment lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments)
 
 ## How settings reach Windows
 
-**Prod + VM tag → prepare → download → apply → report**
+**Prod + tag=true → prepare → download → apply → report**
 
 1. **Prepare:** Microsoft's [Deploy prerequisites to enable Guest Configuration policies on virtual machines](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options) installs the extension and enables the VM's system identity. This remains subscription-wide.
-2. **Select:** the VM tag gates **four rule policies + one package-access policy**. ASC Default's audits remain unchanged.
+2. **Select:** the VM tag must equal `true` for **four rule policies + one package-access policy**. ASC Default's audits remain unchanged.
 3. **Download:** our helper attaches a shared user-assigned identity with [read access to the private package container](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/5-access-package).
 4. **Apply:** four `DeployIfNotExists` policies deliver guest assignments. The extension downloads packages, changes settings, and reports compliance.
 
@@ -79,9 +81,9 @@ Continuous correction is separate. In ApplyAndMonitor, remediation or an Azure V
 
 ## Next tests
 
-1. Compare new tagged and untagged Windows VMs in Prod.
-2. Add the tag to an existing VM; check delivery and remediation timing.
-3. Remove the tag; verify offboarding and retained Windows values.
+1. Compare new Prod Windows VMs with tag `true`, `false`, and missing.
+2. Set the tag to `true` on an existing VM; check delivery and remediation timing.
+3. Remove the tag or set `false`; verify offboarding and retained Windows values.
 4. Change a setting; compare monitoring with automatic correction.
 
-**One existing VM is verified.** Target: supported individual Windows VMs with the opt-in tag in Prod. Linux, Arc, uniform scale sets, tagged AKS nodes and excluded legacy images are outside scope.
+**One existing VM is verified.** Target: supported individual Windows VMs with `vmsecurityBenchmarks=true` in Prod. Linux, Arc, uniform scale sets, tagged AKS nodes and excluded legacy images are outside scope.
