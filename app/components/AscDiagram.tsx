@@ -3,51 +3,50 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { diagramEdges, diagramNodes, diagramSize, subscriptionBox } from '@/lib/asc-diagram-model';
-import type { createAscDiagram } from '@/lib/asc-diagram-scene';
+
 
 export default function AscDiagram() {
   const host = useRef<HTMLDivElement>(null);
-  const controller = useRef<ReturnType<typeof createAscDiagram> | null>(null);
+  const play = useRef<(nodeId?: string) => void>(() => {});
   const [ready, setReady] = useState(false);
+  const [motion, setMotion] = useState<{ run: number; edges: string[] } | null>(null);
 
   useEffect(() => {
     const element = host.current;
     if (!element) return;
-    let disposed = false;
     let started = false;
     let visible = false;
+    let run = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => controller.current?.setEnabled(visible && !document.hidden && !reducedMotion.matches);
+    const stop = () => { clearTimeout(timer); setMotion(null); };
+    play.current = (nodeId) => {
+      if (!visible || document.hidden || reducedMotion.matches) return;
+      clearTimeout(timer);
+      const edges = diagramEdges.filter((edge) => !nodeId || edge.from === nodeId || edge.to === nodeId).map((edge) => edge.id);
+      setMotion({ run: ++run, edges });
+      timer = setTimeout(stop, 4000);
+    };
+    const update = () => {
+      if (!visible || document.hidden || reducedMotion.matches) stop();
+    };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       update();
       if (!visible || started) return;
       started = true;
-      import('@/lib/asc-diagram-scene').then(({ createAscDiagram }) => {
-        if (disposed) return;
-        controller.current = createAscDiagram(element, () => {
-          controller.current?.dispose();
-          controller.current = null;
-          setReady(false);
-        });
-        setReady(true);
-        update();
-        controller.current.play();
-      }).catch(() => {
-        // The SVG and all labels remain usable without WebGL.
-        if (!disposed) setReady(false);
-      });
+      setReady(true);
+      play.current();
     });
     observer.observe(element);
     reducedMotion.addEventListener('change', update);
     document.addEventListener('visibilitychange', update);
     return () => {
-      disposed = true;
+      clearTimeout(timer);
+      play.current = () => {};
       observer.disconnect();
       reducedMotion.removeEventListener('change', update);
       document.removeEventListener('visibilitychange', update);
-      controller.current?.dispose();
-      controller.current = null;
     };
   }, []);
 
@@ -61,11 +60,14 @@ export default function AscDiagram() {
       <div className="asc-diagram-scroll" role="region" aria-label="Subscription diagram, scroll horizontally on small screens" tabIndex={0}>
         <div className="asc-diagram-stage" data-ready={ready}>
           <div className="asc-diagram-drawing" ref={host} aria-hidden="true">
-            <svg className="asc-diagram-fallback" viewBox="0 0 720 460" fill="none">
+            <svg className="asc-diagram-svg" viewBox="0 0 720 460" fill="none">
               <defs><marker id="asc-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#708ba1" /></marker></defs>
               <rect {...subscriptionBox} fill="#f4f7fa" stroke="#c5d0db" />
               {diagramNodes.map((node) => <rect key={node.id} x={node.x} y={node.y} width={node.width} height={node.height} fill="white" stroke="#c5d0db" />)}
               {diagramEdges.map((edge) => <polyline key={edge.id} points={edge.points.map((point) => point.join(',')).join(' ')} stroke="#708ba1" markerEnd="url(#asc-arrow)" />)}
+              {motion ? diagramEdges.filter((edge) => motion.edges.includes(edge.id)).map((edge, index) => (
+                <polyline key={`${motion.run}-${edge.id}`} className="asc-diagram-signal" points={edge.points.map((point) => point.join(',')).join(' ')} pathLength="100" style={{ animationDelay: `${index * 0.4}s` }} />
+              )) : null}
             </svg>
           </div>
           <p className="asc-diagram-scope" style={position(40, 153)}>Your subscription</p>
@@ -74,13 +76,13 @@ export default function AscDiagram() {
             const props = {
               className: 'asc-diagram-node',
               style: { ...position(node.x, node.y), width: `${node.width / 720 * 100}%`, height: `${node.height / 460 * 100}%` },
-              onPointerEnter: () => controller.current?.play(node.id),
-              onFocus: () => controller.current?.play(node.id),
+              onPointerEnter: () => play.current(node.id),
+              onFocus: () => play.current(node.id),
             };
             return node.href ? (
               <Link key={node.id} {...props} href={node.href} aria-label={node.title}>{content}</Link>
             ) : (
-              <button key={node.id} {...props} type="button" disabled={!ready} aria-label={`Show ${node.title} connections`} onClick={() => controller.current?.play(node.id)}>{content}</button>
+              <button key={node.id} {...props} type="button" disabled={!ready} aria-label={`Show ${node.title} connections`} onClick={() => play.current(node.id)}>{content}</button>
             );
           })}
           {diagramEdges.map((edge) => <span className="asc-diagram-edge" key={edge.id} style={position(edge.x, edge.y)}>{edge.label}</span>)}
