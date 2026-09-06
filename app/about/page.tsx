@@ -52,7 +52,7 @@ export default function AboutPage() {
         <h2>Outside the day job</h2>
         <p>
           I tinker with AI agents, developer tools, and my Neovim setup. My{' '}
-          <Link href="/projects/">projects</Link> collect those experiments. You
+          <a href="https://github.com/sunnybharne">projects are on GitHub</a>. You
           can also follow my <Link href="/learning/">learning roadmap</Link>.
         </p>
       </section>
