@@ -34,6 +34,10 @@ any remaining blocker; do not claim the update is live until it is verified.
 - Use `npm run lint` and `npm run build` for website changes. The build's video
   refresh can modify `README.md` and `data/videos.json`; keep unrelated generated
   changes out of the commit.
+- Keep the white, compact layout. Homepage Three.js motion is decorative, lazy-loaded,
+  and pausable. Keep the static fallback and reduced-motion support.
+- For animation changes, build first, then run `npm run test:browser`.
+  Tests use Python 3 and Chromium (`npx playwright install chromium`).
 - Documentation-only instruction changes need a diff review and
   `git diff --check`; they do not require a fresh application build.
 - Keep public learning notes concise: short explanations, useful conditions,

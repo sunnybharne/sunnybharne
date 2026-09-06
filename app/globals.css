@@ -44,7 +44,15 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .site-footer nav { gap: 1.2rem; font-size: .75rem; }
 .page-shell { width: 100%; max-width: 56rem; margin-inline: auto; padding: 2.75rem 2rem 2rem; }
 .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .75rem; }
-.home-intro { padding: 0 0 2.4rem; max-width: 43rem; }
+.home-intro { position: relative; padding: 0 8rem 2.4rem 0; }
+.notebook-motion { position: absolute; top: -1.4rem; right: 0; width: 7rem; height: 7rem; }
+.notebook-motion-drawing, .notebook-motion-drawing canvas, .notebook-motion-fallback { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.notebook-motion-fallback { stroke: #bdc9d5; stroke-width: .8; }
+.notebook-motion[data-ready="true"] .notebook-motion-fallback { visibility: hidden; }
+.notebook-motion-toggle { position: absolute; bottom: 0; right: -.5rem; display: grid; place-items: center; width: 1.75rem; height: 1.75rem; padding: 0; border: 0; border-radius: 3px; background: transparent; color: var(--muted); cursor: pointer; }
+.notebook-motion-toggle svg { width: .65rem; height: .65rem; }
+.notebook-motion-toggle:hover { color: var(--accent); background: var(--surface); }
+.notebook-motion-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .home-intro h1 { font-size: clamp(2.15rem, 5vw, 2.85rem); line-height: 1.13; }
 .home-intro > p:not(.eyebrow) { color: var(--muted); max-width: 37rem; font-size: 1.08rem; line-height: 1.75; }
 .text-link, .article-backlink, .back-link { color: var(--accent); font-size: .875rem; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); }
@@ -153,7 +161,9 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
   .site-header nav { gap: 1.1rem; font-size: .8rem; }
   .site-footer-inner { flex-direction: column; padding-block: 1.6rem; }
   .page-shell, .article-shell { padding: 2.3rem 1.3rem 1.5rem; }
-  .home-intro { padding-bottom: 2.5rem; }
+  .home-intro { padding-right: 5.5rem; padding-bottom: 2.5rem; }
+  .notebook-motion { width: 4.5rem; height: 4.5rem; top: 0; }
+  .notebook-motion-toggle { bottom: -.75rem; right: -.25rem; }
   .home-intro > p:not(.eyebrow) { font-size: 1rem; }
   .article-list-item { grid-template-columns: 1fr; gap: .65rem; padding: 1.4rem 0 1.6rem; }
   .article-list-date { display: flex; gap: .7rem; }
