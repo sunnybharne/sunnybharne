@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ArticleContents from '@/app/components/ArticleContents';
+import { getArticles } from '@/lib/articles';
 import {
   formatPostDate,
   getAllPostSlugs,
@@ -52,57 +54,61 @@ export default async function PostPage({ params }: PostPageProps) {
 
   if (!post) notFound();
 
+  const related = (await getArticles())
+    .filter((article) => article.href !== `/posts/${post.slug}/`)
+    .sort((a, b) => {
+      const overlap = (tags: string[]) => tags.filter((tag) => post.tags.includes(tag)).length;
+      return overlap(b.tags) - overlap(a.tags);
+    })
+    .slice(0, 2);
+
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 py-14 sm:py-20">
-      <Link
-        href="/posts/"
-        className="text-sm opacity-60 hover:opacity-100 hover:underline"
-      >
-        Back to writing
+    <article className="article-shell">
+      <Link href="/articles/" className="article-backlink">
+        ← All articles
       </Link>
 
-      <header className="mt-10 border-b border-black/10 pb-10 dark:border-white/15">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs opacity-55">
+      <header className="article-header">
+        <div className="article-meta">
           <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-          <span aria-hidden="true">/</span>
+          <span aria-hidden="true">·</span>
           <span>{post.readingTimeMinutes} min read</span>
           {post.updated ? (
             <>
-              <span aria-hidden="true">/</span>
+              <span aria-hidden="true">·</span>
               <span>Updated {formatPostDate(post.updated)}</span>
             </>
           ) : null}
-          {post.draft ? (
-            <>
-              <span aria-hidden="true">/</span>
-              <span>Draft preview</span>
-            </>
-          ) : null}
+          {post.draft ? <span>Draft preview</span> : null}
         </div>
-        <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">
-          {post.title}
-        </h1>
-        <p className="mt-5 text-lg leading-8 opacity-75">
-          {post.description}
-        </p>
-        {post.tags.length > 0 ? (
-          <div className="mt-5 flex flex-wrap gap-x-3 gap-y-1 text-sm opacity-55">
-            {post.tags.map((tag) => (
-              <span key={tag}>#{tag}</span>
-            ))}
-          </div>
-        ) : null}
+        <h1 className="article-title">{post.title}</h1>
+        <p className="article-deck">{post.description}</p>
       </header>
 
-      <div
-        className="post-content"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
+      <div className="article-layout">
+        <ArticleContents headings={post.headings} />
+        <div
+          className="article-body post-content"
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
+      </div>
 
-      <footer className="mt-16 border-t border-black/10 pt-8 dark:border-white/15">
-        <Link href="/posts/" className="text-sm font-medium hover:underline">
-          More writing
-        </Link>
+      <footer className="article-footer">
+        {related.length > 0 ? (
+          <section className="related-articles" aria-labelledby="related-articles-heading">
+            <h2 id="related-articles-heading">Read next</h2>
+            <ul>
+              {related.map((article) => (
+                <li key={article.href}>
+                  <Link href={article.href}>{article.title}</Link>
+                  <p>{article.description}</p>
+                  <span className="article-meta">{article.readingTimeMinutes} min read</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+        <Link href="/articles/" className="article-backlink">Browse all articles →</Link>
       </footer>
     </article>
   );

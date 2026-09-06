@@ -3,145 +3,49 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
+const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.sunnybharne.com'),
-  title: {
-    default: 'Sunny Bharne — I do all things Azure.',
-    template: '%s — Sunny Bharne',
-  },
-  description:
-    'Sunny Bharne — Azure Platform Engineer based in Helsinki, Finland. A decade of experience across Azure DevOps, Infrastructure as Code (Bicep, Terraform), Landing Zones, and Azure Policy.',
+  title: { default: 'Sunny Bharne — Notes from the work', template: '%s — Sunny Bharne' },
+  description: 'A personal notebook on Azure, automation and learning through real work. Written by Sunny Bharne in Helsinki.',
   openGraph: {
-    title: 'Sunny Bharne — I do all things Azure.',
-    description:
-      'Azure Platform Engineer in Helsinki. Azure DevOps, IaC (Bicep + Terraform), Landing Zones, Azure Policy.',
-    url: 'https://www.sunnybharne.com',
-    siteName: 'Sunny Bharne',
-    type: 'website',
+    title: 'Sunny Bharne — Notes from the work',
+    description: 'Notes on Azure, automation and the things I learn along the way.',
+    url: 'https://www.sunnybharne.com', siteName: 'Sunny Bharne', type: 'website',
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      dir="ltr"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <body className="min-h-screen bg-background text-foreground">
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </div>
+    <html lang="en" dir="ltr" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <header className="site-header">
+          <div className="site-header-inner">
+            <Link href="/" className="site-name">Sunny Bharne<span aria-hidden="true">.</span></Link>
+            <nav aria-label="Main navigation">
+              <Link href="/articles/">Articles</Link>
+              <Link href="/topics/">Topics</Link>
+              <Link href="/about/">About</Link>
+            </nav>
+          </div>
+        </header>
+        <main id="main-content">{children}</main>
+        <footer className="site-footer">
+          <div className="site-footer-inner">
+            <p>© {new Date().getFullYear()} Sunny Bharne<span>Helsinki, Finland</span></p>
+            <nav aria-label="Elsewhere">
+              <a href="https://github.com/sunnybharne">GitHub</a>
+              <a href="https://www.linkedin.com/in/sunnybharne/">LinkedIn</a>
+              <a href="https://www.youtube.com/@sunnybharne" rel="me">YouTube</a>
+              <a href="https://x.com/thesunnybharne" rel="me">X</a>
+              <a href="mailto:sunny@papliba.com">Email</a>
+            </nav>
+          </div>
+        </footer>
       </body>
     </html>
-  );
-}
-
-function SiteHeader() {
-  return (
-    <header className="border-b border-black/5 dark:border-white/10">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4">
-        <Link href="/" className="font-bold tracking-widest">
-          SUNNY BHARNE
-        </Link>
-        <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:gap-x-6">
-          <Link href="/learning/" className="opacity-70 hover:opacity-100">
-            Learning
-          </Link>
-          <Link href="/posts/" className="opacity-70 hover:opacity-100">
-            Writing
-          </Link>
-          <a
-            href="https://github.com/sunnybharne"
-            className="opacity-70 hover:opacity-100"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sunnybharne/"
-            className="opacity-70 hover:opacity-100"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://www.youtube.com/@sunnybharne"
-            rel="me"
-            className="opacity-70 hover:opacity-100"
-          >
-            YouTube
-          </a>
-          <a
-            href="https://x.com/thesunnybharne"
-            rel="me"
-            aria-label="X profile for @thesunnybharne"
-            className="opacity-70 hover:opacity-100"
-          >
-            X
-          </a>
-          <a
-            href="mailto:sunny@papliba.com"
-            className="opacity-70 hover:opacity-100"
-          >
-            Contact
-          </a>
-        </nav>
-      </div>
-    </header>
-  );
-}
-
-function SiteFooter() {
-  return (
-    <footer className="border-t border-black/5 dark:border-white/10">
-      <div className="mx-auto max-w-5xl px-6 py-6 text-sm opacity-70">
-        <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
-          <span>© {new Date().getFullYear()} Sunny Bharne. Helsinki, Finland.</span>
-          <span className="opacity-60">I use VIM. Judge me.</span>
-        </div>
-        <nav
-          aria-label="Social profiles"
-          className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs"
-        >
-          <a href="https://github.com/sunnybharne" className="hover:underline">
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sunnybharne/"
-            className="hover:underline"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://www.youtube.com/@sunnybharne"
-            rel="me"
-            className="hover:underline"
-          >
-            YouTube @sunnybharne
-          </a>
-          <a
-            href="https://x.com/thesunnybharne"
-            rel="me"
-            className="hover:underline"
-          >
-            X @thesunnybharne
-          </a>
-        </nav>
-      </div>
-    </footer>
   );
 }

@@ -4,6 +4,9 @@ description: "224 Azure security checks: what they flag and what happens next."
 date: 2026-09-05
 track: azure-platform
 provider: Microsoft cloud security benchmark 57.59.0
+tags:
+  - azure-policy
+  - security
 draft: false
 ---
 

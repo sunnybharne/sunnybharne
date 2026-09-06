@@ -2,15 +2,21 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
+import {
+  addHeadingAnchors,
+  estimateReadingTime,
+  renderMarkdown,
+  type ArticleHeading,
+} from './markdown';
 
 const postsDirectory = path.join(process.cwd(), 'content', 'posts');
 const postFilePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const markdown = new MarkdownIt({
+const markdown = addHeadingAnchors(new MarkdownIt({
   html: false,
   linkify: true,
   typographer: false,
-});
+}));
 
 export type PostSummary = {
   slug: string;
@@ -25,6 +31,7 @@ export type PostSummary = {
 
 export type Post = PostSummary & {
   contentHtml: string;
+  headings: ArticleHeading[];
 };
 
 type PostOptions = {
@@ -63,7 +70,7 @@ export async function getPostBySlug(
 
     return {
       ...summary,
-      contentHtml: markdown.render(content),
+      ...renderMarkdown(markdown, content),
     };
   } catch (error) {
     if (isMissingFile(error)) return null;
@@ -182,17 +189,6 @@ function parseTags(value: unknown, slug: string): string[] {
     throw new Error(`Post "${slug}" has invalid tags; use a list of strings.`);
   }
   return value.map((tag) => tag.trim()).filter(Boolean);
-}
-
-function estimateReadingTime(content: string): number {
-  const words = content
-    .replace(/```[\s\S]*?```/g, ' code ')
-    .replace(/[^\p{L}\p{N}'-]+/gu, ' ')
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean).length;
-
-  return Math.max(1, Math.ceil(words / 220));
 }
 
 function isDevelopment(): boolean {

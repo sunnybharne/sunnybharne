@@ -3,23 +3,29 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
 import { parse as parseYaml } from 'yaml';
+import {
+  addHeadingAnchors,
+  estimateReadingTime,
+  renderMarkdown,
+  type ArticleHeading,
+} from './markdown';
 
 const learningDirectory = path.join(process.cwd(), 'content', 'learning');
 const learningLogDirectory = path.join(learningDirectory, 'log');
 const roadmapPath = path.join(learningDirectory, 'roadmap.yml');
 const learningFilePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const markdown = new MarkdownIt({
+const markdown = addHeadingAnchors(new MarkdownIt({
   html: false,
   linkify: true,
   typographer: false,
-});
+}));
 
-const policyGuideMarkdown = new MarkdownIt({
+const policyGuideMarkdown = addHeadingAnchors(new MarkdownIt({
   html: false,
   linkify: true,
   typographer: false,
-});
+}));
 
 policyGuideMarkdown.core.ruler.push('policy-groups', (state) => {
   const tokens: typeof state.tokens = [];
@@ -59,13 +65,6 @@ policyGuideMarkdown.renderer.rules.policy_group_open = () =>
 policyGuideMarkdown.renderer.rules.policy_group_close = () => '</details>\n';
 
 policyGuideMarkdown.renderer.rules.heading_open = (tokens, index, options, _env, self) => {
-  const heading = tokens[index + 1].content;
-  const id = heading
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
-  tokens[index].attrSet('id', id);
   if (tokens[index].meta?.policyGroup) {
     return `<summary>${self.renderToken(tokens, index, options)}`;
   }
@@ -138,6 +137,7 @@ export type LearningLogSummary = {
   resourceTitle?: string;
   resourceUrl?: string;
   minutes?: number;
+  readingTimeMinutes: number;
   tags: string[];
   evidence: LearningResource[];
   draft: boolean;
@@ -145,6 +145,7 @@ export type LearningLogSummary = {
 
 export type LearningLog = LearningLogSummary & {
   contentHtml: string;
+  headings: ArticleHeading[];
 };
 
 type LearningOptions = {
@@ -182,16 +183,16 @@ export async function getLearningLogBySlug(
       'utf8',
     );
     const { data, content } = matter(source);
-    const summary = parseLearningLogMetadata(slug, data);
+    const summary = parseLearningLogMetadata(slug, data, content);
 
     if (summary.draft && !includeDrafts) return null;
 
     return {
       ...summary,
-      contentHtml: (slug === 'asc-default-policy-guide'
-        ? policyGuideMarkdown
-        : markdown
-      ).render(content),
+      ...renderMarkdown(
+        slug === 'asc-default-policy-guide' ? policyGuideMarkdown : markdown,
+        content,
+      ),
     };
   } catch (error) {
     if (isMissingFile(error)) return null;
@@ -247,8 +248,8 @@ async function readLearningLogSummary(
     path.join(learningLogDirectory, filename),
     'utf8',
   );
-  const { data } = matter(source);
-  return parseLearningLogMetadata(slug, data);
+  const { data, content } = matter(source);
+  return parseLearningLogMetadata(slug, data, content);
 }
 
 function parseRoadmap(value: unknown): LearningRoadmap {
@@ -336,6 +337,7 @@ function parseRoadmapItem(value: unknown, context: string): RoadmapItem {
 function parseLearningLogMetadata(
   slug: string,
   data: Record<string, unknown>,
+  content: string,
 ): LearningLogSummary {
   if (data.draft !== undefined && typeof data.draft !== 'boolean') {
     throw new Error(`Learning entry "${slug}" has a non-boolean draft value.`);
@@ -354,6 +356,7 @@ function parseLearningLogMetadata(
     resourceTitle: optionalEntryString(data.resourceTitle, 'resourceTitle', slug),
     resourceUrl,
     minutes,
+    readingTimeMinutes: estimateReadingTime(content),
     tags: parseTags(data.tags, slug),
     evidence: optionalArray(data.evidence, `Learning entry "${slug}" evidence`).map(
       (resource, index) =>
