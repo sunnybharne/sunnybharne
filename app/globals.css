@@ -46,7 +46,7 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .75rem; }
 .home-intro { padding: 0 0 2.4rem; max-width: 43rem; }
 .home-intro h1 { font-size: clamp(2.15rem, 5vw, 2.85rem); line-height: 1.13; }
-.home-intro > p:not(.eyebrow) { color: var(--muted); max-width: 37rem; margin: 1.1rem 0 .8rem; font-size: 1.08rem; line-height: 1.75; }
+.home-intro > p:not(.eyebrow) { color: var(--muted); max-width: 37rem; margin: 0 0 .8rem; font-size: 1.08rem; line-height: 1.75; }
 .text-link, .article-backlink, .back-link { color: var(--accent); font-size: .875rem; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); }
 .text-link:hover, .article-backlink:hover, .back-link:hover { text-decoration-color: currentColor; }
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .6rem 1rem; margin-bottom: .8rem; }
