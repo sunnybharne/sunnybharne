@@ -102,6 +102,18 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .article-contents li + li { margin-top: .35rem; }
 .article-contents a { text-decoration: none; }
 .article-contents a:hover { text-decoration: underline; }
+.asc-diagram { margin: 0 0 2rem; max-width: 52rem; }
+.asc-diagram-scroll { overflow-x: auto; }
+.asc-diagram-stage { position: relative; min-width: 40rem; aspect-ratio: 720 / 460; }
+.asc-diagram-drawing, .asc-diagram-drawing canvas, .asc-diagram-fallback { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.asc-diagram-stage[data-ready="true"] .asc-diagram-fallback { visibility: hidden; }
+.asc-diagram-node { position: absolute; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: .3rem .5rem; line-height: 1.3; }
+.asc-diagram-node strong { font-size: .95rem; font-weight: 600; }
+.asc-diagram-node span { font-size: .75rem; color: var(--muted); margin-top: .3rem; }
+.asc-diagram-node a { color: var(--accent); }
+.asc-diagram-scope { position: absolute; font-size: .8rem; font-weight: 600; }
+.asc-diagram-edge { position: absolute; transform: translate(-50%, -50%); padding: 0 .3rem; background: white; color: var(--muted); font-size: .75rem; white-space: nowrap; }
+.asc-diagram figcaption { max-width: var(--reading); font-size: .85rem; color: var(--muted); margin-top: .75rem; }
 .article-body { max-width: var(--reading); min-width: 0; }
 .post-content { font-size: 1.125rem; line-height: 1.8; overflow-wrap: break-word; }
 .post-content > * + * { margin-top: 1.35rem; }

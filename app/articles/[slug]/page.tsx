@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleContents from '@/app/components/ArticleContents';
+import AscDiagram from '@/app/components/AscDiagram';
 import { getArticles } from '@/lib/articles';
 import {
   formatLearningDate,
@@ -98,6 +99,7 @@ export default async function ArticlePage({ params }: Props) {
 
       <div className="article-layout">
         <ArticleContents headings={article.headings} />
+        {slug === 'asc-default-policy-guide' ? <AscDiagram /> : null}
         <div
           className="article-body post-content"
           dangerouslySetInnerHTML={{ __html: article.contentHtml }}
