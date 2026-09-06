@@ -24,6 +24,8 @@ draft: false
 
 **Your assignment may differ:** check scope, versions, parameters, overrides, and exemptions. These are version **57.59.0** defaults, checked **5 September 2026**, not live compliance results.
 
+**Next lab:** [Apply Windows VM settings with a custom initiative](/learning/windows-vm-policy-enforcement/) — four password rules, preparation, remediation, and verified results.
+
 ## All 224 policies
 
 Open a service group. Check names link to exact Microsoft definitions; **Docs** opens guidance. Disabled rows describe inactive checks.
