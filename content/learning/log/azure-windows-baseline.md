@@ -353,6 +353,83 @@ Existing VMs need an initial remediation task to deploy the assignment. Installi
 
 For how the package and agent work, read [DSC, simply](/articles/dsc/).
 
+## Technical implementation with Azure Policy
+
+Use a **custom DeployIfNotExists policy** alongside the audit baseline. The example below targets local Windows password settings, not domain account passwords. It is an implementation pattern; the package must be built and tested for your Windows version.
+
+### 1. Assign the policies
+
+Start with a pilot resource group, then expand the assignment scope.
+
+| Assignment | Effect | Purpose |
+|---|---|---|
+| Existing Windows baseline | AuditIfNotExists | Keep reporting the baseline checks. |
+| Prerequisite initiative above | DeployIfNotExists + Modify | Install the extension and enable the VM identity. |
+| Custom Windows configuration policy | DeployIfNotExists | Deploy the guest assignment for your tested package. |
+
+Keep these assignments separate. The built-in baseline's `BaselineSettings` parameter customizes its checks; it does not turn that audit policy into an enforcing policy. [Built-in definition](https://github.com/Azure/azure-policy/blob/9780ba642eaf7abee804be93cccaede6751bcc65/built-in-policies/policyDefinitions/Guest%20Configuration/AzureWindowsBaseline_AINE.json).
+
+### 2. Prepare the settings package
+
+On a Windows authoring/test machine, use PowerShell 7 and [`GuestConfiguration` 4.12.0](https://www.powershellgallery.com/packages/GuestConfiguration/4.12.0), the version used for this example. Create a DSC configuration containing only the selected settings, compile its MOF, and package it as **AuditAndSet**. Each resource must implement working **Get, Test and Set** methods.
+
+Test the ZIP on a disposable Windows VM:
+
+```powershell
+Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordRules.zip
+Start-GuestConfigurationPackageRemediation -Path ./WindowsPasswordRules.zip
+Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordRules.zip
+```
+
+The middle command changes that test machine. Verify the actual Windows values too. Upload the tested ZIP to Azure Blob Storage under a versioned name. [Create a package](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package) · [Test it](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/3-test-package).
+
+### 3. Generate the enforcing policy
+
+This example starts with that tested ZIP. Replace the storage address and keep the same policy ID when updating the definition.
+
+```powershell
+Import-Module GuestConfiguration -RequiredVersion 4.12.0
+$policyId = (New-Guid).Guid # Save this ID for later updates.
+$definition = @{
+    PolicyId         = $policyId
+    DisplayName      = 'Apply selected Windows password settings'
+    Description      = 'Apply and correct selected local password settings.'
+    Path             = './generated-policy'
+    Platform         = 'Windows'
+    PolicyVersion    = '1.0.0'
+    Mode             = 'ApplyAndAutoCorrect'
+    ContentUri       = 'https://<storage>.blob.core.windows.net/packages/WindowsPasswordRules-1.0.0.zip'
+    LocalContentPath = './WindowsPasswordRules.zip'
+}
+$generatedPolicy = New-GuestConfigurationPolicy @definition -UseSystemAssignedIdentity -ExcludeArcMachines
+$generatedPolicy.Path
+```
+
+The command generates `<packageName>_DeployIfNotExists.json`; `$generatedPolicy.Path` gives its location. It includes the package hash and guest-assignment deployment. Import this as a **custom policy definition** in Azure Policy. It does not upload the ZIP or assign the policy. [Microsoft's policy generator](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/create-policy-definition) · [Generator source](https://github.com/Azure/GuestConfiguration/blob/main/source/Public/New-GuestConfigurationPolicy.ps1).
+
+For this private-blob example, grant each **VM's system-assigned identity** `Storage Blob Data Reader` on the package container. Automate that grant for new VMs in your provisioning workflow. The prerequisite initiative does not grant blob access. The VM must also reach the package and Machine Configuration endpoints.
+
+### 4. Assign, remediate and verify
+
+1. Assign the generated policy to the pilot scope. Keep **policy enforcement enabled** and set its **EnableAutoRemediation** parameter to the string `"true"` (the generator defaults it to `"false"`).
+2. Give the **policy assignment's managed identity** the roles listed in the generated `roleDefinitionIds`. The portal can grant them during assignment; CLI or Bicep deployments must also create the role assignments.
+3. Remediate applicable prerequisite policies first. Once the extension, identity and package access are ready, create a remediation task for the custom configuration policy to cover existing VMs.
+4. Check the VM's guest assignment uses **ApplyAndAutoCorrect**, then inspect its per-setting report and the actual Windows setting. On a test VM, change the setting and confirm it is restored at the next evaluation.
+
+Assignment parameters for automatic application:
+
+```json
+{
+  "EnableAutoRemediation": { "value": "true" }
+}
+```
+
+This is an assignment-parameters fragment, not a full policy. The generated metadata sets `autoRemediationAssignmentType` to `ApplyAndAutoCorrect`; its deployment also uses that `assignmentType`. [Generator parameters](https://github.com/Azure/GuestConfiguration/blob/main/source/templates/2-Parameters.json) · [Deployment template generation](https://github.com/Azure/GuestConfiguration/blob/main/source/Private/New-GuestConfigurationPolicySetActionSection.ps1).
+
+New eligible VMs are handled after deployment and policy evaluation. Initial remediation deploys the configuration; the agent handles later drift. **DeployIfNotExists success alone does not prove Windows settings changed.** [Remediation and permissions](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources) · [Apply modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
+
+Avoid conflicting GPO settings. Removing a policy assignment does not restore previous Windows values; plan a separate rollback configuration.
+
 ## Where to look
 
 **Azure portal → Policy → Compliance → this policy → a machine.** Open its Machine Configuration details to see individual failed checks.
