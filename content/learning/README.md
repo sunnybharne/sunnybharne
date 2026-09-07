@@ -1,5 +1,11 @@
 # Learning Journey Content
 
+## Article order
+
+Edit `data/article-order.json` to set the homepage and article list order.
+Use article slugs, first to last. Unlisted articles follow, newest first.
+Keep publication dates unchanged.
+
 The `/learning/` page is generated from `roadmap.yml` and the Markdown files
 inside `log/`.
 

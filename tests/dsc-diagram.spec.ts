@@ -12,9 +12,10 @@ test('DSC article renders without JavaScript and respects reduced motion on mobi
   const region = page.getByRole('region', { name: /DSC diagram/ });
   await region.scrollIntoViewIfNeeded();
   expect(await region.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
+  await page.bringToFront();
   await region.focus();
   await expect(region).toBeFocused();
-  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight', { delay: 150 });
   await expect.poll(() => region.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
   await context.close();
 });

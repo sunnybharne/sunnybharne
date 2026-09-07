@@ -1,5 +1,8 @@
 import { getAllLearningLogs } from './learning';
 import { getAllPosts } from './posts';
+import articleOrder from '../data/article-order.json';
+
+const articleRanks = new Map(articleOrder.map((slug, index) => [slug, index]));
 
 export type ArticleSummary = {
   slug: string;
@@ -38,7 +41,11 @@ export async function getArticles(): Promise<ArticleSummary[]> {
       readingTimeMinutes: post.readingTimeMinutes,
       kind: 'article',
     })),
-  ].sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+  ].sort((a, b) =>
+    (articleRanks.get(a.slug) ?? articleOrder.length) -
+      (articleRanks.get(b.slug) ?? articleOrder.length) ||
+    b.date.localeCompare(a.date) || a.title.localeCompare(b.title)
+  );
 }
 
 export function shortDate(date: string): string {

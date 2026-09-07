@@ -1,6 +1,6 @@
 ---
-title: "Windows VM policies: audit to apply"
-description: "Four local password settings, one VM tag, no automatic drift correction."
+title: "ASC Default Policies: Audit to Apply"
+description: "Apply selected security controls identified by ASC Default, with VM guest configuration as one example."
 date: 2026-09-06
 track: azure-platform
 provider: Azure Machine Configuration lab
@@ -11,59 +11,47 @@ tags:
 draft: false
 ---
 
-[ASC Default](/articles/asc-default-policy-guide/) audits the baseline. This custom initiative **changes four local Windows password settings**.
+[ASC Default](/articles/asc-default-policy-guide/) helps identify security gaps. **Fixing a gap needs a separate action.** Choose how to apply each selected control based on what it needs to change. There is no single switch that makes every audit policy apply a fix.
 
-## Settings
+Guest configuration policies are one example: they can apply selected settings inside a virtual machine (VM).
 
-| Setting | Value | Effect |
-|---|---|---|
-| Maximum password age | 60 days | Expires passwords unless the account is exempt. |
-| Minimum password length | 14 characters | Applies when setting a password. |
-| Password history | 24 passwords | Blocks reuse of remembered passwords. |
-| Minimum password age | 1 day | Stops users quickly cycling through password history. |
+This feature is called **Azure Machine Configuration**. It can check and configure settings inside the operating system. It does not cover every ASC Default control, and an audit policy cannot always be switched to enforcement. [Microsoft overview](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview/01-overview-concepts)
 
-These are lab values, not a general recommendation. Existing passwords are not replaced. Domain policy can override local settings.
+## From finding to configured setting
 
-## Opt in
+1. **Choose the control.** Read the finding, agree on the required setting, and select the machines it should apply to.
+2. **Choose how to apply it.** Use a suitable configuration policy, or create and test a custom package that can check and change the setting. An audit-only package cannot apply a fix.
+3. **Assign it to the selected VMs.** Azure Policy delivers a configuration assignment; the Machine Configuration extension inside each VM runs the package. The extension and required identities must be ready.
+4. **Apply and verify.** Existing VMs may need a remediation task to start the change. Check the actual setting and compliance results, then review the original security finding after it is assessed again.
 
-The initiative is assigned to **Prod**. Add this tag to a supported Windows **VM**:
+For this approach, `DeployIfNotExists` policies deliver the configuration. The package contains the instructions that change Windows. [Microsoft: custom packages](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/overview)
 
-```text
-vmsecurityBenchmarks = true
-```
+## Does it keep correcting changes?
 
-`false` or missing means the VM is not selected. Resource group and subscription tags do not inherit automatically.
+| Mode | What happens |
+|---|---|
+| `Audit` | Checks settings and reports gaps. |
+| `ApplyAndMonitor` | Applies settings once, then reports later changes away from them. |
+| `ApplyAndAutoCorrect` | Applies settings and corrects later drift at the next evaluation. |
 
-`BenchmarkTagName` sets the shared tag name; it does not tag VMs.
+This lab uses **ApplyAndMonitor**. Later drift needs another remediation trigger; it is not continuously corrected. With policy enforcement enabled, an Azure VM resource update can also trigger reapplication. [Microsoft: application and remediation modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options)
 
-**Removing the tag does not undo settings or remove existing guest assignments.** Offboarding needs assignment cleanup and separate restoration of Windows values.
+## A small Windows example
 
-## How it applies
+The lab groups four custom policies into one initiative. They set local password age to 60 days, minimum length to 14 characters, history to 24 passwords, and minimum age to 1 day.
 
-1. Subscription-wide prerequisites install the extension and enable the VM's system identity.
-2. For tagged VMs, a helper adds the package-download identity without replacing existing identities.
-3. Four `DeployIfNotExists` policies create guest assignments. The extension downloads private ZIP packages, applies their settings, and reports compliance. Existing VMs may need remediation.
+These are lab values, not a general recommendation. They do not replace existing passwords, and domain policy can override local settings.
 
-The ZIP contains the desired value and check/change code. The policy delivers it.
+The lab selects supported individual Windows VMs using the VM tag `vmsecurityBenchmarks=true`. Removing the tag does not undo settings or remove existing guest assignments; cleanup and restoration are separate steps.
 
-**Mode: `ApplyAndMonitor`.** Apply settings, then report drift—not continuous correction. Remediation or an Azure VM resource update can reapply settings.
+**Validation is partial.** One existing VM passed all four checks on 6 September 2026, before the version 1.3.0 policy simplification. The current version, new VMs, tag changes, offboarding and drift still need testing.
 
-`EnableAutoRemediation=true` enables automatic application. It does **not** mean `ApplyAndAutoCorrect`.
+## Lab code and references
 
-## Verified and pending
+The example uses private configuration ZIPs and a package-download identity. These JSON files contain deployment placeholders and are not a complete deployment guide.
 
-One existing Prod VM passed **4/4 rules**, confirmed with `net accounts` on **6 September 2026**. Lockout settings stayed unchanged.
-
-That test preceded the version 1.3.0 policy simplification. Fresh validation, new-VM, tag-change, offboarding and drift tests remain pending.
-
-Scope: supported individual Windows VMs. Domain controllers, Linux, Arc, uniform scale sets, tagged AKS nodes and excluded legacy images are outside this lab.
-
-## Code and references
-
-- [60-day policy](/learning-assets/windows-vm-policy-enforcement/windows-local-password-age-60.json)
-- [Identity helper](/learning-assets/windows-vm-policy-enforcement/windows-policy-package-identity.json)
-- [Shared initiative](/learning-assets/windows-vm-policy-enforcement/initiative.json)
-- [Microsoft: application modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options)
-- [Microsoft: assignment lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments)
-
-JSON files contain deployment placeholders. Replace them before use.
+- [Example password-age policy](/learning-assets/windows-vm-policy-enforcement/windows-local-password-age-60.json)
+- [Package identity helper](/learning-assets/windows-vm-policy-enforcement/windows-policy-package-identity.json)
+- [Four-policy initiative](/learning-assets/windows-vm-policy-enforcement/initiative.json)
+- [Microsoft: configuration assignment lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments)
+- [Microsoft: Defender for Cloud policy reference](https://learn.microsoft.com/en-us/azure/defender-for-cloud/policy-reference)

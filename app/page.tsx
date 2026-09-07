@@ -12,7 +12,7 @@ export default async function HomePage() {
       </section>
       <section aria-labelledby="recent-title">
         <div className="section-heading">
-          <h2 id="recent-title">Latest articles</h2>
+          <h2 id="recent-title">Articles</h2>
         </div>
         <ArticleList articles={articles.slice(0, 6)} compact />
       </section>
