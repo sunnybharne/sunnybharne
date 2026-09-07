@@ -43,7 +43,7 @@ policyGuideMarkdown.core.ruler.push('policy-groups', (state) => {
     if (token.type === 'heading_open' && ['h2', 'h3'].includes(token.tag)) {
       if (groupOpen) closeGroup();
       if (token.tag === 'h2') {
-        inReference = state.tokens[index + 1].content === 'All 224 policies';
+        inReference = ['All 224 policies', 'Saved policy reference', 'All baseline checks'].includes(state.tokens[index + 1].content);
       }
       if (inReference && token.tag === 'h3') {
         tokens.push(new state.Token('policy_group_open', 'details', 1));
@@ -190,7 +190,7 @@ export async function getLearningLogBySlug(
     return {
       ...summary,
       ...renderMarkdown(
-        slug === 'asc-default-policy-guide' ? policyGuideMarkdown : markdown,
+        ['asc-default-policy-guide', 'azure-windows-baseline'].includes(slug) ? policyGuideMarkdown : markdown,
         content,
       ),
     };

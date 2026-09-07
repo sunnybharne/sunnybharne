@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import ArticleContents from '@/app/components/ArticleContents';
 import DscDiagram from '@/app/components/DscDiagram';
 import AscDiagram from '@/app/components/AscDiagram';
+import WindowsBaselineDiagram from '@/app/components/WindowsBaselineDiagram';
 import { getArticles } from '@/lib/articles';
 import {
   formatLearningDate,
@@ -79,7 +80,7 @@ export default async function ArticlePage({ params }: Props) {
     : formatPostDate(article.date);
 
   return (
-    <article className={`article-shell${slug === 'asc-default-policy-guide' ? ' learning-policy-guide' : ''}`}>
+    <article className={`article-shell${['asc-default-policy-guide', 'azure-windows-baseline'].includes(slug) ? ' learning-policy-guide' : ''}`}>
       <Link href="/articles/" className="article-backlink">← All articles</Link>
 
       <header className="article-header">
@@ -102,6 +103,7 @@ export default async function ArticlePage({ params }: Props) {
         <ArticleContents headings={article.headings} />
         {slug === 'dsc' ? <DscDiagram /> : null}
         {slug === 'asc-default-policy-guide' ? <AscDiagram /> : null}
+        {slug === 'azure-windows-baseline' ? <WindowsBaselineDiagram /> : null}
         <div
           className="article-body post-content"
           dangerouslySetInnerHTML={{ __html: article.contentHtml }}
