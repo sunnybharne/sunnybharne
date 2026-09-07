@@ -10,7 +10,10 @@ test('DSC article renders without JavaScript and respects reduced motion on mobi
   expect(await image.evaluate((el: HTMLImageElement) => el.currentSrc)).toContain('diagram-static.svg');
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
   const region = page.getByRole('region', { name: /DSC diagram/ });
+  await region.scrollIntoViewIfNeeded();
+  expect(await region.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
   await region.focus();
+  await expect(region).toBeFocused();
   await page.keyboard.press('ArrowRight');
   await expect.poll(() => region.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
   await context.close();
