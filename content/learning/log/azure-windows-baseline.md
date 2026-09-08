@@ -343,92 +343,123 @@ Expected values are raw policy or registry values; `0` does not always mean “o
 
 ## Enforce selected settings
 
-The baseline above audits Windows. To apply selected settings, add a separate **Machine Configuration assignment** through Azure Policy.
+The Windows baseline audits settings. To change a setting, deploy a separate **Machine Configuration package** through a custom Azure Policy.
 
-1. Choose the settings, such as minimum password length of **14**.
-2. Use a configuration package that can **change** those settings.
-3. Set its mode to **ApplyAndAutoCorrect**. The VM agent applies the settings and corrects later changes at its next check.
+For this example, the desired setting is **local minimum password length of at least 14**. A value of 8 should become 14. This changes the password rule; it does not change any existing account password.
 
-Existing VMs need an initial remediation task to deploy the assignment. Installing the extension alone does not apply these settings.
+There are two parts to remediation:
 
-For how the package and agent work, read [DSC, simply](/articles/dsc/).
+| Part | What it does |
+|---|---|
+| Azure Policy remediation | Deploys or updates the Machine Configuration assignment on the VM. |
+| Machine Configuration agent | Downloads the package and runs its code inside Windows to correct the setting. |
+
+Set the guest assignment to **ApplyAndAutoCorrect** so the agent also corrects later drift at its next evaluation. The built-in baseline continues auditing separately. [Microsoft's remediation modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
+
+![Password remediation flow: Azure Policy deploys the guest assignment, the VM agent downloads the ZIP, DSC changes minimum password length from 8 to 14, and the agent reports the setting as Compliant.](/learning-assets/windows-vm-policy-enforcement/password-remediation-flow.svg)
+
+For the package and DSC basics, read [DSC, simply](/articles/dsc/).
 
 ## Technical implementation with Azure Policy
 
-Use a **custom DeployIfNotExists policy** alongside the audit baseline. The example below targets local Windows password settings, not domain account passwords. It is an implementation pattern; the package must be built and tested for your Windows version.
+### 1. Write and package the Windows setting
 
-### 1. Assign the policies
+Use a PowerShell DSC resource with three operations:
 
-Start with a pilot resource group, then expand the assignment scope.
+| Operation | Minimum password length example |
+|---|---|
+| **Get** | Read the current Windows value with `secedit`. |
+| **Test** | Return true when the value is at least 14. |
+| **Set** | Use `net accounts` to set 14 only when the current value is lower. |
 
-| Assignment | Effect | Purpose |
-|---|---|---|
-| Existing Windows baseline | AuditIfNotExists | Keep reporting the baseline checks. |
-| Prerequisite initiative above | DeployIfNotExists + Modify | Install the extension and enable the VM identity. |
-| Custom Windows configuration policy | DeployIfNotExists | Deploy the guest assignment for your tested package. |
+The custom `WindowsPasswordPolicy` resource leaves stronger existing values unchanged. Compile the DSC configuration into a **MOF** and build an **AuditAndSet** ZIP. The package contains that compiled configuration, resource modules and metadata. It is a specific package format, not an arbitrary zipped script. The Windows workflow uses PowerShell 7 with pinned `GuestConfiguration` **4.12.0** and `PSDesiredStateConfiguration` **2.0.7**. [Package authoring](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package).
 
-Keep these assignments separate. The built-in baseline's `BaselineSettings` parameter customizes its checks; it does not turn that audit policy into an enforcing policy. [Built-in definition](https://github.com/Azure/azure-policy/blob/9780ba642eaf7abee804be93cccaede6751bcc65/built-in-policies/policyDefinitions/Guest%20Configuration/AzureWindowsBaseline_AINE.json).
-
-### 2. Prepare the settings package
-
-On a Windows authoring/test machine, use PowerShell 7 and [`GuestConfiguration` 4.12.0](https://www.powershellgallery.com/packages/GuestConfiguration/4.12.0), the version used for this example. Create a DSC configuration containing only the selected settings, compile its MOF, and package it as **AuditAndSet**. Each resource must implement working **Get, Test and Set** methods.
-
-Test the ZIP on a disposable Windows VM:
+Before deployment, test the package on a disposable Windows machine:
 
 ```powershell
-Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordRules.zip
-Start-GuestConfigurationPackageRemediation -Path ./WindowsPasswordRules.zip
-Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordRules.zip
+Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordMinimum_v1_0_0.zip
+Start-GuestConfigurationPackageRemediation -Path ./WindowsPasswordMinimum_v1_0_0.zip
+Get-GuestConfigurationPackageComplianceStatus -Path ./WindowsPasswordMinimum_v1_0_0.zip
 ```
 
-The middle command changes that test machine. Verify the actual Windows values too. Upload the tested ZIP to Azure Blob Storage under a versioned name. [Create a package](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package) · [Test it](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/3-test-package).
+The Windows package tests passed: 8 changed to 14, the string parameter `"14"` worked, and a value of 14 stayed unchanged when the required minimum was 12. The middle command changes that disposable runner; it does not test Azure Policy deployment. [Package testing](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/3-test-package).
 
-### 3. Generate the enforcing policy
+### 2. Deploy the package and policy through IaC
 
-This example starts with that tested ZIP. Replace the storage address and keep the same policy ID when updating the definition.
+The implementation uses this folder:
 
-```powershell
-Import-Module GuestConfiguration -RequiredVersion 4.12.0
-$policyId = (New-Guid).Guid # Save this ID for later updates.
-$definition = @{
-    PolicyId         = $policyId
-    DisplayName      = 'Apply selected Windows password settings'
-    Description      = 'Apply and correct selected local password settings.'
-    Path             = './generated-policy'
-    Platform         = 'Windows'
-    PolicyVersion    = '1.0.0'
-    Mode             = 'ApplyAndAutoCorrect'
-    ContentUri       = 'https://<storage>.blob.core.windows.net/packages/WindowsPasswordRules-1.0.0.zip'
-    LocalContentPath = './WindowsPasswordRules.zip'
-}
-$generatedPolicy = New-GuestConfigurationPolicy @definition -UseSystemAssignedIdentity -ExcludeArcMachines
-$generatedPolicy.Path
+```text
+platform/vm-guest-configuration/
+  packages/WindowsPasswordMinimum/  # DSC configuration and resource
+  parameters/windows-password.json # Required value and package version
+  parameters/hosting.tfvars         # Package storage settings
+  scripts/                         # Build, test, publish, generate policy
+  main.tf                          # Azure package storage
 ```
 
-The command generates `<packageName>_DeployIfNotExists.json`; `$generatedPolicy.Path` gives its location. It includes the package hash and guest-assignment deployment. Import this as a **custom policy definition** in Azure Policy. It does not upload the ZIP or assign the policy. [Microsoft's policy generator](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/create-policy-definition) · [Generator source](https://github.com/Azure/GuestConfiguration/blob/main/source/Public/New-GuestConfigurationPolicy.ps1).
+The JSON setting is `"minimumPasswordLength": 14`. A Windows GitHub Actions workflow builds, tests and publishes the versioned ZIP. Terraform creates its storage. Definition and assignment JSON files stay in the existing `platform/policy-management/` folders. Each assignment folder's `_scope.json` selects the scope.
 
-For this private-blob example, grant each **VM's system-assigned identity** `Storage Blob Data Reader` on the package container. Automate that grant for new VMs in your provisioning workflow. The prerequisite initiative does not grant blob access. The VM must also reach the package and Machine Configuration endpoints.
+Publish the tested ZIP at a versioned address, then generate a custom **DeployIfNotExists** definition with `New-GuestConfigurationPolicy`. Use **ApplyAndAutoCorrect**. The generated definition contains the package address, content hash and guest-assignment deployment. Deploy that JSON through the policy IaC pipeline. [Policy generation](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/create-policy-definition).
 
-### 4. Assign, remediate and verify
+This example uses a dedicated Blob container with anonymous **blob reads** for the generic package only. Anonymous listing and writes are disabled. Uploads require Microsoft Entra authentication; shared-key access is disabled. The ZIP contains no tenant details, credentials or secrets. The VM downloads it without a SAS token or storage role, and the policy pins its SHA-256 hash. A private repository's release download would not provide this anonymous access.
 
-1. Assign the generated policy to the pilot scope. Keep **policy enforcement enabled** and set its **EnableAutoRemediation** parameter to the string `"true"` (the generator defaults it to `"false"`).
-2. Give the **policy assignment's managed identity** the roles listed in the generated `roleDefinitionIds`. The portal can grant them during assignment; CLI or Bicep deployments must also create the role assignments.
-3. Remediate applicable prerequisite policies first. Once the extension, identity and package access are ready, create a remediation task for the custom configuration policy to cover existing VMs.
-4. Check the VM's guest assignment uses **ApplyAndAutoCorrect**, then inspect its per-setting report and the actual Windows setting. On a test VM, change the setting and confirm it is restored at the next evaluation.
+Keep these policy assignments separate:
 
-Assignment parameters for automatic application:
+| Assignment | Purpose |
+|---|---|
+| Windows baseline audit | Report the existing Windows baseline checks. |
+| Guest Configuration prerequisites | Enable VM identity and install the extension. |
+| Custom password configuration | Deliver the package that changes minimum password length. |
+
+Deploy the custom definition at your organisation's root management group and initially assign it to a test subscription. IaC also creates the assignment's managed identity and grants **Guest Configuration Resource Contributor** at the target scope. The definition's `roleDefinitionIds` describe the permissions; writing those IDs does not grant the roles. [Remediation permissions](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources).
+
+For the initial audit-then-remediate test, use this assignment-parameters fragment:
 
 ```json
 {
-  "EnableAutoRemediation": { "value": "true" }
+  "MinimumPasswordLength": { "value": "14" },
+  "EnableAutoRemediation": { "value": "false" }
 }
 ```
 
-This is an assignment-parameters fragment, not a full policy. The generated metadata sets `autoRemediationAssignmentType` to `ApplyAndAutoCorrect`; its deployment also uses that `assignmentType`. [Generator parameters](https://github.com/Azure/GuestConfiguration/blob/main/source/templates/2-Parameters.json) · [Deployment template generation](https://github.com/Azure/GuestConfiguration/blob/main/source/Private/New-GuestConfigurationPolicySetActionSection.ps1).
+Both values are **strings**. `EnableAutoRemediation: "false"` controls the service's metadata-driven automatic application; it does not disable **DeployIfNotExists**. Creating or updating the VM resource in Azure can still deploy **ApplyAndAutoCorrect**. For this audit-first test, avoid VM resource updates until the explicit remediation task. Once deployed, the guest assignment's mode controls later drift correction. [Generator parameters](https://github.com/Azure/GuestConfiguration/blob/main/source/templates/2-Parameters.json) · [Remediation behavior](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
 
-New eligible VMs are handled after deployment and policy evaluation. Initial remediation deploys the configuration; the agent handles later drift. **DeployIfNotExists success alone does not prove Windows settings changed.** [Remediation and permissions](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources) · [Apply modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
+### 3. Remediate the existing VM
 
-Avoid conflicting GPO settings. Removing a policy assignment does not restore previous Windows values; plan a separate rollback configuration.
+First confirm the existing Windows value and the custom **Audit** guest report. In this test, both showed **8** against a required **14**, and the report was **NonCompliant** before remediation. The built-in baseline's password check also reported **NonCompliant**.
+
+Create an **Azure Policy remediation task for the custom password policy**. This deploys the guest assignment as **ApplyAndAutoCorrect**. Here, `$VM_ID` is the target VM's Azure resource ID and `$POLICY_ASSIGNMENT_ID` is the custom Azure Policy assignment ID:
+
+```bash
+az policy remediation create \
+  --resource "$VM_ID" \
+  --name remediate-password \
+  --policy-assignment "$POLICY_ASSIGNMENT_ID" \
+  --resource-discovery-mode ExistingNonCompliant
+```
+
+`ExistingNonCompliant` uses the policy's recorded noncompliant state. Confirm that state before running it. [Azure Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources) · [Machine Configuration apply modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
+
+The agent inside Windows then checks the value, applies the correction and reports its result. Later changes below the required minimum are corrected by the agent's next evaluation; they do not need another Azure Policy remediation task.
+
+### 4. Verify the setting, not just the deployment
+
+The Azure Policy remediation completed with **one successful deployment and no failures**. The custom guest assignment changed from **Audit** to **ApplyAndAutoCorrect**.
+
+| Evidence | Before remediation | After remediation |
+|---|---|---|
+| Custom guest report | Minimum length **8**, required **14** — **NonCompliant** | Minimum length **14**, required **14** — **Compliant** |
+| Independent Windows read | **8** | **14** |
+| Custom Azure Policy compliance | **NonCompliant** | **Compliant** |
+| Built-in baseline: Minimum password length | **NonCompliant** | **Compliant** — value **14**, required **14** |
+
+The custom report and a read-only `secedit` export both confirmed **14**. No command manually set 14 on the Azure VM; the package applied it after policy remediation. The next built-in baseline report also marked **Minimum password length** as **Compliant**.
+
+Reporting intervals are package-specific. In this lab, the custom package used **15 minutes** and the built-in baseline used **60 minutes**. After recording the corrected value, we requested a fresh baseline audit with one agent-service restart on the isolated test VM. This was a lab verification step; the package had already corrected the setting.
+
+**A successful remediation deployment alone does not prove that Windows changed.** Guest reports and Azure Policy compliance can arrive at different times. The full Windows baseline remained **NonCompliant** because other checks still failed. This remediation fixed the minimum-password-length check.
+
+This resource refuses to run on domain controllers. Test it on standalone Windows machines first; domain policy can override local settings on domain-joined machines. Removing the Azure Policy assignment does not restore the old Windows value; use a separate rollback configuration if needed.
 
 ## Where to look
 
