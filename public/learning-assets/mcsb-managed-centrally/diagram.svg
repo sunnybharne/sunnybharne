@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="566" viewBox="0 0 880 566" role="img" aria-labelledby="title description">
+  <title id="title">One MCSB assignment at Papliba</title>
+  <desc id="description">Microsoft's built-in Microsoft cloud security benchmark initiative is assigned at the Papliba organization root management group. Its coverage is inherited through child management groups by the Platform, Prod, and Test subscriptions. Intermediate management groups are omitted. Future subscriptions under this root inherit too, unless excluded.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#267b9d" />
+    </marker>
+    <style>
+      text { font-family: Arial, sans-serif; text-anchor: middle; fill: #193d4b; }
+      .label { font-size: 14px; fill: #526d78; }
+      .title { font-size: 23px; font-weight: 600; }
+      .detail { font-size: 16px; fill: #526d78; }
+      .line { fill: none; stroke: #267b9d; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="880" height="566" fill="#ffffff" />
+
+  <rect x="180" y="20" width="520" height="100" rx="8" fill="#ffffff" stroke="#c7d8de" stroke-width="1.5" />
+  <text class="label" x="440" y="51">MICROSOFT'S BUILT-IN INITIATIVE</text>
+  <text class="title" x="440" y="88">Microsoft cloud security benchmark</text>
+
+  <path class="line" d="M 440 120 V 163" marker-end="url(#arrow)" />
+  <text class="detail" x="515" y="148">Assign once</text>
+
+  <rect x="180" y="172" width="520" height="122" rx="8" fill="#f5fbfa" stroke="#298878" stroke-width="2" />
+  <text class="title" x="440" y="207">Papliba</text>
+  <text class="detail" x="440" y="232">Organization root management group</text>
+  <text x="440" y="268" font-size="17">One MCSB assignment · settings managed in code</text>
+
+  <path class="line" d="M 440 294 V 386 M 165 414 V 386 H 715 V 414 M 440 386 V 414" stroke-dasharray="5 5" />
+  <path class="line" d="M 165 408 V 418 M 440 408 V 418 M 715 408 V 418" marker-end="url(#arrow)" />
+  <rect x="233" y="315" width="414" height="53" fill="#ffffff" />
+  <text x="440" y="333" font-size="17">Inherited through child management groups</text>
+  <text class="label" x="440" y="357">Intermediate groups omitted</text>
+
+  <g fill="#ffffff" stroke="#c7d8de" stroke-width="1.5">
+    <rect x="50" y="422" width="230" height="84" rx="8" />
+    <rect x="325" y="422" width="230" height="84" rx="8" />
+    <rect x="600" y="422" width="230" height="84" rx="8" />
+  </g>
+  <text class="title" x="165" y="458">Platform</text>
+  <text class="title" x="440" y="458">Prod</text>
+  <text class="title" x="715" y="458">Test</text>
+  <text class="detail" x="165" y="483">Subscription</text>
+  <text class="detail" x="440" y="483">Subscription</text>
+  <text class="detail" x="715" y="483">Subscription</text>
+
+  <text class="detail" x="440" y="548">Future subscriptions under Papliba inherit too, unless excluded.</text>
+</svg>

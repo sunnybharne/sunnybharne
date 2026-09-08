@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import ArticleContents from '@/app/components/ArticleContents';
 import DscDiagram from '@/app/components/DscDiagram';
 import AscDiagram from '@/app/components/AscDiagram';
+import McsbCentralDiagram from '@/app/components/McsbCentralDiagram';
 import WindowsBaselineDiagram from '@/app/components/WindowsBaselineDiagram';
 import { getArticles } from '@/lib/articles';
 import {
@@ -103,6 +104,7 @@ export default async function ArticlePage({ params }: Props) {
         <ArticleContents headings={article.headings} />
         {slug === 'dsc' ? <DscDiagram /> : null}
         {slug === 'asc-default-policy-guide' ? <AscDiagram /> : null}
+        {slug === 'mcsb-managed-centrally' ? <McsbCentralDiagram /> : null}
         {slug === 'azure-windows-baseline' ? <WindowsBaselineDiagram /> : null}
         <div
           className="article-body post-content"

@@ -16,6 +16,8 @@ draft: false
 
 See its results in **Azure portal → Policy → Compliance → ASC Default**. You do not need to open Defender for Cloud to view assignment compliance. Defender has related security recommendations; the two views can differ. [Microsoft: viewing compliance](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data#portal)
 
+For one shared assignment across subscriptions, see [MCSB managed centrally, simply](/articles/mcsb-managed-centrally/).
+
 ## Saved policy reference
 
 **224 saved policies.** Open a group for details and JSON.
