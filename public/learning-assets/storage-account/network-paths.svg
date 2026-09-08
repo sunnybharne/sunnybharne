@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="532" viewBox="0 0 480 532" role="img" aria-labelledby="title description">
+  <title id="title">Two network paths to Azure Storage</title>
+  <desc id="description">A service endpoint enabled on a VNet subnet still reaches the Storage public endpoint. The Storage firewall must allow that subnet. A private endpoint provides a private IP in a VNet and connects to the Storage Blob service, which remains outside the VNet. Disable public network access separately. Both paths also require permission to access the data.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M1 1 L6 4 L1 7" fill="none" stroke="#47738c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="480" height="532" fill="#fff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="12" y="28" font-size="24" font-weight="700" fill="#183951">Service endpoint</text>
+    <rect x="12" y="48" width="176" height="100" rx="10" fill="#f5f9fc" stroke="#d0e0eb"/>
+    <text x="28" y="78" font-size="21" font-weight="700" fill="#183951">VNet subnet</text>
+    <text x="28" y="106" font-size="18" fill="#35586d">Service endpoint</text>
+    <text x="28" y="130" font-size="18" fill="#35586d">enabled</text>
+    <path d="M190 98 H241" fill="none" stroke="#47738c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="250" y="48" width="218" height="100" rx="10" fill="#fff" stroke="#d0e0eb"/>
+    <text x="268" y="78" font-size="21" font-weight="700" fill="#183951">Storage</text>
+    <text x="268" y="110" font-size="21" fill="#35586d">Public endpoint</text>
+    <text x="12" y="180" font-size="19" fill="#35586d">Storage firewall must allow this subnet.</text>
+
+    <path d="M12 207 H468" stroke="#e1e8ed"/>
+    <text x="12" y="244" font-size="24" font-weight="700" fill="#183951">Private endpoint</text>
+    <rect x="12" y="264" width="198" height="156" rx="10" fill="#f5f9fc" stroke="#a9c8dc" stroke-dasharray="5 4"/>
+    <text x="28" y="290" font-size="18" font-weight="700" fill="#35586d">VNet</text>
+    <rect x="26" y="304" width="170" height="98" rx="8" fill="#fff" stroke="#d0e0eb"/>
+    <text x="40" y="332" font-size="19" font-weight="700" fill="#183951">Private endpoint</text>
+    <text x="40" y="362" font-size="21" fill="#35586d">Private IP</text>
+    <text x="40" y="388" font-size="18" fill="#35586d">in the subnet</text>
+    <path d="M212 352 H241" fill="none" stroke="#47738c" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="250" y="304" width="218" height="98" rx="10" fill="#fff" stroke="#d0e0eb"/>
+    <text x="268" y="334" font-size="21" font-weight="700" fill="#183951">Storage Blob</text>
+    <text x="268" y="365" font-size="21" fill="#35586d">service</text>
+    <text x="12" y="452" font-size="19" fill="#35586d">Disable public network access separately.</text>
+
+    <path d="M12 475 H468" stroke="#e1e8ed"/>
+    <text x="12" y="508" font-size="20" font-weight="700" fill="#183951">Both paths also need data permissions.</text>
+  </g>
+</svg>
