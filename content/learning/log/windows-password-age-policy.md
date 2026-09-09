@@ -188,7 +188,19 @@ A successful ARM deployment alone proves neither that the ZIP downloaded nor tha
 
 ## Verification status
 
-The disposable Windows package tests passed on 9 September 2026. The policy definition, lab assignment and deployment role were created successfully. Live VM remediation is still being verified; deployment success is not yet a confirmed Windows correction.
+Verified on **9 September 2026**, using a Windows Server 2025 Azure VM:
+
+| Check | Result |
+|---|---|
+| Disposable Windows package tests | Passed: 90 → 42, preserve 30, correct unlimited, restore runner. |
+| Terraform deployment | Policy definition, lab assignment and deployment role created through IaC. |
+| Test preparation inside the VM | Local maximum password age changed to 90. |
+| Azure Policy remediation | One successful deployment, zero failures. |
+| Guest assignment mode | ApplyAndAutoCorrect. |
+| Guest report | Compliant: maximum password age 42, required at most 42. |
+| Independent Windows read after remediation | `secedit` confirmed MaximumPasswordAge = 42. |
+
+The guest report was evaluated at **07:16 UTC**. The agent applied the correction; the test preparation command only set 90. This verifies the initial application. A separate later-drift test on the Azure VM has not been completed. The built-in Windows baseline remains a separate assessment.
 
 ## Related reading
 
