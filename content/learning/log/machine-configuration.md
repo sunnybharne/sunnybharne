@@ -23,6 +23,42 @@ The **Assignments** tab in this view describes itself as a list of **baseline po
 
 **Enabled does not mean compliant.** In our walkthrough, one machine had its prerequisites, but its Windows baseline still reported non-compliance. Check the assignment report to understand the actual settings.
 
+## What does the Overview table mean?
+
+This pane brings together onboarding and configuration management for machine operating systems. The Overview table describes subscription readiness, rather than whether every Windows or Linux setting is correct.
+
+The following is an anonymised version of the row inspected during this walkthrough:
+
+| Column | Example value | Meaning |
+|---|---|---|
+| Name | Lab subscription | The subscription represented by this row. |
+| Status | Enabled | The portal recognises Machine Configuration as enabled for this subscription. It does not prove someone clicked Enable here. |
+| Machines missing prerequisite | 0 | No machines are currently counted as missing the prerequisites by this view. |
+| Machines with prerequisite | 1 | One machine is counted as having the prerequisites. In this walkthrough we separately verified its extension and managed identity. |
+| Eligible machines | 0 | The view's eligibility counter. It is not the total VM count. The inspected UI did not explain its exact eligibility calculation. |
+
+Do not read the final zero as “there are no VMs” or “the VM cannot use Machine Configuration.” This same subscription had a VM actively reporting configuration results. These counters are a portal summary; use resource and report details to resolve uncertainty.
+
+## What does Enable actually do?
+
+We opened **Enable** without submitting it. The wizard showed:
+
+1. **Basics:** choose a scope and an assignment name. Its default name was **Deploy prerequisites to enable Guest Configuration policies on virtual machines**.
+2. **Managed Identity:** choose the policy assignment's identity and its location. The wizard displayed Contributor permissions for deployment.
+3. **Review + create:** review before submitting the assignment.
+
+**Yes: this is a policy-based onboarding route that can install the extension on eligible VMs.** The built-in prerequisite initiative adds a system-assigned identity to the VM and deploys the appropriate Windows or Linux Guest Configuration extension. Microsoft recommends this initiative for extension deployment at scale. [Prerequisite policy](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/create-policy-definition).
+
+There are two identities to distinguish: the **policy assignment identity** performs Azure deployments; the **VM identity** belongs to the machine. Existing machines missing prerequisites need remediation to apply the policy changes. Do not assume that opening the wizard, assigning the initiative, or refreshing the table instantly installs everything. Check deployment and remediation results. We did not submit this wizard, so we have not verified whether this particular onboarding flow starts remediation automatically. [Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources).
+
+The Overview advertises baseline auditing as part of onboarding. The prerequisite initiative itself prepares machines; it does not contain the Windows password checks or automatically repair them. The baseline configuration and its reports remain separate.
+
+## Is this the same as our policy-as-code setup?
+
+**It serves the same prerequisite purpose.** In this walkthrough, the existing management-group assignment already used that built-in initiative, and the VM had its prerequisites. Creating another subscription assignment was unnecessary.
+
+For an environment managed through code, keep the initiative assignment, its identity permissions and remediation process in that workflow. The portal is useful for inspecting results. An Enabled row alone does not tell you whether setup came from the portal, inherited policy or another deployment method.
+
 ## Policy, assignment, package, agent
 
 ![Azure Policy targets machines. A machine assignment identifies a configuration package. The agent downloads the package, checks or applies settings inside the VM, and reports compliance to Azure.](/learning-assets/machine-configuration/flow.svg)
