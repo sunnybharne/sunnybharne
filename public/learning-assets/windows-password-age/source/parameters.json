@@ -1,0 +1,5 @@
+{
+  "name": "WindowsMaximumPasswordAge",
+  "version": "1.0.0",
+  "maximumPasswordAge": 42
+}
