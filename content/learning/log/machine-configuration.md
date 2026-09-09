@@ -33,6 +33,18 @@ The Windows editor showed **Basics**, **Modify settings** and **Review + downloa
 
 **These values describe the baseline being prepared, not the current values read from your VM.** Opening the editor does not deploy settings or change an existing MCSB assignment. The documented workflow exports settings as JSON, then passes them to a baseline policy assignment. Its audit assignment uses `AuditIfNotExists`; editing a value does not automatically repair Windows. [Baseline assignment workflow](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/assign-security-baselines/deploy-a-baseline-policy-assignment).
 
+## What is Maximum password age, and where is it in Windows?
+
+**Maximum password age** is how many days a Windows password can be used before it expires and must be changed. For example, **42 days** means expiration 42 days after the password was last set. **0** means passwords never expire under this policy.
+
+Inside the Windows VM desktop, including a Bastion session:
+
+1. Open **Start**, search for `secpol.msc`, and open **Local Security Policy**.
+2. Open **Account Policies → Password Policy**.
+3. Double-click **Maximum password age** to inspect its value.
+
+The Azure baseline editor shows the **expected value**. This Windows dialog shows the machine's local policy setting; we did not verify that they match in this example. An individual account with **Password never expires** enabled is exempt from expiration. Domain accounts follow the applicable domain password policy; this setting does not control Microsoft Entra account password expiration. [Maximum password age](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-password-age).
+
 ## Why is the Assignments tab empty?
 
 This specialised tab lists **baseline policy assignments**, not VMs waiting to be enabled. Microsoft documents assignments created through the portal or code; it does not state that changing a default setting is required for an assignment to appear.
