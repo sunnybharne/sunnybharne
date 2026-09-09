@@ -45,6 +45,8 @@ Inside the Windows VM desktop, including a Bastion session:
 
 The Azure baseline editor shows the **expected value**. This Windows dialog shows the machine's local policy setting; we did not verify that they match in this example. An individual account with **Password never expires** enabled is exempt from expiration. Domain accounts follow the applicable domain password policy; this setting does not control Microsoft Entra account password expiration. [Maximum password age](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-password-age).
 
+For the code that applies this setting, read [Windows password age through policy, simply](/articles/windows-password-age-policy/).
+
 ## Why is the Assignments tab empty?
 
 This specialised tab lists **baseline policy assignments**, not VMs waiting to be enabled. Microsoft documents assignments created through the portal or code; it does not state that changing a default setting is required for an assignment to appear.

@@ -1,0 +1,20 @@
+{
+  "name": "pa-win-password-age",
+  "location": "swedencentral",
+  "identity": {
+    "type": "SystemAssigned"
+  },
+  "properties": {
+    "displayName": "Configure Windows maximum password age - lab",
+    "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/<root-management-group>/providers/Microsoft.Authorization/policyDefinitions/pd-win-password-age",
+    "enforcementMode": "Default",
+    "parameters": {
+      "MaximumPasswordAge": {
+        "value": "42"
+      },
+      "EnableAutoRemediation": {
+        "value": "true"
+      }
+    }
+  }
+}

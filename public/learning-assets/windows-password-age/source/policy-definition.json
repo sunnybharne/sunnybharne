@@ -1,0 +1,170 @@
+{
+  "properties": {
+    "displayName": "Configure Windows maximum password age",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Set the local maximum password age to at most 42 days and correct later drift.",
+    "metadata": {
+      "category": "Guest Configuration",
+      "version": "1.0.0",
+      "requiredProviders": [
+        "Microsoft.GuestConfiguration"
+      ],
+      "guestConfiguration": {
+        "name": "WindowsMaximumPasswordAge_v1_0_0",
+        "version": "1.0.0",
+        "contentType": "Custom",
+        "contentUri": "https://raw.githubusercontent.com/sunnybharne/sunnybharne/f84470f49aa0bd1b906b77c09fb900726d47254b/public/learning-assets/windows-password-age/WindowsMaximumPasswordAge_v1_0_0.zip",
+        "contentHash": "5FBDB78745414C1E0FA5013F3FD30E1A5D1ED71E5F2769FA0A807D8A37FC0A91",
+        "configurationParameter": {
+          "MaximumPasswordAge": "[WindowsMaximumPasswordAge]MaximumAge;MaximumPasswordAge"
+        },
+        "enableAutoRemediation": "[parameters('EnableAutoRemediation')]",
+        "autoRemediationAssignmentType": "ApplyAndAutoCorrect"
+      }
+    },
+    "parameters": {
+      "EnableAutoRemediation": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Enable Auto Remediation",
+          "description": "When true, the policy will automatically enforce remediation. When false, it will only audit"
+        },
+        "allowedValues": [
+          "true",
+          "false"
+        ],
+        "defaultValue": "true"
+      },
+      "MaximumPasswordAge": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Maximum password age",
+          "description": "Maximum local password age in days; shorter positive values are preserved."
+        },
+        "defaultValue": "42",
+        "allowedValues": [
+          "42"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "field": "Microsoft.Compute/imagePublisher",
+            "equals": "MicrosoftWindowsServer"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "Microsoft.Compute/imageSKU",
+                "like": "2022*"
+              },
+              {
+                "field": "Microsoft.Compute/imageSKU",
+                "like": "2025*"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deployIfNotExists",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/088ab73d-1256-47ae-bea9-9de8e7131f31"
+          ],
+          "type": "Microsoft.GuestConfiguration/guestConfigurationAssignments",
+          "name": "[concat('WindowsMaximumPasswordAge_v1_0_0$pid', uniqueString(policy().assignmentId, policy().definitionReferenceId))]",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/complianceStatus",
+                "equals": "Compliant"
+              },
+              {
+                "value": "[parameters('EnableAutoRemediation')]",
+                "in": [
+                  "true",
+                  "false"
+                ]
+              },
+              {
+                "field": "Microsoft.GuestConfiguration/guestConfigurationAssignments/parameterHash",
+                "equals": "[base64(concat('[WindowsMaximumPasswordAge]MaximumAge;MaximumPasswordAge', '=', parameters('MaximumPasswordAge')))]"
+              }
+            ]
+          },
+          "deployment": {
+            "properties": {
+              "mode": "incremental",
+              "parameters": {
+                "vmName": {
+                  "value": "[field('name')]"
+                },
+                "location": {
+                  "value": "[field('location')]"
+                },
+                "assignmentName": {
+                  "value": "[concat('WindowsMaximumPasswordAge_v1_0_0$pid', uniqueString(policy().assignmentId, policy().definitionReferenceId))]"
+                },
+                "MaximumPasswordAge": {
+                  "value": "[parameters('MaximumPasswordAge')]"
+                }
+              },
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "vmName": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "assignmentName": {
+                    "type": "string"
+                  },
+                  "MaximumPasswordAge": {
+                    "type": "string"
+                  }
+                },
+                "resources": [
+                  {
+                    "apiVersion": "2024-04-05",
+                    "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
+                    "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', parameters('assignmentName'))]",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "guestConfiguration": {
+                        "name": "WindowsMaximumPasswordAge_v1_0_0",
+                        "version": "1.0.0",
+                        "contentType": "Custom",
+                        "contentUri": "https://raw.githubusercontent.com/sunnybharne/sunnybharne/f84470f49aa0bd1b906b77c09fb900726d47254b/public/learning-assets/windows-password-age/WindowsMaximumPasswordAge_v1_0_0.zip",
+                        "contentHash": "5FBDB78745414C1E0FA5013F3FD30E1A5D1ED71E5F2769FA0A807D8A37FC0A91",
+                        "assignmentType": "ApplyAndAutoCorrect",
+                        "configurationParameter": [
+                          {
+                            "name": "[WindowsMaximumPasswordAge]MaximumAge;MaximumPasswordAge",
+                            "value": "[parameters('MaximumPasswordAge')]"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "evaluationDelay": "AfterProvisioningSuccess"
+        }
+      }
+    }
+  },
+  "name": "pd-win-password-age"
+}

@@ -124,9 +124,25 @@ The build writes a versioned ZIP and a manifest with its SHA256 hash. The workfl
 
 ## 5. Host the ZIP somewhere the VM can reach
 
-This lab uses a public GitHub URL pinned to the commit containing the tested ZIP. The content is generic configuration code. A commit-pinned URL plus the package hash identifies the exact bytes to download.
+This lab uses a public GitHub URL in the portfolio repository, pinned to the commit containing the tested ZIP. The enterprise infrastructure repository remains private. The content is generic configuration code. A commit-pinned URL plus the package hash identifies the exact bytes to download.
 
 A storage account is not mandatory. Microsoft supports HTTPS package hosting, including GitHub. Public package hosting is unsuitable for confidential content, and this approach requires outbound access to GitHub. A VM without a public IP can still have outbound access. For an environment with no public egress, use reachable private hosting and the required DNS and authentication instead. [Package hosting](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/4-publish-package).
+
+## Can we use an existing storage account with public access disabled?
+
+**Yes, with private connectivity and authentication.** An account with public access disabled and no private endpoint cannot supply the ZIP to this VM simply because the VM is in Azure.
+
+For this alternative, manage the following in IaC:
+
+1. A Blob private endpoint connected to a network reachable from the VM.
+2. Private DNS so the normal storage hostname resolves to that endpoint's private IP from the VM.
+3. A user-assigned managed identity attached to the VM, granted **Storage Blob Data Reader** on the package container and referenced for package downloads.
+4. An upload runner with private connectivity and write permission to that container.
+5. The guest assignment's storage URL, hash and content identity.
+
+The VM's system-assigned identity remains a prerequisite; the content-download identity has a separate purpose. Microsoft documents a user-assigned identity or SAS for protected package access. Authentication does not provide a network path. GitHub-hosted runners on the public internet do not automatically reach a private endpoint. Service endpoints are not required for this private-endpoint design. [Secure package access](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/5-access-package).
+
+This is an alternative hosting design. The implementation demonstrated here currently uses the public, generic package. It does not provision private storage connectivity.
 
 ## 6. DeployIfNotExists delivers the assignment
 
@@ -156,7 +172,7 @@ The assignment supplies these values:
 
 `EnableAutoRemediation` is a string parameter used by Machine Configuration metadata. It is separate from the policy's `enforcementMode: "Default"` and the guest assignment's `assignmentType: "ApplyAndAutoCorrect"`. Together they request enabled deployment and ongoing correction. They do not change the built-in audit baseline into a repair package.
 
-The policy definition is a separate native Azure Policy JSON file in the infrastructure repository. Its ARM deployment is the necessary payload for DeployIfNotExists; it is not another service or a script runner. The existing Terraform code reads the definition, assignment and IAM JSON files. No new Terraform module is needed.
+The [complete policy definition](https://github.com/sunnybharne/sunnybharne/blob/main/public/learning-assets/windows-password-age/source/policy-definition.json) and [assignment example](https://github.com/sunnybharne/sunnybharne/blob/main/public/learning-assets/windows-password-age/source/assignment.example.json) are available with the source. Replace the example management-group placeholder and choose your assignment scope before deployment. Its ARM deployment is the necessary payload for DeployIfNotExists; it is not another service or a script runner. The existing Terraform code reads the definition, assignment and IAM JSON files. No new Terraform module is needed.
 
 The definition is reusable. Its first assignment is scoped to the lab resource group, so it does not change every Windows VM in the organisation. The policy assignment's managed identity receives the required Guest Configuration deployment role at that scope. The VM retains its own separate system-assigned identity.
 
