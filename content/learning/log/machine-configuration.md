@@ -23,6 +23,24 @@ The **Assignments** tab in this view describes itself as a list of **baseline po
 
 **Enabled does not mean compliant.** In our walkthrough, one machine had its prerequisites, but its Windows baseline still reported non-compliance. Check the assignment report to understand the actual settings.
 
+## Where can I browse the security baseline settings?
+
+Open **Policy → Machine Configuration → Definitions**, select **Azure Security Baseline for Windows**, then choose **Modify settings**.
+
+The Definitions tab is a catalogue of baseline templates. In the view inspected, it offered Azure Windows/Linux baselines and CIS Windows/Linux benchmarks, with the Windows CIS entry marked Preview. Seeing a definition here does not mean it is assigned to any machine.
+
+The Windows editor showed **Basics**, **Modify settings** and **Review + download**. Its settings grid contained **Machine Setting**, **Severity** and **Value**, plus search, severity filters and selection checkboxes. On 9 September 2026 it displayed version **1.0.0** with **298 settings**; that count can change.
+
+**These values describe the baseline being prepared, not the current values read from your VM.** Opening the editor does not deploy settings or change an existing MCSB assignment. The documented workflow exports settings as JSON, then passes them to a baseline policy assignment. Its audit assignment uses `AuditIfNotExists`; editing a value does not automatically repair Windows. [Baseline assignment workflow](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/assign-security-baselines/deploy-a-baseline-policy-assignment).
+
+## Why is the Assignments tab empty?
+
+This specialised tab lists **baseline policy assignments**, not VMs waiting to be enabled. Microsoft documents assignments created through the portal or code; it does not state that changing a default setting is required for an assignment to appear.
+
+In our example, the Windows baseline was included inside an **MCSB initiative assignment**, and its guest configuration reports existed even though this list was empty. The initiative-based setup is a possible explanation, but we have not verified the view's exact filter. Do not treat that explanation as a confirmed product limitation, or create another assignment merely to populate this list.
+
+To see actual VM results, open **Policy → Compliance → the MCSB initiative assignment → the relevant Windows baseline policy → the VM's compliance details → Last evaluated resource**. Review the individual settings, reasons and evaluation time there. [Guest configuration results](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/determine-non-compliance#compliance-details-for-guest-configuration).
+
 ## What does the Overview table mean?
 
 This pane brings together onboarding and configuration management for machine operating systems. The Overview table describes subscription readiness, rather than whether every Windows or Linux setting is correct.
@@ -52,6 +70,14 @@ We opened **Enable** without submitting it. The wizard showed:
 There are two identities to distinguish: the **policy assignment identity** performs Azure deployments; the **VM identity** belongs to the machine. Existing machines missing prerequisites need remediation to apply the policy changes. Do not assume that opening the wizard, assigning the initiative, or refreshing the table instantly installs everything. Check deployment and remediation results. We did not submit this wizard, so we have not verified whether this particular onboarding flow starts remediation automatically. [Policy remediation](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/remediate-resources).
 
 The Overview advertises baseline auditing as part of onboarding. The prerequisite initiative itself prepares machines; it does not contain the Windows password checks or automatically repair them. The baseline configuration and its reports remain separate.
+
+## Which managed identity does it use?
+
+The prerequisite initiative has four policies: add a system-assigned identity to eligible VMs without identities; add one while preserving existing user-assigned identities; install the Windows extension; install the Linux extension.
+
+If the VM already has a system-assigned identity, the policy does not create a second one. The policy assignment's deployment identity and the VM's own identity have different jobs: the former deploys Azure resources, while the latter lets the machine authenticate. The agent performs the work inside the operating system.
+
+Find the VM identity under **VM → Identity → System assigned** (under Security in the inspected VM menu). Its identity object is also visible under **Microsoft Entra ID → Enterprise applications → All applications**, filtered to **Application type = Managed Identities**. Search by the VM name and match the Object ID. It is not a standalone user-assigned identity resource. [Viewing managed identities](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/view-applications-portal).
 
 ## Is this the same as our policy-as-code setup?
 
