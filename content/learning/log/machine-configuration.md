@@ -98,6 +98,28 @@ For an environment managed through code, keep the initiative assignment, its ide
 
 A machine assignment is a separate Azure resource: `Microsoft.GuestConfiguration/guestConfigurationAssignments`. Azure Policy can orchestrate these assignments; they can also be deployed directly. A policy assignment is therefore not the same object as a machine assignment. Custom assignments identify their ZIP package using an HTTPS content URI and a hash. [Assignment resources](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/assignments).
 
+## Is the package PowerShell, Python or policy JSON?
+
+For the Windows DSC approach discussed here, the package is a **ZIP containing a compiled configuration (MOF), the required DSC resource modules, and package metadata**. It is more than an arbitrary script zipped by hand. PowerShell is used to author and build this kind of package; the policy JSON is a separate deployment and evaluation definition.
+
+**DSC means Desired State Configuration.** You describe the state you want, such as a minimum password length. Resources provide the logic to read, test and, when supported, set that state. Machine Configuration uses that capability as part of its managed service. It also supports compatible Linux machines; do not assume a Windows resource can run unchanged on Linux.
+
+A package built for `Audit` checks settings. A package built for `AuditAndSet` can also apply supported settings. That package capability is separate from the assignment's runtime mode. [Package contents and types](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package), [DSC, simply](/articles/dsc/).
+
+## Why did we discuss a storage account?
+
+The agent needs somewhere to download a **custom package**. Azure Blob Storage is a hosting option: the build publishes the ZIP, and the assignment references its HTTPS address and content hash. The storage account holds the artifact; it does not execute the configuration. Microsoft-provided baseline packages do not require you to upload your own copy to a new storage account. [Publishing custom packages](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/4-publish-package).
+
+A ZIP in the source repository is not automatically available to a running VM. The deployment must publish it to a reachable location and configure the required access. Keep source code, the built artifact, and the assignment that references it consistent.
+
+## How does the configuration reach a private VM?
+
+The policy does not open RDP and run PowerShell on the VM. The installed agent retrieves assignment information, obtains the referenced content and performs the work locally. It reports results back to the service.
+
+The machine needs access to both the configuration service and package location. Microsoft supports outbound HTTPS on port 443 or an appropriately configured private network path. **No VM public IP or Bastion session is required for configuration reporting.** Hub peering alone does not provide every required endpoint, DNS record or permission.
+
+If a custom package is in storage with public network access disabled, provide the private endpoint, DNS, routes and authentication needed to reach it. A managed identity provides authentication; it does not create network connectivity. Blocking all access to the package host can prevent new downloads. [Agent identity and connectivity requirements](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/guest-configuration).
+
 ## Does it fix the VM automatically?
 
 | Machine assignment mode | Behaviour |
@@ -107,6 +129,33 @@ A machine assignment is a separate Azure resource: `Microsoft.GuestConfiguration
 | ApplyAndAutoCorrect | Applies the configuration and corrects later drift. |
 
 Applying settings requires a package that supports changing them. Turning on policy enforcement does not turn an audit-only baseline into a repair package. [Configuration modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview/01-overview-concepts).
+
+## What does remediation mean here?
+
+There are two different operations:
+
+| Operation | What changes |
+|---|---|
+| Remediate prerequisites or a deployment policy | Azure deploys missing resources, such as the extension or an applicable configuration assignment. |
+| Apply settings inside Windows | The local agent runs the package's supported setting logic. |
+
+For existing machines, a deployment policy's initial remediation can deliver the configuration. With `ApplyAndAutoCorrect`, later drift is corrected by the agent at its next evaluation; it does not require a new Azure remediation task for every drift event. An audit-only baseline cannot be turned into a repair package by clicking Remediate. [Remediation behaviour](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
+
+Likewise, **Azure Policy enforcement enabled does not mean Deny**. It activates the policy's configured effect. An audit effect reports; a deployment effect deploys its specified resources. Neither label alone tells you whether Windows settings will be changed. Read the policy effect, package capability and machine assignment mode together.
+
+## How would we enforce the password setting through code?
+
+The proposed workflow is:
+
+1. Keep the prerequisite initiative assigned at the intended scope.
+2. Author and test a configuration that can set minimum password length to 14.
+3. Build the package with apply capability and publish it to reachable storage.
+4. Deploy a policy definition that delivers the machine assignment, referencing that package and its hash.
+5. Assign it with `ApplyAndAutoCorrect`, the required deployment identity permissions, and the intended scope.
+6. Remediate existing machines that need the assignment.
+7. Verify the Windows setting and the new configuration report. Then check the separate baseline report after its next evaluation.
+
+Changing one setting does not make the whole Windows baseline compliant. A controlled drift test can confirm that the agent restores that setting. This is an implementation and verification plan; the audit observation below is not evidence that this repair test has completed on the current VM. [Creating the policy](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/create-policy-definition).
 
 ## What did our Windows example show?
 
@@ -123,6 +172,12 @@ This is the Windows password-policy setting. It does **not** mean the user's act
 Open the relevant configuration assignment and inspect the individual setting, reason and evaluation time. From **Policy → Compliance**, the policy's compliance details can also link to **Last evaluated resource**, which opens the guest assignment details.
 
 Do not stop at the overall red status: one failed setting can make the configuration non-compliant. Also check report timestamps before treating an older result as the current machine state. [Reading compliance details](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/determine-non-compliance#compliance-details-for-guest-configuration).
+
+## Why assign the baseline through a management group?
+
+An initiative such as **Microsoft cloud security benchmark (MCSB)** can include guest configuration audit policies. A management-group assignment lets child subscriptions inherit one centrally managed configuration. It does not install every prerequisite merely because the initiative exists.
+
+Our walkthrough therefore checked both the MCSB audit and the separate prerequisite assignment. An existing subscription-level Defender assignment such as **ASC Default** can overlap a central initiative. Inspect assignment scope, parameters and ownership before replacing anything; an empty specialised Machine Configuration list is not a reason to delete policies.
 
 ## What should be managed in code?
 
