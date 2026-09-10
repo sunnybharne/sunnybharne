@@ -1,7 +1,0 @@
-.figure { margin: 0 0 1.5rem; max-width: 56rem; min-width: 0; }
-.scroll { overflow-x: auto; }
-.scroll:focus-visible { outline: 2px solid #2583b3; outline-offset: 3px; }
-.image { display: block; width: 100%; min-width: 46rem; height: auto; }
-.figure figcaption, .hint { font-size: .85rem; color: #536575; margin-top: .65rem; }
-.hint { display: none; }
-@media (max-width: 760px) { .hint { display: block; } }

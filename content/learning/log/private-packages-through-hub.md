@@ -30,8 +30,6 @@ A **hub** is the platform team's shared network. A **spoke** is a workload's net
 
 ![Three subscription VNets peer directly to one regional hub. A Blob private endpoint sits in a dedicated hub subnet and connects to package storage outside the VNet. Each VM initiates its own private download.](/learning-assets/private-packages-through-hub/shared-hub.svg)
 
-[Open diagram 1 at full size](/learning-assets/private-packages-through-hub/shared-hub.svg)
-
 The platform team provides a storage account, a Blob container for packages and a **Blob private endpoint in the hub**. Public network access and anonymous Blob access stay disabled. The storage account can belong to the platform subscription while remaining outside the VNet. The endpoint is its private network entry point.
 
 Every connected spoke reaches this endpoint through its **own direct peering to the hub**. The design does not depend on one spoke reaching another spoke. Microsoft describes this central placement for private endpoints serving shared resources. [Shared private endpoint architecture](https://learn.microsoft.com/en-us/azure/architecture/networking/guide/private-link-hub-spoke-network).
@@ -41,8 +39,6 @@ A firewall is not required just to reach this hub endpoint. If the organisation 
 ## 2. Separate the instruction from the download
 
 ![Four stages: Azure Policy deploys a Machine Configuration assignment; the VM agent resolves the private address and downloads the ZIP using its read identity; Windows applies the setting; the agent reports the result over a separately configured service connection.](/learning-assets/private-packages-through-hub/vm-download.svg)
-
-[Open diagram 2 at full size](/learning-assets/private-packages-through-hub/vm-download.svg)
 
 | Part | Its job |
 |---|---|
@@ -79,8 +75,6 @@ An NSG on the endpoint subnet can limit access to approved networks on HTTPS por
 ## 3. Make new subscriptions join automatically
 
 ![The platform foundation creates shared services. Landing-zone code creates each spoke, peering and DNS settings. Inherited policies prepare applicable VMs. Automated checks verify private resolution, download, application and reporting. Repeat the hub pattern as regions or capacity require.](/learning-assets/private-packages-through-hub/automatic-onboarding.svg)
-
-[Open diagram 3 at full size](/learning-assets/private-packages-through-hub/automatic-onboarding.svg)
 
 | Managed through code | What it creates or configures |
 |---|---|

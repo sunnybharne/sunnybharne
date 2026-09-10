@@ -132,7 +132,7 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .post-content th { font-weight: 600; background: var(--surface); }
 .post-content hr { border: 0; border-top: 1px solid var(--line); margin-block: 2.5rem; }
 .learning-policy-guide .article-body { max-width: 100%; }
-.learning-policy-guide .post-content > :not(.learning-table-scroll):not(.policy-group) { max-width: var(--reading); margin-inline: 0; }
+.learning-policy-guide .post-content > :not(.learning-table-scroll):not(.policy-group):not(table) { max-width: var(--reading); margin-inline: 0; }
 .policy-group { border: 1px solid var(--line); border-radius: 3px; }
 .policy-group + .policy-group { margin-top: .8rem; }
 .policy-group summary { cursor: pointer; padding: 1rem 1.2rem; font-size: 1rem; }

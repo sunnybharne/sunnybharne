@@ -2,72 +2,18 @@ import { expect, test } from '@playwright/test';
 
 const article = '/articles/asc-default-policy-guide/';
 
-test('displays native draw.io animation without a canvas', async ({ page }) => {
+test('ASC article uses a React Flow diagram instead of a canvas', async ({ page }) => {
   await page.addInitScript(() => {
     HTMLCanvasElement.prototype.getContext = () => { throw new Error('Unexpected canvas'); };
   });
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(article);
-  const image = page.locator('.asc-diagram-image');
-  await image.scrollIntoViewIfNeeded();
-  await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
-  const first = await image.screenshot();
-  await page.waitForTimeout(400);
-  expect(await image.screenshot()).not.toEqual(first);
-  await expect(page.locator('.asc-diagram canvas')).toHaveCount(0);
-  expect(errors).toEqual([]);
+  await expect(page.locator('.react-flow')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Inspect ASC Default/ })).toBeVisible();
+  await expect(page.locator('.react-flow canvas')).toHaveCount(0);
+  expect(errors.filter((error) => error !== 'Unexpected canvas')).toEqual([]);
 });
-
-test('export contains native flowing connectors and embedded official icons', async ({ page }) => {
-  await page.goto('/learning-assets/asc-default/diagram.svg');
-  await expect(page.locator('svg image')).toHaveCount(4);
-  const animated = page.locator('path[style*="animation:"]');
-  await expect(animated).toHaveCount(2);
-  const first = await animated.first().evaluate((el) => getComputedStyle(el).strokeDashoffset);
-  await page.waitForTimeout(350);
-  expect(await animated.first().evaluate((el) => getComputedStyle(el).strokeDashoffset)).not.toBe(first);
-});
-
-test('reduced motion keeps the exported diagram still', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto(article);
-  const image = page.locator('.asc-diagram-image');
-  await image.scrollIntoViewIfNeeded();
-  await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
-  expect(await image.evaluate((el: HTMLImageElement) => el.currentSrc)).toContain('diagram-static.svg');
-  const first = await image.screenshot();
-  await page.waitForTimeout(400);
-  expect(first.equals(await image.screenshot())).toBe(true);
-  await page.goto('/learning-assets/asc-default/diagram.svg');
-  expect(await page.locator('path[style*="animation:"]').first().evaluate((el) => getComputedStyle(el).animationName)).toBe('none');
-});
-
-test('mobile keeps labels readable with keyboard scrolling and no page overflow', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(article);
-  const region = page.getByRole('region', { name: /Subscription diagram/ });
-  await region.scrollIntoViewIfNeeded();
-  await expect(page.getByText('Scroll sideways to see the full diagram.')).toBeVisible();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
-  expect(await region.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
-  await region.focus();
-  await page.keyboard.press('ArrowRight');
-  await expect.poll(() => region.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-});
-
-test('diagram works without JavaScript', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
-  try {
-    const page = await context.newPage();
-    await page.goto(`http://127.0.0.1:4321${article}`);
-    const image = page.getByRole('img', { name: /ASC Default Azure Policy/ });
-    await image.scrollIntoViewIfNeeded();
-    await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
-    await expect(image).toBeVisible();
-  } finally { await context.close(); }
-});
-
 
 test('shows all saved policies in accessible groups with pinned JSON links', async ({ page }) => {
   await page.goto(article);

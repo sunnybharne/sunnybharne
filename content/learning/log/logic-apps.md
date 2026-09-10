@@ -19,7 +19,7 @@ The plan determines where the workflow runs, how it connects to networks, and ho
 | Portal option | Simple explanation | Charging model |
 | --- | --- | --- |
 | Consumption | Shared infrastructure, useful for small workflows using public service endpoints. No direct VNet integration. | Pay per operation. |
-| Standard — Workflow Service Plan | Dedicated compute with VNet integration. Our choice for this private networking demonstration. | Hosting capacity, even when workflows are idle; other service charges can apply. |
+| Standard — Workflow Service Plan | Dedicated compute with VNet integration. Our choice for this private networking demonstration. | Hosting capacity, even when workflows are idle; other service charges can apply. See [Logic Apps pricing](/articles/logic-apps-pricing/). |
 | Standard — App Service Environment V3 | Run in a dedicated, isolated App Service environment. Useful when an organisation needs that level of isolation. | Environment and hosting capacity. |
 | Standard — Hybrid | Run the runtime on infrastructure you manage, with local network access. | Runtime usage plus the infrastructure you operate. |
 | Automation Project (preview) | The portal offers managed hosting with VNet integration and scale to zero. Check preview limitations and availability before adopting it. | The portal lists a base charge plus vCPU-second usage. |
@@ -88,6 +88,7 @@ The app's runtime storage also needs connectivity. A Blob private endpoint alone
 - [Private networking for Standard Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint)
 - [Deploy with private runtime storage](https://learn.microsoft.com/en-us/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account)
 - [Plan and manage costs](https://learn.microsoft.com/en-us/azure/logic-apps/plan-manage-costs)
+- [Logic Apps pricing, simply](/articles/logic-apps-pricing/)
 
 ## Networking: the service endpoint example
 

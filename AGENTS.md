@@ -38,8 +38,9 @@ any remaining blocker; do not claim the update is live until it is verified.
   Keep article text readable; lists and reference tables can use the available width.
 - Homepage Three.js motion is decorative, lazy-loaded,
   and settles after four seconds, with no button. Keep the static fallback and reduced-motion support.
-- Use SVG + CSS for article diagrams, not Three.js. Keep keyboard interaction,
-  reduced-motion support, and static content without JavaScript.
+- Article diagrams use React Flow in the Papliba card style, forced to the light theme.
+  Keep keyboard interaction, reduced-motion support (no travelling pulse), and a
+  no-JavaScript fallback. Do not use Three.js for article diagrams.
 - For animation changes, build first, then run `npm run test:browser`.
   Tests use Python 3 and Chromium (`npx playwright install chromium`).
 - Documentation-only instruction changes need a diff review and

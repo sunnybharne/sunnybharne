@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleContents from '@/app/components/ArticleContents';
-import DscDiagram from '@/app/components/DscDiagram';
-import AscDiagram from '@/app/components/AscDiagram';
-import McsbCentralDiagram from '@/app/components/McsbCentralDiagram';
-import WindowsBaselineDiagram from '@/app/components/WindowsBaselineDiagram';
+import ArticleFlow from '@/app/components/article-flow/ArticleFlow';
 import { getArticles } from '@/lib/articles';
+import {
+  introDiagramIdForSlug,
+  splitArticleHtml,
+} from '@/lib/article-flow';
 import {
   formatLearningDate,
   getLearningLogBySlug,
@@ -79,9 +80,10 @@ export default async function ArticlePage({ params }: Props) {
   const formattedDate = result.kind === 'note'
     ? formatLearningDate(article.date)
     : formatPostDate(article.date);
+  const introDiagramId = introDiagramIdForSlug(slug);
 
   return (
-    <article className={`article-shell${['asc-default-policy-guide', 'azure-windows-baseline'].includes(slug) ? ' learning-policy-guide' : ''}`}>
+    <article className={`article-shell${['asc-default-policy-guide', 'azure-windows-baseline', 'logic-apps-pricing'].includes(slug) ? ' learning-policy-guide' : ''}`}>
       <Link href="/articles/" className="article-backlink">← All articles</Link>
 
       <header className="article-header">
@@ -102,14 +104,18 @@ export default async function ArticlePage({ params }: Props) {
 
       <div className="article-layout">
         <ArticleContents headings={article.headings} />
-        {slug === 'dsc' ? <DscDiagram /> : null}
-        {slug === 'asc-default-policy-guide' ? <AscDiagram /> : null}
-        {slug === 'mcsb-managed-centrally' ? <McsbCentralDiagram /> : null}
-        {slug === 'azure-windows-baseline' ? <WindowsBaselineDiagram /> : null}
-        <div
-          className="article-body post-content"
-          dangerouslySetInnerHTML={{ __html: article.contentHtml }}
-        />
+        {introDiagramId ? <ArticleFlow diagramId={introDiagramId} /> : null}
+        {splitArticleHtml(article.contentHtml).map((segment, index) => (
+          segment.type === 'diagram' ? (
+            <ArticleFlow diagramId={segment.id} key={`${segment.id}-${index}`} />
+          ) : (
+            <div
+              className="article-body post-content"
+              dangerouslySetInnerHTML={{ __html: segment.html }}
+              key={`html-${index}`}
+            />
+          )
+        ))}
       </div>
 
       <footer className="article-footer">

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" role="img" aria-labelledby="title desc">
+  <title id="title">Logic App outbound path to private storage</title>
+  <desc id="desc">The Logic App sends traffic into an integration subnet. That subnet routes inside the same VNet to four storage private endpoints in a second subnet. Storage public access stays off. Internet inbound to the Logic App is blocked.</desc>
+  <rect width="960" height="280" fill="#fff"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="24" y="28" width="912" height="188" rx="14" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="480" y="54" fill="#334155" font-size="16">vnet-spoke-test-swc-001</text>
+
+    <rect x="48" y="76" width="168" height="112" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+    <text x="132" y="114" fill="#0f172a" font-size="18">Logic App</text>
+    <text x="132" y="138" fill="#475569" font-size="13">VNet integration</text>
+    <text x="132" y="158" fill="#475569" font-size="13">outbound only</text>
+
+    <rect x="268" y="76" width="200" height="112" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="368" y="108" fill="#0f172a" font-size="16">Integration subnet</text>
+    <text x="368" y="132" fill="#475569" font-size="13">snet-logicapp-integration</text>
+    <text x="368" y="152" fill="#475569" font-size="13">10.202.1.0/24</text>
+    <text x="368" y="172" fill="#475569" font-size="13">Microsoft.Web/serverFarms</text>
+
+    <rect x="520" y="76" width="200" height="112" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="620" y="108" fill="#0f172a" font-size="16">Private endpoint subnet</text>
+    <text x="620" y="132" fill="#475569" font-size="13">snet-privatelink</text>
+    <text x="620" y="152" fill="#475569" font-size="13">10.202.2.0/27</text>
+    <text x="620" y="172" fill="#475569" font-size="13">blob · file · queue · table</text>
+
+    <rect x="772" y="76" width="140" height="112" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+    <text x="842" y="120" fill="#0f172a" font-size="18">Storage</text>
+    <text x="842" y="146" fill="#475569" font-size="13">public access off</text>
+
+    <g stroke="#2563eb" stroke-width="3" fill="none">
+      <path d="M216 132H258m-10-7 10 7-10 7"/>
+      <path d="M468 132H510m-10-7 10 7-10 7"/>
+      <path d="M720 132H762m-10-7 10 7-10 7"/>
+    </g>
+  </g>
+  <text x="480" y="244" text-anchor="middle" fill="#475569" font-family="Arial, sans-serif" font-size="15">Same VNet, two subnets. No private endpoint on the Logic App. Internet inbound to the app is a separate, blocked path.</text>
+  <text x="480" y="266" text-anchor="middle" fill="#475569" font-family="Arial, sans-serif" font-size="15">A service endpoint is not on this path while storage public access is disabled.</text>
+</svg>
