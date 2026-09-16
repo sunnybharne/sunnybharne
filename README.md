@@ -57,9 +57,9 @@
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><img src="https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg" width="280" alt="Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch"></a><br><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><b>Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch</b></a><br><sub>299 views · 3 weeks ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><img src="https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg" width="280" alt="Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch"></a><br><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><b>Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch</b></a><br><sub>301 views · 3 weeks ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><img src="https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg" width="280" alt="Why AI Made Me Give Up Vim and Return to VS Code"></a><br><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><b>Why AI Made Me Give Up Vim and Return to VS Code</b></a><br><sub>1.3K views · 1 month ago</sub></td>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Building a New Email Client"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Building a New Email Client</b></a><br><sub>4.7K views · 2 months ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><img src="https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg" width="280" alt="Normal Coding Day | Building a New Email Client"></a><br><a href="https://www.youtube.com/watch?v=awCupq9jkQ4"><b>Normal Coding Day | Building a New Email Client</b></a><br><sub>4.8K views · 2 months ago</sub></td>
   </tr>
   <tr>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><img src="https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg" width="280" alt="2026 Desk Setup Upgrade | Cockpit Mode"></a><br><a href="https://www.youtube.com/watch?v=aHygd83XVdU"><b>2026 Desk Setup Upgrade | Cockpit Mode</b></a><br><sub>260 views · 3 months ago</sub></td>
