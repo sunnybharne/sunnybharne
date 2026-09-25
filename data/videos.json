@@ -1,53 +1,53 @@
 {
-  "fetchedAt": "2026-09-24T06:15:30.872Z",
+  "fetchedAt": "2026-09-25T06:15:40.583Z",
   "videos": [
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "312 views",
-      "published": "1 month ago"
+      "views": "314",
+      "published": "1mo ago"
     },
     {
       "id": "rPmby-3YCCc",
       "title": "Why AI Made Me Give Up Vim and Return to VS Code",
       "url": "https://www.youtube.com/watch?v=rPmby-3YCCc",
       "thumbnail": "https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg",
-      "views": "1.3K views",
-      "published": "1 month ago"
+      "views": "1.3K",
+      "published": "1mo ago"
     },
     {
       "id": "awCupq9jkQ4",
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "5.4K views",
-      "published": "2 months ago"
+      "views": "5.5K",
+      "published": "2mo ago"
     },
     {
       "id": "aHygd83XVdU",
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "266 views",
-      "published": "3 months ago"
+      "views": "266",
+      "published": "3mo ago"
     },
     {
       "id": "d3y5ABV5_34",
       "title": "Claude vs Qwen 7B: Can a Local LLM Replace Claude?",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.8K views",
-      "published": "4 months ago"
+      "views": "1.8K",
+      "published": "4mo ago"
     },
     {
       "id": "RgUAUc-uL74",
       "title": "A Real Coding Day: Building My First Mac App",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "3.1K views",
-      "published": "5 months ago"
+      "views": "3.1K",
+      "published": "5mo ago"
     }
   ]
 }
