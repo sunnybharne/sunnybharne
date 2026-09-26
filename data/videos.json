@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-09-25T06:15:40.583Z",
+  "fetchedAt": "2026-09-26T06:14:16.574Z",
   "videos": [
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "314",
+      "views": "316",
       "published": "1mo ago"
     },
     {
@@ -22,7 +22,7 @@
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "5.5K",
+      "views": "5.6K",
       "published": "2mo ago"
     },
     {
@@ -30,7 +30,7 @@
       "title": "2026 Desk Setup Upgrade | Cockpit Mode",
       "url": "https://www.youtube.com/watch?v=aHygd83XVdU",
       "thumbnail": "https://i.ytimg.com/vi/aHygd83XVdU/hqdefault.jpg",
-      "views": "266",
+      "views": "269",
       "published": "3mo ago"
     },
     {
@@ -38,7 +38,7 @@
       "title": "Claude vs Qwen 7B: Can a Local LLM Replace Claude?",
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
-      "views": "1.8K",
+      "views": "1.9K",
       "published": "4mo ago"
     },
     {
