@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-10-09T06:16:18.507Z",
+  "fetchedAt": "2026-10-10T06:14:58.065Z",
   "videos": [
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "339",
+      "views": "340",
       "published": "1mo ago"
     },
     {
@@ -22,7 +22,7 @@
       "title": "Normal Coding Day | Building a New Email Client",
       "url": "https://www.youtube.com/watch?v=awCupq9jkQ4",
       "thumbnail": "https://i.ytimg.com/vi/awCupq9jkQ4/hqdefault.jpg",
-      "views": "6.4K",
+      "views": "6.5K",
       "published": "3mo ago"
     },
     {
@@ -46,7 +46,7 @@
       "title": "A Real Coding Day: Building My First Mac App",
       "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
       "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "3.2K",
+      "views": "3.3K",
       "published": "5mo ago"
     }
   ]
