@@ -345,31 +345,6 @@
   background: #75a4aa;
 }
 
-.peeringPulse {
-  stroke: color-mix(in srgb, var(--network-connected) 45%, #c5f6e7);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-dasharray: 9 87;
-  opacity: 0.9;
-  pointer-events: none;
-  animation: peering-travel 5s linear infinite;
-}
-
-.peeringPulse[data-animating="false"] {
-  animation-play-state: paused;
-}
-
-@keyframes peering-travel {
-  to { stroke-dashoffset: -96; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .peeringPulse {
-    animation: none;
-    opacity: 0;
-  }
-}
-
 .edgeLabel {
   position: absolute;
   display: flex;

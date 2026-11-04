@@ -1,4 +1,4 @@
-"""Export the simple DSC draw.io shapes as accessible animated and static SVGs."""
+"""Export the simple DSC draw.io shapes as accessible static SVGs."""
 from pathlib import Path
 import base64
 import html
@@ -22,7 +22,7 @@ parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="910" height="460" viewB
          '<title id="title">DSC inside Azure Machine Configuration</title>',
          '<desc id="desc">Azure Policy deploys an assignment. The VM agent downloads a package and runs DSC to check and optionally apply the desired settings.</desc>',
          '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2583b3"/></marker>',
-         '<style>.flow{stroke-dasharray:7 5;animation:flow 2.4s linear infinite}@keyframes flow{to{stroke-dashoffset:-48}}@media(prefers-reduced-motion:reduce){.flow{animation:none}}</style></defs>',
+         '<style>.flow{stroke-dasharray:7 5}</style></defs>',
          '<rect width="910" height="460" fill="white"/>']
 # Shapes first, then connectors, then labels.
 for cell in vertices.values():
@@ -56,4 +56,4 @@ for cell in vertices.values():
 parts.append('</svg>')
 svg='\n'.join(parts)
 (OUT/'diagram.svg').write_text(svg)
-(OUT/'diagram-static.svg').write_text(svg.replace('animation:flow 2.4s linear infinite','animation:none'))
+(OUT/'diagram-static.svg').write_text(svg)

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Background,
   BackgroundVariant,
@@ -36,21 +36,9 @@ type FlowCardNode = Node<{ entry: FlowNode; inspect: (id: string) => void }, 'ar
 type FlowCardEdge = Edge<{
   link: FlowLink;
   inspect: (id: string) => void;
-  isAnimating: boolean;
 }, 'articleLink'>;
 
 const positions = [Position.Top, Position.Right, Position.Bottom, Position.Left];
-const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
-
-function subscribeToMotionPreference(onChange: () => void) {
-  const preference = window.matchMedia(reducedMotionQuery);
-  preference.addEventListener('change', onChange);
-  return () => preference.removeEventListener('change', onChange);
-}
-
-function getMotionPreference() {
-  return window.matchMedia(reducedMotionQuery).matches;
-}
 
 function ArticleCard({ data, selected }: NodeProps<FlowCardNode>) {
   const { entry } = data;
@@ -136,16 +124,6 @@ function ArticleLinkLine(props: EdgeProps<FlowCardEdge>) {
           opacity: disabled ? 0.55 : 1,
         }}
       />
-      {connected && !identityLink ? (
-        <path
-          aria-hidden="true"
-          className={styles.peeringPulse}
-          d={path}
-          data-animating={data.isAnimating}
-          data-edge-pulse="true"
-          fill="none"
-        />
-      ) : null}
       <EdgeLabelRenderer>
         <button
           aria-label={`Inspect ${data.link.label}`}
@@ -251,7 +229,7 @@ function LinkDetails({ link, diagram }: { link: FlowLink; diagram: ArticleDiagra
   );
 }
 
-function DiagramMap({ diagram, isAnimating }: { diagram: ArticleDiagram; isAnimating: boolean }) {
+function DiagramMap({ diagram }: { diagram: ArticleDiagram }) {
   const [selection, setSelection] = useState<{ kind: 'node' | 'link'; id: string }>(() => ({
     kind: 'node',
     id: diagram.nodes[0]?.id ?? '',
@@ -280,7 +258,7 @@ function DiagramMap({ diagram, isAnimating }: { diagram: ArticleDiagram; isAnima
     source: item.source,
     target: item.target,
     type: 'articleLink',
-    data: { link: item, inspect: inspectLink, isAnimating },
+    data: { link: item, inspect: inspectLink },
     ariaLabel: `${diagram.nodes.find((node) => node.id === item.source)?.name} to ${diagram.nodes.find((node) => node.id === item.target)?.name}, ${item.label}`,
     selected: selection.kind === 'link' && selection.id === item.id,
     ...linkHandles(
@@ -289,7 +267,7 @@ function DiagramMap({ diagram, isAnimating }: { diagram: ArticleDiagram; isAnima
     ),
     focusable: false,
     deletable: false,
-  })), [diagram, inspectLink, isAnimating, nodes, selection]);
+  })), [diagram, inspectLink, nodes, selection]);
   const selectedNode = selection.kind === 'node'
     ? diagram.nodes.find((item) => item.id === selection.id)
     : undefined;
@@ -409,15 +387,10 @@ function Fallback({ diagram }: { diagram: ArticleDiagram }) {
 }
 
 function LiveDiagram({ diagram }: { diagram: ArticleDiagram }) {
-  const prefersReducedMotion = useSyncExternalStore(
-    subscribeToMotionPreference,
-    getMotionPreference,
-    () => true,
-  );
   return (
     <div className={styles.wrap}>
       <ReactFlowProvider>
-        <DiagramMap diagram={diagram} isAnimating={!prefersReducedMotion} />
+        <DiagramMap diagram={diagram} />
       </ReactFlowProvider>
     </div>
   );

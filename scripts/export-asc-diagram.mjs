@@ -16,12 +16,9 @@ const result = spawnSync(executable, [
 if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status || 1);
 
-// Keep draw.io's drawing and native flow animation; only add motion accessibility.
-let svg = fs.readFileSync(output, 'utf8');
-if (!svg.includes('@keyframes ge-flow-animation')) throw new Error('Native flow animation is missing.');
-svg = svg.replace('</defs>', '<style>@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }</style></defs>');
-fs.writeFileSync(output, svg);
-// SVG images do not inherit reduced-motion reliably in every browser.
-fs.writeFileSync(output.replace('.svg', '-static.svg'), svg.replace(/animation: [^;]+;/g, 'animation: none;'));
+// Both public filenames stay static, including when opened directly.
+const svg = fs.readFileSync(output, 'utf8');
+if (/@keyframes|\banimation\s*:|<animate/i.test(svg)) throw new Error('Disable flow animation in the draw.io source before exporting.');
+fs.writeFileSync(output.replace('.svg', '-static.svg'), svg);
 
 }

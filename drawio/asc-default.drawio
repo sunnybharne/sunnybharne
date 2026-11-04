@@ -62,13 +62,13 @@
         <mxCell id="references-label" value="uses these checks" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontFamily=Arial;fontSize=15;fontColor=#526e82;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="354" y="144" width="155" height="24" />
         </mxCell>
-        <mxCell id="assesses" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#2583b3;strokeWidth=1.8;flowAnimation=1;flowAnimationDuration=1800;flowAnimationTimingFunction=linear;flowAnimationDirection=normal;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="assignment" target="resources">
+        <mxCell id="assesses" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#2583b3;strokeWidth=1.8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="assignment" target="resources">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
         <mxCell id="assesses-label" value="assesses" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontFamily=Arial;fontSize=16;fontColor=#397697;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="211" y="246" width="105" height="24" />
         </mxCell>
-        <mxCell id="findings" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#2583b3;strokeWidth=1.8;flowAnimation=1;flowAnimationDuration=1800;flowAnimationTimingFunction=linear;flowAnimationDirection=normal;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="resources" target="policy">
+        <mxCell id="findings" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;endFill=1;endSize=7;strokeColor=#2583b3;strokeWidth=1.8;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="resources" target="policy">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
         <mxCell id="findings-label" value="view compliance" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontFamily=Arial;fontSize=15;fontColor=#397697;fontStyle=0;" vertex="1" parent="1">
@@ -151,7 +151,7 @@
         <mxCell id="installtext" value="Deploys the OS extension&#10;and enables identity" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=15;fontColor=#183951;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="198" y="165" width="195" height="45" />
         </mxCell>
-        <mxCell id="report" source="vm" target="baseline" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;flowAnimation=1;flowAnimationDuration=1800;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+        <mxCell id="report" source="vm" target="baseline" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
           <mxGeometry as="geometry" relative="1">
             <Array as="points">
               <mxPoint x="430" y="350" />
@@ -162,7 +162,7 @@
         <mxCell id="reporttext" value="Sends report" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#183951;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="438" y="211" width="110" height="25" />
         </mxCell>
-        <mxCell id="result" source="baseline" target="compliance" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;flowAnimation=1;flowAnimationDuration=1800;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+        <mxCell id="result" source="baseline" target="compliance" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
         <mxCell id="resulttext" value="Reports compliance" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=14;fontColor=#183951;fontStyle=0;" vertex="1" parent="1">

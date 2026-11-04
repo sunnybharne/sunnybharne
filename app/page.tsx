@@ -1,5 +1,4 @@
 import ArticleList from '@/app/components/ArticleList';
-import NotebookMotion from '@/app/components/NotebookMotion';
 import { getArticles } from '@/lib/articles';
 
 export default async function HomePage() {
@@ -8,7 +7,6 @@ export default async function HomePage() {
     <div className="page-shell home-page">
       <section className="home-intro" aria-label="Introduction">
         <p>I’m Sunny, an Azure platform engineer in Helsinki. This is where I dump my brain.</p>
-        <NotebookMotion />
       </section>
       <section aria-labelledby="recent-title">
         <div className="section-heading">

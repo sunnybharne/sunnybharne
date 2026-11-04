@@ -70,16 +70,16 @@
         <mxCell id="condition" value="* Apply only with Set support and an apply mode." style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontFamily=Arial;fontSize=13;fontColor=#183951;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="342" y="396" width="505" height="25" />
         </mxCell>
-        <mxCell id="deploy" source="policy" target="assignment" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;flowAnimation=1;flowAnimationDuration=2400;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+        <mxCell id="deploy" source="policy" target="assignment" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
-        <mxCell id="read" source="assignment" target="agent" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;flowAnimation=1;flowAnimationDuration=2400;exitX=0.23;exitY=1;entryX=0.5;entryY=0;">
+        <mxCell id="read" source="assignment" target="agent" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;exitX=0.23;exitY=1;entryX=0.5;entryY=0;">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
-        <mxCell id="download" source="zip" target="agent" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;flowAnimation=1;flowAnimationDuration=2400;exitX=1;exitY=0.5;entryX=0;entryY=0.75;">
+        <mxCell id="download" source="zip" target="agent" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.75;">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
-        <mxCell id="run" source="agent" target="dsc" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;flowAnimation=1;flowAnimationDuration=2400;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+        <mxCell id="run" source="agent" target="dsc" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=0;endArrow=block;strokeColor=#2583b3;strokeWidth=1.8;fontFamily=Arial;fontSize=12;fontColor=#526e82;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
       </root>

@@ -18,12 +18,29 @@ test('Logic Apps pricing diagram uses React Flow in the light card style', async
   expect(errors).toEqual([]);
 });
 
-test('React Flow pulse pauses when reduced motion is requested', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/articles/logic-apps-pricing/');
-  await expect(page.locator('.react-flow')).toBeVisible();
-  const pulse = page.locator('[data-edge-pulse]').first();
-  await expect(pulse).toHaveAttribute('data-animating', 'false');
+for (const reducedMotion of ['no-preference', 'reduce'] as const) {
+  test(`article diagrams stay still with motion preference ${reducedMotion}`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion });
+    await page.goto('/articles/logic-apps-pricing/');
+    await expect(page.locator('.react-flow')).toBeVisible();
+    await expect(page.locator('[data-edge-pulse], canvas')).toHaveCount(0);
+    expect(await page.evaluate(() => document.getAnimations().length)).toBe(0);
+    await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto');
+    await page.getByRole('button', { name: /Inspect Standard WS1/ }).focus();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('heading', { name: 'Standard WS1', exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.getAnimations().length)).toBe(0);
+  });
+}
+
+test('downloadable diagram SVGs contain no animation', async ({ request }) => {
+  for (const folder of ['asc-default', 'windows-baseline', 'dsc']) {
+    for (const name of ['diagram.svg', 'diagram-static.svg']) {
+      const response = await request.get(`/learning-assets/${folder}/${name}`);
+      expect(response.ok()).toBe(true);
+      expect(await response.text()).not.toMatch(/@keyframes|\banimation\s*:|<animate|<set\b/i);
+    }
+  }
 });
 
 test('DSC keeps a static fallback without JavaScript', async ({ browser }) => {
