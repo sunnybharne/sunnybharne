@@ -11,6 +11,22 @@ export default async function HomePage() {
         <p className="home-intro-lead">
           I’m an Azure platform engineer with a decade of experience, based in Helsinki, Finland.
         </p>
+        <figure className="home-diagram">
+          <div className="home-diagram-scroll" tabIndex={0} role="region" aria-label="Azure platform diagram; scroll horizontally on smaller screens">
+            {/* Static export of assets/banner.drawio, also used in the GitHub profile README. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/portfolio-diagram.svg"
+              width={601}
+              height={131}
+              alt="Azure enterprise landing zones connected to Azure DevOps, policies, Terraform, Bicep, subscription vending, and pipelines."
+            />
+          </div>
+          <figcaption>
+            My Azure platform overview.{' '}
+            <a href="/portfolio-diagram.svg">View full-size diagram</a>.
+          </figcaption>
+        </figure>
         <h2>What I work on</h2>
         <ul>
           <li>

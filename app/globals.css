@@ -52,6 +52,11 @@ h1, .article-title { font-family: var(--font-geist-sans), Arial, sans-serif; fon
 .home-intro li + li { margin-top: .4rem; }
 .home-intro strong { font-weight: 600; }
 .home-intro p a { color: var(--accent); text-decoration: underline; }
+.home-diagram { margin: 1.5rem 0; }
+.home-diagram-scroll { overflow-x: auto; background: #0d1117; }
+.home-diagram img { display: block; width: 100%; min-width: 601px; height: auto; }
+.home-diagram figcaption { color: var(--muted); margin-top: .6rem; font-size: .8rem; }
+.home-diagram figcaption a { color: var(--accent); text-decoration: underline; }
 .text-link, .article-backlink, .back-link { color: var(--accent); font-size: .875rem; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); }
 .text-link:hover, .article-backlink:hover, .back-link:hover { text-decoration-color: currentColor; }
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .6rem 1rem; margin-bottom: .8rem; }
