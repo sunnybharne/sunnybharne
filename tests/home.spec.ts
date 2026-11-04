@@ -25,7 +25,7 @@ for (const width of [320, 390, 768, 1280]) {
   test(`keeps the plain homepage compact at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto('/');
-    await expect(page.locator('.home-intro p')).toBeVisible();
+    await expect(page.locator('.home-intro-lead')).toBeVisible();
     await expect(page.locator('.home-intro')).toHaveCSS('padding-right', '0px');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     const list = await page.locator('.article-list').boundingBox();
