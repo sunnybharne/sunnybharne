@@ -31,6 +31,9 @@ any remaining blocker; do not claim the update is live until it is verified.
 - Preserve the existing Next.js static-export app and GitHub Pages deployment.
 - Portfolio routes are in `app/`; learning entries are Markdown files in
   `content/learning/log/`. Follow `content/learning/README.md` for their format.
+- The Learning section at `/learning/` uses one ongoing note,
+  `content/learning/plan.md`, for study methods, certification plans, and next steps.
+  Keep certification choices and dates open until the user decides them.
 - Use `npm run lint` and `npm run build` for website changes. The build's video
   refresh can modify `README.md` and `data/videos.json`; keep unrelated generated
   changes out of the commit.

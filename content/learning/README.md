@@ -6,21 +6,19 @@ Edit `data/article-order.json` to set the homepage and article list order.
 Use article slugs, first to last. Unlisted articles follow, newest first.
 Keep publication dates unchanged.
 
-The `/learning/` page is generated from `roadmap.yml` and the Markdown files
-inside `log/`.
+## Learning plan
 
-## Update The Roadmap
+The `/learning/` page reads **only `plan.md`**. Keep study methods,
+certification plans, preparation steps, next actions, and session notes in
+that single file. Edit its `title`, `description`, and `updated` front matter
+along with the body; `updated` uses `YYYY-MM-DD`.
 
-Edit `roadmap.yml` to change the current focus, tracks, milestones, resources,
-or evidence links. Valid milestone statuses are:
+The note is linked from the main navigation as **Learning**. It is separate
+from the technical articles generated from `log/`. Keep certification choices,
+dates, and progress open until they have been decided; do not invent achievements.
 
-- `planned`
-- `in-progress`
-- `paused`
-- `completed`
-
-Dates use `YYYY-MM-DD`. Track and milestone IDs must be unique, lowercase, and
-hyphenated.
+The older `roadmap.yml` remains as reference material and a list of existing
+track IDs. It does not supply content to the Learning page.
 
 ## Add A Learning Entry
 

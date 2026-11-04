@@ -152,6 +152,17 @@ type LearningOptions = {
   includeDrafts?: boolean;
 };
 
+export async function getLearningPlan() {
+  const source = await fs.readFile(path.join(learningDirectory, 'plan.md'), 'utf8');
+  const { data, content } = matter(source);
+  return {
+    title: requiredString(data.title, 'Learning plan title'),
+    description: requiredString(data.description, 'Learning plan description'),
+    updated: requiredDate(data.updated, 'Learning plan updated'),
+    ...renderMarkdown(markdown, content),
+  };
+}
+
 export async function getLearningRoadmap(): Promise<LearningRoadmap> {
   const source = await fs.readFile(roadmapPath, 'utf8');
   return parseRoadmap(parseYaml(source));
