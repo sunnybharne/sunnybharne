@@ -1,0 +1,143 @@
+.diagram {
+  --connector: #cbd5e1;
+  margin: 1.75rem 0;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: .75rem 1rem;
+  border: 1px solid #c9dced;
+  border-radius: 6px;
+  background: #f8fbff;
+}
+
+.root img, .node img {
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.title, .subtitle {
+  display: block;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.subtitle {
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+.branches {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: .5rem;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 0 0;
+}
+
+.branches::before, .branches::after, .node::before {
+  content: '';
+  position: absolute;
+  background: var(--connector);
+}
+
+.branches::before {
+  top: 0;
+  left: calc((100% - 2.5rem) / 12);
+  right: calc((100% - 2.5rem) / 12);
+  height: 1px;
+}
+
+.branches::after {
+  top: -1.5rem;
+  left: 50%;
+  width: 1px;
+  height: 1.5rem;
+}
+
+.node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .6rem;
+  min-width: 0;
+  min-height: 6rem;
+  padding: .75rem .35rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: .76rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.node::before {
+  top: calc(-1.25rem - 1px);
+  left: 50%;
+  width: 1px;
+  height: 1.25rem;
+}
+
+.caption {
+  margin-top: .85rem;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+@media (max-width: 600px) {
+  .root {
+    margin-inline: 0;
+  }
+
+  .branches {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+    padding: 1rem 0 0 3rem;
+  }
+
+  .branches::before {
+    top: 0;
+    bottom: 1.5rem;
+    left: 2rem;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .branches::after {
+    display: none;
+  }
+
+  .node {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: .75rem;
+    min-height: 3rem;
+    padding: .5rem .75rem;
+    font-size: .8rem;
+    text-align: left;
+  }
+
+  .node::before {
+    top: 50%;
+    left: calc(-1rem - 1px);
+    width: 1rem;
+    height: 1px;
+  }
+}
