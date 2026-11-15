@@ -1,10 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
-import MarkdownIt from 'markdown-it';
 import { parse as parseYaml } from 'yaml';
 import {
-  addHeadingAnchors,
+  createArticleMarkdown,
   estimateReadingTime,
   renderMarkdown,
   type ArticleHeading,
@@ -15,17 +14,9 @@ const learningLogDirectory = path.join(learningDirectory, 'log');
 const roadmapPath = path.join(learningDirectory, 'roadmap.yml');
 const learningFilePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const markdown = addHeadingAnchors(new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: false,
-}));
+const markdown = createArticleMarkdown();
 
-const policyGuideMarkdown = addHeadingAnchors(new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: false,
-}));
+const policyGuideMarkdown = createArticleMarkdown();
 
 policyGuideMarkdown.core.ruler.push('policy-groups', (state) => {
   const tokens: typeof state.tokens = [];

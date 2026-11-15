@@ -9,6 +9,10 @@ export type ArticleHeading = {
   title: string;
 };
 
+export function createArticleMarkdown() {
+  return addHeadingAnchors(new MarkdownIt({ html: false, linkify: true, typographer: false }));
+}
+
 export function addHeadingAnchors(markdown: MarkdownRenderer): MarkdownRenderer {
   markdown.core.ruler.push('article-headings', (state) => {
     const usedIds = new Set<string>();

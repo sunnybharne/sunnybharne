@@ -1,9 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
-import MarkdownIt from 'markdown-it';
 import {
-  addHeadingAnchors,
+  createArticleMarkdown,
   estimateReadingTime,
   renderMarkdown,
   type ArticleHeading,
@@ -12,11 +11,7 @@ import {
 const postsDirectory = path.join(process.cwd(), 'content', 'posts');
 const postFilePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const markdown = addHeadingAnchors(new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: false,
-}));
+const markdown = createArticleMarkdown();
 
 export type PostSummary = {
   slug: string;
