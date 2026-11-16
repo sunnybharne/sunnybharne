@@ -39,10 +39,12 @@
 }
 
 .branches {
+  --columns: 8;
+  --gap: .5rem;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: .5rem;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: var(--gap);
   list-style: none;
   margin: 1.5rem 0 0;
   padding: 1.25rem 0 0;
@@ -56,8 +58,7 @@
 
 .branches::before {
   top: 0;
-  left: calc((100% - 2.5rem) / 12);
-  right: calc((100% - 2.5rem) / 12);
+  inset-inline: calc(((100% + var(--gap)) / var(--columns) - var(--gap)) / 2);
   height: 1px;
 }
 
@@ -100,7 +101,7 @@
   font-size: .8rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 46rem) {
   .root {
     margin-inline: 0;
   }

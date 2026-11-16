@@ -1,5 +1,7 @@
 import azureIcon from '@/assets/azure.svg';
 import devopsIcon from '@/assets/devops.svg';
+import githubIcon from '@/assets/github.svg';
+import githubActionsIcon from '@/assets/github-actions.svg';
 import policyIcon from '@/assets/policies.svg';
 import terraformIcon from '@/assets/terraform.svg';
 import bicepIcon from '@/assets/bicep.svg';
@@ -9,11 +11,13 @@ import styles from './HomePlatformDiagram.module.css';
 
 const capabilities = [
   { label: 'Azure DevOps', icon: devopsIcon },
+  { label: 'Azure Pipelines', icon: pipelineIcon },
+  { label: 'GitHub', icon: githubIcon },
+  { label: 'GitHub Actions', icon: githubActionsIcon },
   { label: 'Azure Policy', icon: policyIcon },
   { label: 'Terraform', icon: terraformIcon },
   { label: 'Bicep', icon: bicepIcon },
   { label: 'Subscription vending', icon: subscriptionIcon },
-  { label: 'Pipelines', icon: pipelineIcon },
 ];
 
 export default function HomePlatformDiagram() {
