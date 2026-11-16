@@ -8,20 +8,13 @@ export default async function HomePage() {
   return (
     <div className="page-shell home-page">
       <section className="home-intro" aria-label="Introduction">
-        <h1>I’m Sunny. I do all things Azure.</h1>
+        <h1>I’m Sunny. I build Azure landing zones.</h1>
         <p className="home-intro-lead">
-          I build Azure platforms in Helsinki. I’ve worked in engineering for ten years.
+          Helsinki, Finland · Ten years in engineering.
         </p>
         <HomePlatformDiagram />
-        <h2>What I work on</h2>
-        <ul>
-          <li>I build landing zones, subscriptions, and management groups with Terraform and Bicep.</li>
-          <li>I run Azure DevOps pipelines on self-hosted agents and manage repos and service connections.</li>
-          <li>I roll out Azure Policy in stages, test infrastructure with Pester and Terraform, and track changes in ServiceNow.</li>
-        </ul>
         <p>
-          I’m building <Link href="/articles/papliba/">Papliba</Link> to inspect Azure networks and policy results.
-          Here’s my <Link href="/learning/">Azure certification plan</Link>.
+          I’m building <Link href="/articles/papliba/">Papliba</Link> to trace network connections and check Azure Policy results.
         </p>
         <nav className="project-links" aria-label="Introduction profiles and contact">
           <a className="text-link" href="https://github.com/sunnybharne">GitHub</a>
