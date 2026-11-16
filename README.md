@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="Banner" width="100%">
+<img src="assets/banner.svg" alt="Azure landing zone tools, including Azure DevOps, Azure Pipelines, GitHub, and GitHub Actions" width="100%">
 
 # Sunny Bharne, I do all things Azure.
 
@@ -8,6 +8,8 @@
 [![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
 [![Bicep](https://img.shields.io/badge/Bicep-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
 [![Azure DevOps](https://img.shields.io/badge/Azure_DevOps-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sunnybharne?tab=repositories)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-0969DA?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/sunnybharne/sunnybharne/actions/workflows/deploy-github-pages.yml)
 [![Azure Policy](https://img.shields.io/badge/Azure_Policy-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
 [![Azure Landing Zones](https://img.shields.io/badge/Azure_Landing_Zones-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
 
@@ -20,6 +22,7 @@
 ### What I work on
 
 - Azure DevOps pipelines, self-hosted agents, repos, and service connections.
+- I use GitHub Actions to build and deploy [my website](https://www.sunnybharne.com/) to GitHub Pages.
 - Subscriptions, management groups, and landing zones in [Terraform and Bicep](https://github.com/sunnybharne/azure-enterprise-platform).
 - Azure Policy releases, ServiceNow change management, and infrastructure tests with Pester and Terraform.
 
