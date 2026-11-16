@@ -21,7 +21,6 @@ export default async function LearningPage() {
   return (
     <article className="page-shell">
       <header className="page-heading">
-        <p className="eyebrow">Learning</p>
         <h1>{plan.title}</h1>
         <p className="page-intro">{plan.description}</p>
         <p className="article-meta">

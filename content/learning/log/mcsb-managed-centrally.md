@@ -1,6 +1,6 @@
 ---
-title: "MCSB managed centrally, simply"
-description: "One security baseline assignment across subscriptions: why it helps, how inheritance works, and where ASC Default overlaps."
+title: "Assigning MCSB at a management group"
+description: "Child subscriptions inherit the Microsoft cloud security benchmark. Existing ASC Default assignments can overlap."
 date: 2026-09-08
 track: azure-platform
 provider: Microsoft Learn
@@ -29,7 +29,7 @@ For example, change a supported check's parameter in the central assignment. Tha
 
 ## What about ASC Default?
 
-Defender for Cloud enables MCSB by default when an account is onboarded. In Azure Policy, you may already see a subscription assignment displayed as **ASC Default**, with resource name `SecurityCenterBuiltIn`. See [ASC Default, simply](/articles/asc-default-policy-guide/).
+Defender for Cloud enables MCSB by default when an account is onboarded. In Azure Policy, you may already see a subscription assignment displayed as **ASC Default**, with resource name `SecurityCenterBuiltIn`. See [ASC Default policy reference](/articles/asc-default-policy-guide/).
 
 **Adding a management-group assignment does not replace that subscription assignment.** Both can apply. Different parameters or effects can create conflicting expectations. Check the existing assignments before introducing another. [Manage MCSB recommendations](https://learn.microsoft.com/en-us/azure/defender-for-cloud/manage-mcsb).
 
@@ -58,4 +58,4 @@ In a folder-based policy repository, the assignment could live at `assignments/p
 
 **Use central management when you want a deliberate, shared security configuration across subscriptions.** For a small setup using the default checks, keeping the Defender defaults and adding a few targeted policies may be simpler. Review existing Defender-managed assignments before changing their ownership or removing them.
 
-A central assignment also does not mean every VM setting is automatically fixed. The selected policy effects and remediation setup determine what changes. Paid Defender plans have their own [enablement steps](https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-defender-for-servers-scale#scale-a-defender-for-servers-plan). For Windows settings, see [Azure Windows baseline, simply](/articles/azure-windows-baseline/).
+A central assignment also does not mean every VM setting is automatically fixed. The selected policy effects and remediation setup determine what changes. Paid Defender plans have their own [enablement steps](https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-defender-for-servers-scale#scale-a-defender-for-servers-plan). For Windows settings, see [Azure Windows baseline checks](/articles/azure-windows-baseline/).

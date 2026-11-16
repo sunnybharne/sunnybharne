@@ -4,7 +4,7 @@ import { getArticles } from '@/lib/articles';
 
 export const metadata: Metadata = {
   title: 'Articles',
-  description: 'Notes on Azure, automation and learning through real work.',
+  description: 'Azure labs on policy, networking, VM configuration, and Logic Apps.',
   alternates: { canonical: '/articles/' },
 };
 

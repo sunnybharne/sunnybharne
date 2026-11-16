@@ -1,6 +1,6 @@
 ---
-title: "VNet peering, simply"
-description: "Connect two Azure private networks and understand what that connection allows."
+title: "VNet peering with Azure Bastion"
+description: "A hub Bastion host can reach a spoke VM on its private IP. Both networks need a peering."
 date: 2026-09-09
 track: azure-platform
 provider: Microsoft Learn

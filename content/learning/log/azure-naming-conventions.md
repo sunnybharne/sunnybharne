@@ -1,6 +1,6 @@
 ---
-title: "Azure naming conventions, simply"
-description: "Choose a readable naming pattern, handle Azure's exceptions, and record the decision."
+title: "Azure resource naming conventions"
+description: "A naming pattern for Azure resources, with examples for storage accounts, identities, and subnets."
 date: 2026-09-07
 track: azure-platform
 provider: Microsoft Learn

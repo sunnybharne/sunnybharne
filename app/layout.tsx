@@ -8,11 +8,11 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.sunnybharne.com'),
-  title: { default: 'Sunny Bharne — Practical engineering notes', template: '%s — Sunny Bharne' },
-  description: 'Practical notes on Azure, automation and lessons from real engineering work. Written by Sunny Bharne in Helsinki.',
+  title: { default: 'Sunny Bharne — Azure platform engineering', template: '%s — Sunny Bharne' },
+  description: 'Azure Policy, networking, and infrastructure as code by Sunny Bharne.',
   openGraph: {
-    title: 'Sunny Bharne — Practical engineering notes',
-    description: 'A simple reference for Azure, automation and lessons from real work.',
+    title: 'Sunny Bharne — Azure platform engineering',
+    description: 'Azure Policy, networking, and infrastructure as code by Sunny Bharne.',
     url: 'https://www.sunnybharne.com', siteName: 'Sunny Bharne', type: 'website',
   },
 };

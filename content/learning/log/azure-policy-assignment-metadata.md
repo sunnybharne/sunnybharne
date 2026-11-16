@@ -1,6 +1,6 @@
 ---
 title: "Azure Policy assignments at management-group scope"
-description: "A hands-on exploration of assignment scope, visible metadata, RBAC, and cleanup in the Azure portal."
+description: "I tested which subscriptions inherited an assignment and what operators could see in the portal."
 date: 2026-08-27
 track: azure-platform
 provider: Azure portal and Microsoft Learn
@@ -11,33 +11,11 @@ tags:
   - azure
   - governance
   - policy
-evidence:
-  - title: "Azure Policy assignment structure"
-    provider: Microsoft Learn
-    url: https://learn.microsoft.com/azure/governance/policy/concepts/assignment-structure
 draft: false
 ---
 
-## What I learned
+I created a low-impact policy assignment at the parent management group, checked it in the child subscriptions, and removed it. The scope determined which subscriptions inherited the assignment. Exclusions narrowed its reach, and the enforcement setting controlled how Azure applied the effect.
 
-I explored how an Azure Policy assignment behaves when it is created at the
-parent management-group scope. The scope determines which child subscriptions
-are covered, while exclusions and enforcement settings refine how the
-assignment is applied.
+The portal showed the assignment description but had little space for ownership or change history. I’ll put a short description on the assignment, keep ownership in the infrastructure repository, and use the deployment history to track changes.
 
-The Azure portal's assignment page provides limited room for operator-facing
-context. A concise description is useful there, but richer ownership and
-change information belongs in the infrastructure source and deployment
-history, with links added where the portal makes them visible.
-
-## What I tried
-
-I created a low-impact policy assignment, reviewed how it appeared across the
-selected subscriptions, tested the visible description, and then removed the
-assignment after the experiment.
-
-## Next step
-
-Express the same assignment through infrastructure as code with a consistent
-description format, source-controlled ownership information, and a testable
-cleanup path.
+My next test is to deploy and remove the same assignment through infrastructure as code.

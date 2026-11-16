@@ -1,6 +1,6 @@
 ---
-title: "DSC, simply"
-description: "Describe the settings you want. Let the machine check and apply them."
+title: "Desired State Configuration (DSC)"
+description: "How a VM checks a Windows password rule and applies it from a PowerShell DSC package."
 date: 2026-09-07
 track: azure-platform
 provider: Microsoft Learn

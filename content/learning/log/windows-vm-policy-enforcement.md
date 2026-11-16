@@ -1,6 +1,6 @@
 ---
-title: "ASC Default Policies: Audit to Apply"
-description: "Apply selected security controls identified by ASC Default, with VM guest configuration as one example."
+title: "Enforcing Windows password rules with Azure Policy"
+description: "One lab VM passed four local password checks after remediation."
 date: 2026-09-06
 track: azure-platform
 provider: Azure Machine Configuration lab
@@ -11,11 +11,7 @@ tags:
 draft: false
 ---
 
-[ASC Default](/articles/asc-default-policy-guide/) helps identify security gaps. **Fixing a gap needs a separate action.** Choose how to apply each selected control based on what it needs to change. There is no single switch that makes every audit policy apply a fix.
-
-Guest configuration policies are one example: they can apply selected settings inside a virtual machine (VM).
-
-This feature is called **Azure Machine Configuration**. It can check and configure settings inside the operating system. It does not cover every ASC Default control, and an audit policy cannot always be switched to enforcement. [Microsoft overview](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview/01-overview-concepts)
+[ASC Default](/articles/asc-default-policy-guide/) can flag Windows settings that need attention. To apply the password rules, we used Azure Policy to assign a package and the Machine Configuration agent to change the settings inside Windows. Other findings may need different fixes. [Azure Machine Configuration](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview/01-overview-concepts)
 
 ## From finding to configured setting
 

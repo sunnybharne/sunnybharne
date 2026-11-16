@@ -1,6 +1,6 @@
 ---
-title: "Windows password age through policy, simply"
-description: "Follow the code from a Windows password setting to a package, Azure Policy and automatic correction."
+title: "Enforcing maximum password age on Windows VMs"
+description: "A DSC package and Azure Policy assignment for a 42-day local password limit."
 date: 2026-09-09
 track: azure-platform
 provider: Microsoft Learn
@@ -204,4 +204,4 @@ The guest report was evaluated at **07:16 UTC**. The agent applied the correctio
 
 ## Related reading
 
-[Machine Configuration, simply](/articles/machine-configuration/) explains the portal views and identities. [Azure Windows baseline, simply](/articles/azure-windows-baseline/) covers the earlier minimum-password-length example. [DSC, simply](/articles/dsc/) explains the configuration model.
+[Azure Machine Configuration](/articles/machine-configuration/) explains the portal views and identities. [Azure Windows baseline checks](/articles/azure-windows-baseline/) covers the earlier minimum-password-length example. [Desired State Configuration (DSC)](/articles/dsc/) explains the configuration model.

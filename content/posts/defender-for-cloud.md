@@ -1,6 +1,6 @@
 ---
-title: "Defender for Cloud, simply"
-description: "How Microsoft finds cloud security risks, detects threats, and separates free checks from paid protection."
+title: "Defender for Cloud plans and findings"
+description: "Which plans report security recommendations, which detect threats, and where to check what a subscription pays for."
 date: 2026-09-07
 tags:
   - azure-policy

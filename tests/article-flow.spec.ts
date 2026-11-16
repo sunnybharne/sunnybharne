@@ -4,7 +4,7 @@ test('Logic Apps pricing diagram uses React Flow in the light card style', async
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/articles/logic-apps-pricing/');
-  await expect(page.getByRole('heading', { name: 'Logic Apps pricing, simply', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Logic Apps pricing in Sweden Central', exact: true })).toBeVisible();
   const diagram = page.getByRole('region', { name: 'Logic Apps hosting prices in Sweden Central' });
   await diagram.scrollIntoViewIfNeeded();
   await expect(page.locator('.react-flow')).toBeVisible();
@@ -48,7 +48,7 @@ test('DSC keeps a static fallback without JavaScript', async ({ browser }) => {
   try {
     const page = await context.newPage();
     await page.goto('http://127.0.0.1:4321/articles/dsc/');
-    await expect(page.getByRole('heading', { name: 'DSC, simply', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Desired State Configuration (DSC)', exact: true })).toBeVisible();
     const image = page.getByRole('img', { name: /Azure Policy deploys a configuration assignment/ });
     await expect.poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
     expect(await image.evaluate((el: HTMLImageElement) => el.currentSrc)).toContain('diagram-static.svg');

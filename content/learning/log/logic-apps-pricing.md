@@ -1,6 +1,6 @@
 ---
-title: "Logic Apps pricing, simply"
-description: "What you pay on Consumption, Standard WS1–WS3, ASE v3, Hybrid, and the preview Automation option, using Sweden Central list prices."
+title: "Logic Apps pricing in Sweden Central"
+description: "Consumption bills per operation. Standard bills for capacity even when idle. Here’s where the costs cross in this lab."
 date: 2026-09-10
 track: azure-platform
 provider: Microsoft Learn
@@ -13,11 +13,11 @@ tags:
 draft: false
 ---
 
-**Logic Apps does not have one price.** The hosting option picks the meter. Connectors, runtime storage and integration accounts can add more.
+Connectors, runtime storage, and integration accounts can add charges on top of the hosting plan.
 
 This note uses **Sweden Central** pay-as-you-go **USD** list prices from the Azure Retail Prices API on **10 September 2026**. Monthly figures use **730 hours**, the same convention as Microsoft’s Standard examples. Enterprise Agreement discounts, reservations and extra resources such as Application Insights are not included. [Pricing model](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-pricing), [Pricing page](https://azure.microsoft.com/en-us/pricing/details/logic-apps/).
 
-The lab Standard app `logic-plb-app-test-swc-001` is **WS1**. That plan bills while the app exists, even with no workflows. See [Logic Apps, simply](/articles/logic-apps/) for hosting choices and [the private storage path](/articles/logic-app-storage-networking/) for why this lab is not Consumption.
+The lab Standard app `logic-plb-app-test-swc-001` is **WS1**. That plan bills while the app exists, even with no workflows. See [Logic Apps hosting and networking](/articles/logic-apps/) for hosting choices and [the private storage path](/articles/logic-app-storage-networking/) for why this lab is not Consumption.
 
 ![Hosting options and Sweden Central list prices for Logic Apps.](/learning-assets/logic-apps-pricing/hosting.svg)
 

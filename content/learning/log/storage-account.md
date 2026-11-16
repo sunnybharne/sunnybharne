@@ -1,6 +1,6 @@
 ---
-title: "Storage account, simply"
-description: "A storage account walkthrough: the setup choices, private endpoints, and the exception hiding behind disabled public access."
+title: "Azure Storage account setup"
+description: "In our Blob Storage lab, the trusted-services exception was still enabled after we disabled public network access."
 date: 2026-09-08
 track: azure-platform
 provider: Microsoft Learn
@@ -13,7 +13,7 @@ draft: false
 
 **A storage account holds data in Azure.** Blob Storage stores objects such as PDFs and images. Azure Files provides shared folders. Queues hold messages, and Tables hold structured, non-relational data. The account type determines which services are available. [Storage account types](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview#types-of-storage-accounts).
 
-This walkthrough follows a small Blob Storage lab. It explains the choices that raised questions during creation, then checks what **public network access: Disabled** actually means. Resource names in examples are placeholders.
+This lab uses placeholder resource names.
 
 ## Start with the resource group
 

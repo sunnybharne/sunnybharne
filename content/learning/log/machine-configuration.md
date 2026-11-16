@@ -1,6 +1,6 @@
 ---
-title: "Machine Configuration, simply"
-description: "Understand the Azure Policy view that reports settings inside your machines."
+title: "Azure Machine Configuration"
+description: "Find the guest assignment, read a failed Windows baseline check, and identify which settings the agent can fix."
 date: 2026-09-09
 track: azure-platform
 provider: Microsoft Learn
@@ -15,13 +15,13 @@ draft: false
 
 ## What is this page in Azure Policy?
 
-In the portal view checked on **9 September 2026**, **Policy → Machine Configuration** has three tabs: **Overview**, **Definitions** and **Assignments**. This describes the view we inspected; it does not establish when Microsoft introduced it.
+In the portal view checked on **9 September 2026**, **Policy → Machine Configuration** has three tabs: **Overview**, **Definitions** and **Assignments**.
 
 Overview shows subscription onboarding status and counts such as **Machines missing prerequisite**, **Machines with prerequisite** and **Eligible machines**. Its Enable action says it onboards eligible VMs and activates baseline auditing. It is a configuration action, not just a display filter.
 
 The **Assignments** tab in this view describes itself as a list of **baseline policy assignments**. During this walkthrough it showed no baseline settings assignments, even though the VM already had guest assignments and compliance reports. An empty list here is therefore not proof that no configuration is running. Use the VM assignment details or Policy Compliance to verify.
 
-**Enabled does not mean compliant.** In our walkthrough, one machine had its prerequisites, but its Windows baseline still reported non-compliance. Check the assignment report to understand the actual settings.
+One VM had all prerequisites and still failed the Windows baseline. Its assignment report listed the failed settings.
 
 ## Where can I browse the security baseline settings?
 
@@ -45,7 +45,7 @@ Inside the Windows VM desktop, including a Bastion session:
 
 The Azure baseline editor shows the **expected value**. This Windows dialog shows the machine's local policy setting; we did not verify that they match in this example. An individual account with **Password never expires** enabled is exempt from expiration. Domain accounts follow the applicable domain password policy; this setting does not control Microsoft Entra account password expiration. [Maximum password age](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-password-age).
 
-For the code that applies this setting, read [Windows password age through policy, simply](/articles/windows-password-age-policy/).
+For the code that applies this setting, read [Enforcing maximum password age on Windows VMs](/articles/windows-password-age-policy/).
 
 ## Why is the Assignments tab empty?
 
@@ -118,7 +118,7 @@ For the Windows DSC approach discussed here, the package is a **ZIP containing a
 
 **DSC means Desired State Configuration.** You describe the state you want, such as a minimum password length. Resources provide the logic to read, test and, when supported, set that state. Machine Configuration uses that capability as part of its managed service. It also supports compatible Linux machines; do not assume a Windows resource can run unchanged on Linux.
 
-A package built for `Audit` checks settings. A package built for `AuditAndSet` can also apply supported settings. That package capability is separate from the assignment's runtime mode. [Package contents and types](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package), [DSC, simply](/articles/dsc/).
+A package built for `Audit` checks settings. A package built for `AuditAndSet` can also apply supported settings. That package capability is separate from the assignment's runtime mode. [Package contents and types](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/2-create-package), [Desired State Configuration (DSC)](/articles/dsc/).
 
 ## Why did we discuss a storage account?
 
@@ -197,4 +197,4 @@ Our walkthrough therefore checked both the MCSB audit and the separate prerequis
 
 Keep the prerequisite policies, baseline assignments and any custom enforcement packages in source control. Review existing assignments before using portal onboarding so you understand whether it will overlap your current setup.
 
-Installing an extension prepares the machine to run configurations. Deploying a repair configuration is another step. For the Windows example and the code behind these packages, read [Azure Windows baseline, simply](/articles/azure-windows-baseline/) and [DSC, simply](/articles/dsc/).
+Installing an extension prepares the machine to run configurations. Deploying a repair configuration is another step. For the Windows example and the code behind these packages, read [Azure Windows baseline checks](/articles/azure-windows-baseline/) and [Desired State Configuration (DSC)](/articles/dsc/).

@@ -17,23 +17,13 @@
 
 ---
 
-### Expert: (Take it with a pinch of salt)
+### What I work on
 
-- Azure DevOps (Azure Pipelines, Azure DevOps Self-hosted agents, Azure Repos, Service Connections, etc. In short I know Azure DevOps quite well).
-- Azure Platform IAC using [Bicep](https://github.com/sunnybharne/azure-enterprise-platform) and [Terraform](https://github.com/sunnybharne/azure-enterprise-platform) (Mostly HCL, catching up with cdktf)
-- Azure subscription provisioning IAC. ([Platform Landing Zones](https://github.com/sunnybharne/azure-enterprise-platform), Standard Landing Zones, Shared Landing Zones).
-- Azure Management Group structure provisioning IAC. (According to CAF and some of my own architectural thoughts)
-- [Azure Policy](https://github.com/sunnybharne/azure-enterprise-platform) provisioning IAC. (According to CAF and some of my own architectural thoughts)
-- Azure Policy release design with multiple release cycles. 
-- Azure Platform Change Management using ServiceNow.
-- Azure Platform Test Automation using Pester and Terraform testing tools.
+- Azure DevOps pipelines, self-hosted agents, repos, and service connections.
+- Subscriptions, management groups, and landing zones in [Terraform and Bicep](https://github.com/sunnybharne/azure-enterprise-platform).
+- Azure Policy releases, ServiceNow change management, and infrastructure tests with Pester and Terraform.
 
-### Past Life Skills:
-
-- Test Automation using Selenium with Java.
-- Test Automation framework development in Java.
-- Java (Everything I did was in Java, hence I know Java quite well)
-- Other SDLC terminologies and workflows that I don't remember now, regression, integration unit test automation to name a few.
+Before Azure, I built Java and Selenium frameworks for regression and integration tests.
 
 <div align="center">
 

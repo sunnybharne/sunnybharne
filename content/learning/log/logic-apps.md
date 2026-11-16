@@ -1,6 +1,6 @@
 ---
-title: "Logic Apps, simply"
-description: "Understand Logic Apps hosting plans and how a workflow connects to private storage."
+title: "Logic Apps hosting and networking"
+description: "Compare hosting plans and configure a Standard Logic App with private runtime storage."
 date: 2026-09-09
 track: azure-platform
 provider: Microsoft Learn
@@ -88,7 +88,7 @@ The app's runtime storage also needs connectivity. A Blob private endpoint alone
 - [Private networking for Standard Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint)
 - [Deploy with private runtime storage](https://learn.microsoft.com/en-us/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account)
 - [Plan and manage costs](https://learn.microsoft.com/en-us/azure/logic-apps/plan-manage-costs)
-- [Logic Apps pricing, simply](/articles/logic-apps-pricing/)
+- [Logic Apps pricing in Sweden Central](/articles/logic-apps-pricing/)
 
 ## Networking: the service endpoint example
 

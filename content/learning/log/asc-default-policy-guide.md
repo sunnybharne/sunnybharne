@@ -1,6 +1,6 @@
 ---
-title: "ASC Default, simply"
-description: "A security checklist assigned in Azure Policy, with a saved policy-by-policy reference."
+title: "ASC Default policy reference"
+description: "224 Azure Policy definitions grouped by service, with effects and links to the saved JSON."
 date: 2026-09-05
 track: azure-platform
 provider: Saved Microsoft cloud security benchmark reference
@@ -16,7 +16,7 @@ draft: false
 
 See its results in **Azure portal → Policy → Compliance → ASC Default**. You do not need to open Defender for Cloud to view assignment compliance. Defender has related security recommendations; the two views can differ. [Microsoft: viewing compliance](https://learn.microsoft.com/en-us/azure/governance/policy/how-to/get-compliance-data#portal)
 
-For one shared assignment across subscriptions, see [MCSB managed centrally, simply](/articles/mcsb-managed-centrally/).
+For one shared assignment across subscriptions, see [Assigning MCSB at a management group](/articles/mcsb-managed-centrally/).
 
 ## Saved policy reference
 

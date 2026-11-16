@@ -1,6 +1,6 @@
 ---
-title: "Papliba: what I’m building"
-description: "My work on Papliba: exploring Azure infrastructure, checking policy results, and developing a workspace for practical automation."
+title: "Papliba"
+description: "I’m building a tool to trace Azure network connections, inspect policy results, and edit workflows."
 date: 2026-11-04
 tags:
   - papliba
@@ -10,57 +10,25 @@ tags:
 draft: false
 ---
 
-Papliba is the product I’m working on to make Azure infrastructure easier to understand and work with. It brings resource exploration, network diagrams, policy checks, and a visual workflow editor into one workspace.
+When a Logic App uses private storage, I want to see which subnet it uses and where the storage endpoint sits. Papliba puts that diagram next to the Azure configuration.
 
-This is a snapshot of the product and the work around it as of **4 November 2026**. It is still in development.
+## What works in the preview
 
-## Why I’m building it
-
-Platform work often starts with a question: what is connected to this network, how does this service reach its storage, or what does this policy result actually tell me?
-
-Answering those questions can mean moving between resource lists, configuration screens, scripts, and diagrams. With Papliba, I want to keep the relationships visible while making the underlying configuration easy to inspect.
-
-The same idea applies to automation: understand the task, see the steps, and keep the result available for review.
-
-## What I’m working on
-
-| Area | What the current implementation provides |
+| Area | What I can do |
 | --- | --- |
-| Azure exploration | Resource search and subscription filters, with views for networks, storage, Logic Apps, Foundry, landing zones, and policy assignments. |
-| Network context | VNet and subnet diagrams, peering details, address-space views, and drilldowns into related resources. |
-| Policy validation | Saved expectations, manual checks against recorded Azure policy evaluations, run history, and exportable evidence. |
-| Workflow editing | Projects, connected steps, Python files, undo, and saved workspace state. |
+| Resources | Search by subscription and inspect networks, storage, Logic Apps, Foundry, landing zones, and policy assignments. |
+| Networking | Follow VNet peerings, inspect subnet address ranges, and open the connected resources. The diagram shows configured paths. Traffic needs a separate test. |
+| Policy | Check saved expectations against recorded Azure Policy evaluations, review past runs, and export results. Predicting whether a new deployment will be blocked needs a separate test. |
+| Workflows | Connect steps, edit Python files, undo changes, and reopen saved projects. |
 
-I’m working across the interface, backend, integrations, packaging, and documentation. A useful diagram needs accurate resource relationships; a useful check needs a result that explains what was checked and what remains unknown.
+I’m developing previews for macOS, Windows, and VS Code. A local installation saves projects on the computer. Azure, GitHub, and optional AI features use their respective services.
 
-The explorer reads configuration. It does not prove that network traffic can pass. Policy validation reads existing evaluations; it does not establish whether a new deployment would be blocked. Those boundaries matter when using the results to make decisions.
+## What I’m building next
 
-## Bringing Papliba into everyday development
+I want to turn a request like “Find resources missing an owner tag” into a workflow I can inspect before it runs. I’d review the subscriptions, checks, and proposed changes in the editor, approve the run, then read the report.
 
-I’m developing Mac and Windows desktop previews alongside a VS Code extension. The extension brings the workspace into the editor, close to the scripts and project files I’m already using. Dedicated apps provide another way to work for people who prefer a separate window or use another editor.
+As of 4 November 2026, the preview supports individual-script assistance. General workflow execution, scheduling, and managed cloud access are still planned.
 
-The work here includes startup and shutdown behaviour, preserving a workspace across restarts, opening project files, and making the interface usable inside an editor panel. These integrations are previews, with installation and platform coverage still being developed.
+## Project links
 
-For local installations, the workspace is stored on the computer. Connections to Azure, GitHub, and an optional AI provider still communicate with those services.
-
-## The next direction: creating workflows through conversation
-
-I’m exploring how someone could describe an Azure task and have AI propose a workflow they can inspect and refine. The initial focus is inventory, reports, policy checks, and explicitly approved changes.
-
-For example:
-
-> Check the selected subscriptions for resources missing an owner tag, include their recorded policy compliance, and prepare a report.
-
-The experience I want is to review the proposed steps and scope, approve execution where needed, and inspect the results afterwards. The visual editor would help explain and adjust the workflow.
-
-This is a development direction. General workflow execution and scheduling are not implemented yet, and managed Cloud access is not open. The existing editor and individual-script assistance are foundations for that work.
-
-## Follow the product
-
-- [Papliba product website](https://papliba.com/)
-- [Public website project on GitHub](https://github.com/sunnybharne/papliba-site)
-- [My technical articles](/articles/), where I write up the Azure concepts and implementation details behind this work.
-
-**Website availability, checked 4 November 2026:** the product domain returned an HTTPS certificate-name mismatch during verification. The public website repository is available as a fallback while the product address is unavailable.
-
-I’ll update this note as the product develops, keeping implemented features and future work clearly identified.
+[Papliba](https://papliba.com/) returned a certificate-name error on 4 November. The [website repository](https://github.com/sunnybharne/papliba-site) was available. I publish the Azure lab notes in [Articles](/articles/).

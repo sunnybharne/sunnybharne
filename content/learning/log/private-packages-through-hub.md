@@ -1,6 +1,6 @@
 ---
-title: "Private VM configuration through a hub, simply"
-description: "A shared private download point for VM configuration packages, with automatic setup for new subscriptions."
+title: "Serving VM configuration packages through a hub"
+description: "A proposed design for VMs in spoke networks to download configuration packages from private Blob Storage."
 date: 2026-09-09
 track: azure-platform
 provider: Microsoft Learn
@@ -12,17 +12,11 @@ tags:
 draft: false
 ---
 
-**Keep configuration packages in private storage. Give spoke VMs access through a shared private endpoint in the hub. Use policy and infrastructure code to prepare each new VM and network automatically.**
+A spoke VM needs to download a configuration ZIP but cannot reach a public package host. I propose a Blob private endpoint in the hub that each spoke can reach over peering. The design still needs deployment and testing.
 
-This is a **proposed architecture**, using generic names. It explains the design for stakeholder review; it does not claim that this hub solution has been deployed or tested.
+## Package delivery
 
-## The problem we are solving
-
-A Windows VM needs a configuration package to apply a setting, such as a local password rule. The package is a ZIP containing the configuration and the code that checks and changes Windows.
-
-The VM cannot reach GitHub or another public package host. We also want to add subscriptions without manually configuring every VM.
-
-**Azure Policy can tell a VM which package to use. The VM still needs a working path to download it.** Microsoft requires custom packages to be available over HTTPS from a location the managed machine can reach. [Package hosting requirements](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/4-publish-package).
+Azure Policy assigns the package. The VM downloads it over HTTPS. The ZIP contains the configuration and code to check or change a setting, such as a Windows password rule. [Package hosting requirements](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to/develop-custom-package/4-publish-package).
 
 ## 1. Share the private connection through the hub
 
@@ -53,8 +47,6 @@ The VM initiates the download. The ZIP comes back on that connection; policy doe
 An assignment using **ApplyAndAutoCorrect** can correct later changes during agent checks. It requires a package capable of changing the setting. A package that only audits cannot enforce it. [Configuration modes](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/concepts/remediation-options).
 
 ## How DNS works for all the spokes
-
-Think of DNS as a contact list: the application supplies a name and receives an address.
 
 For this design, a managed **Azure DNS Private Resolver** in the hub answers the spokes' DNS questions. The Blob private DNS zone, **privatelink.blob.core.windows.net**, is linked to the hub. Each spoke's VNet DNS setting points to the resolver's private inbound address, configured by the landing-zone template.
 
@@ -124,4 +116,4 @@ Start with one hub and two spokes in different subscriptions. The acceptance che
 4. The agent changes a deliberately noncompliant test setting and reports the correct result.
 5. A new landing zone passes the same checks without manual portal changes.
 
-Only after those checks should the policy be expanded to more workloads. For the package code itself, see [Windows password age through policy, simply](/articles/windows-password-age-policy/).
+Only after those checks should the policy be expanded to more workloads. For the package code itself, see [Enforcing maximum password age on Windows VMs](/articles/windows-password-age-policy/).

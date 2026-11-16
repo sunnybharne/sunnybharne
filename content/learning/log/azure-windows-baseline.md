@@ -1,6 +1,6 @@
 ---
-title: "Azure Windows baseline, simply"
-description: "One Azure Policy, many Windows security checks."
+title: "Azure Windows baseline checks"
+description: "285 Windows security checks, their prerequisites, and how to inspect a failed check."
 date: 2026-09-07
 track: azure-platform
 provider: Azure Policy definition 2.1.1
@@ -39,7 +39,7 @@ Guest Configuration is the older name for Machine Configuration.
 
 **ASC Default's audit alone does not install these prerequisites.** This setup enables auditing; it does not fix Windows baseline settings. [Microsoft setup requirements](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview/02-setup-prerequisites).
 
-For how the agent checks and applies settings, read [DSC, simply](/articles/dsc/).
+For how the agent checks and applies settings, read [Desired State Configuration (DSC)](/articles/dsc/).
 
 ## All baseline checks
 
@@ -358,7 +358,7 @@ Set the guest assignment to **ApplyAndAutoCorrect** so the agent also corrects l
 
 ![Password remediation flow: Azure Policy deploys the guest assignment, the VM agent downloads the ZIP, DSC changes minimum password length from 8 to 14, and the agent reports the setting as Compliant.](/learning-assets/windows-vm-policy-enforcement/password-remediation-flow.svg)
 
-For the package and DSC basics, read [DSC, simply](/articles/dsc/).
+For the package and DSC basics, read [Desired State Configuration (DSC)](/articles/dsc/).
 
 ## Technical implementation with Azure Policy
 
