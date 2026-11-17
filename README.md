@@ -4,14 +4,14 @@
 
 # Sunny Bharne, I do all things Azure.
 
-[![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
-[![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
-[![Bicep](https://img.shields.io/badge/Bicep-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
-[![Azure DevOps](https://img.shields.io/badge/Azure_DevOps-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+![Bicep](https://img.shields.io/badge/Bicep-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)
+![Azure DevOps](https://img.shields.io/badge/Azure_DevOps-0078D4?style=for-the-badge&logo=azure-devops&logoColor=white)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sunnybharne?tab=repositories)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-0969DA?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/sunnybharne/sunnybharne/actions/workflows/deploy-github-pages.yml)
-[![Azure Policy](https://img.shields.io/badge/Azure_Policy-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
-[![Azure Landing Zones](https://img.shields.io/badge/Azure_Landing_Zones-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://github.com/sunnybharne/azure-enterprise-platform)
+![Azure Policy](https://img.shields.io/badge/Azure_Policy-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
+![Azure Landing Zones](https://img.shields.io/badge/Azure_Landing_Zones-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 
 ###### A developer with a decade of experience | Helsinki, Finland.
 
@@ -23,7 +23,7 @@
 
 - Azure DevOps pipelines, self-hosted agents, repos, and service connections.
 - I use GitHub Actions to build and deploy [my website](https://www.sunnybharne.com/) to GitHub Pages.
-- Subscriptions, management groups, and landing zones in [Terraform and Bicep](https://github.com/sunnybharne/azure-enterprise-platform).
+- Subscriptions, management groups, and landing zones in Terraform and Bicep for [Papliba](https://papliba.com/). The platform lives in the [Papliba GitHub organization](https://github.com/papliba).
 - Azure Policy releases, ServiceNow change management, and infrastructure tests with Pester and Terraform.
 
 Before Azure, I built Java and Selenium frameworks for regression and integration tests.
