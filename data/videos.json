@@ -1,12 +1,20 @@
 {
-  "fetchedAt": "2026-11-23T06:14:14.074Z",
+  "fetchedAt": "2026-11-24T06:09:52.821Z",
   "videos": [
+    {
+      "id": "xqmfjCbvqgc",
+      "title": "Normal Coding Day 2 | Building a Workflow Orchestrator",
+      "url": "https://www.youtube.com/watch?v=xqmfjCbvqgc",
+      "thumbnail": "https://i.ytimg.com/vi/xqmfjCbvqgc/hqdefault.jpg",
+      "views": "178",
+      "published": "15h ago"
+    },
     {
       "id": "_FB_mPdOwjM",
       "title": "Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch",
       "url": "https://www.youtube.com/watch?v=_FB_mPdOwjM",
       "thumbnail": "https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg",
-      "views": "355",
+      "views": "357",
       "published": "3mo ago"
     },
     {
@@ -39,14 +47,6 @@
       "url": "https://www.youtube.com/watch?v=d3y5ABV5_34",
       "thumbnail": "https://i.ytimg.com/vi/d3y5ABV5_34/hqdefault.jpg",
       "views": "2.1K",
-      "published": "6mo ago"
-    },
-    {
-      "id": "RgUAUc-uL74",
-      "title": "A Real Coding Day: Building My First Mac App",
-      "url": "https://www.youtube.com/watch?v=RgUAUc-uL74",
-      "thumbnail": "https://i.ytimg.com/vi/RgUAUc-uL74/hqdefault.jpg",
-      "views": "3.3K",
       "published": "6mo ago"
     }
   ]
