@@ -50,7 +50,7 @@ Before Azure, I built Java and Selenium frameworks for regression and integratio
 <!-- YOUTUBE:START -->
 <table>
   <tr>
-    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=xqmfjCbvqgc"><img src="https://i.ytimg.com/vi/xqmfjCbvqgc/hqdefault.jpg" width="280" alt="Normal Coding Day 2 | Building a Workflow Orchestrator"></a><br><a href="https://www.youtube.com/watch?v=xqmfjCbvqgc"><b>Normal Coding Day 2 | Building a Workflow Orchestrator</b></a><br><sub>178 · 15h ago</sub></td>
+    <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=xqmfjCbvqgc"><img src="https://i.ytimg.com/vi/xqmfjCbvqgc/hqdefault.jpg" width="280" alt="Normal Coding Day 2 | Building a Workflow Orchestrator"></a><br><a href="https://www.youtube.com/watch?v=xqmfjCbvqgc"><b>Normal Coding Day 2 | Building a Workflow Orchestrator</b></a><br><sub>838 · 1d ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><img src="https://i.ytimg.com/vi/_FB_mPdOwjM/hqdefault.jpg" width="280" alt="Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch"></a><br><a href="https://www.youtube.com/watch?v=_FB_mPdOwjM"><b>Pi Used 51% Fewer Tokens Than Codex — But There’s a Catch</b></a><br><sub>357 · 3mo ago</sub></td>
     <td align="center" width="33%"><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><img src="https://i.ytimg.com/vi/rPmby-3YCCc/hqdefault.jpg" width="280" alt="Why AI Made Me Give Up Vim and Return to VS Code"></a><br><a href="https://www.youtube.com/watch?v=rPmby-3YCCc"><b>Why AI Made Me Give Up Vim and Return to VS Code</b></a><br><sub>1.4K · 3mo ago</sub></td>
   </tr>
